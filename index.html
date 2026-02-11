@@ -1,0 +1,3751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Supporting mothers with disabilities through community, resources, and empowerment">
+    <title>The Mum Bridge & Care Foundation - Empowering Mothers with Disabilities</title>
+    <link rel="icon" type="image/png" href="assets/logo/the-mum-bridge-icon.png">
+
+    <style>
+        /* ============================================
+           CSS VARIABLES - DESIGN SYSTEM
+           Centralized tokens for consistency and easy theming
+           ============================================ */
+        :root {
+            /* Color Palette - Warm, accessible, dignified */
+            --color-primary: #7B5E7B;          /* Muted purple - strength & community */
+            --color-primary-light: #9D7E9D;
+            --color-primary-dark: #5A445A;
+            --color-accent: #D4A574;            /* Warm gold - hope & warmth */
+            --color-accent-light: #E8C9A0;
+            --color-text-primary: #2C2C2C;      /* Near-black for readability */
+            --color-text-secondary: #5F5F5F;
+            --color-text-light: #FFFFFF;
+            --color-background: #FDFBF9;        /* Warm off-white */
+            --color-background-alt: #F5F1ED;
+            --color-border: #E0DDD9;
+            --color-success: #6B9E78;
+            --color-error: #C76E6E;
+
+            /* Spacing System - 8px base */
+            --space-xs: 0.5rem;    /* 8px */
+            --space-sm: 1rem;      /* 16px */
+            --space-md: 1.5rem;    /* 24px */
+            --space-lg: 2.5rem;    /* 40px */
+            --space-xl: 4rem;      /* 64px */
+            --space-2xl: 6rem;     /* 96px */
+
+            /* Typography */
+            --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            --font-display: Georgia, 'Times New Roman', serif;
+
+            --text-xs: 0.875rem;   /* 14px */
+            --text-sm: 1rem;       /* 16px */
+            --text-base: 1.125rem; /* 18px */
+            --text-lg: 1.5rem;     /* 24px */
+            --text-xl: 2rem;       /* 32px */
+            --text-2xl: 2.5rem;    /* 40px */
+            --text-3xl: 3rem;      /* 48px */
+
+            /* Effects */
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+            --radius-sm: 0.375rem;
+            --radius-md: 0.75rem;
+            --radius-lg: 1.25rem;
+
+            /* Animation Timing */
+            --transition-fast: 200ms ease;
+            --transition-base: 300ms ease;
+            --transition-slow: 500ms ease;
+            --transition-entrance: 800ms cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Respect user motion preferences - ACCESSIBILITY */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            html {
+                scroll-behavior: auto;
+            }
+        }
+
+        body {
+            font-family: var(--font-primary);
+            font-size: var(--text-base);
+            line-height: 1.7;
+            color: var(--color-text-primary);
+            background-color: var(--color-background);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; /* Prevent horizontal scroll showing mobile menu */
+            position: relative;
+        }
+
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            line-height: 1.2;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-md);
+        }
+
+        h1 { font-size: var(--text-3xl); }
+        h2 { font-size: var(--text-2xl); }
+        h3 { font-size: var(--text-xl); }
+        h4 { font-size: var(--text-lg); }
+
+        p {
+            margin-bottom: var(--space-md);
+        }
+
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: color var(--transition-base);
+        }
+
+        a:hover, a:focus {
+            color: var(--color-primary-dark);
+            outline: none;
+        }
+
+        /* Keyboard focus indicator - ACCESSIBILITY */
+        a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+            outline: 3px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
+        /* ============================================
+           LAYOUT UTILITIES
+           ============================================ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+
+        .section {
+            padding: var(--space-2xl) 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity var(--transition-entrance), transform var(--transition-entrance);
+        }
+
+        /* Intersection Observer trigger class */
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto var(--space-xl);
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: var(--space-md);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+            border-radius: 2px;
+        }
+
+        /* ============================================
+           HEADER & NAVIGATION
+           ============================================ */
+        .header {
+            position: sticky;
+            top: 0;
+            background: rgba(253, 251, 249, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--color-border);
+            z-index: 100;
+            animation: slideDown var(--transition-entrance);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-sm) 0;
+            gap: var(--space-md);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav {
+            display: flex;
+            gap: var(--space-lg);
+            list-style: none;
+        }
+
+        .nav-link {
+            font-size: var(--text-sm);
+            font-weight: 500;
+            position: relative;
+            padding: var(--space-xs) 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent);
+            transition: width var(--transition-base);
+        }
+
+        .nav-link:hover::after, .nav-link:focus::after {
+            width: 100%;
+        }
+
+        /* ============================================
+           MOBILE NAVIGATION
+           Hamburger menu with accessible toggle
+           ============================================ */
+
+        /* Hide icon logo by default (show on mobile) */
+        .logo-icon {
+            display: none;
+        }
+
+        /* Mobile menu toggle button - hidden on desktop */
+        .mobile-menu-toggle {
+            display: none; /* Hidden on desktop */
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: var(--space-xs);
+            width: 48px;
+            height: 48px;
+            position: relative;
+            z-index: 102;
+            /* Minimum tap target size for accessibility */
+            min-width: 44px;
+            min-height: 44px;
+            transition: opacity var(--transition-fast);
+            /* Ensure it's clickable */
+            pointer-events: auto;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .mobile-menu-toggle:hover {
+            opacity: 0.7;
+        }
+
+        .mobile-menu-toggle:focus-visible {
+            outline: 3px solid var(--color-accent);
+            outline-offset: 2px;
+            border-radius: var(--radius-sm);
+        }
+
+        /* Hamburger icon lines */
+        .hamburger-line {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background-color: var(--color-primary);
+            margin: 5px auto;
+            transition: all var(--transition-base);
+            border-radius: 2px;
+        }
+
+        /* Mobile: Make hamburger lines white and visible */
+        @media (max-width: 768px) {
+            .hamburger-line {
+                width: 30px;
+                height: 4px;
+                background-color: white !important;
+            }
+        }
+
+        /* Animated hamburger to X transformation */
+        .mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* Prevent body scroll when mobile menu is open */
+        body.mobile-menu-open {
+            overflow: hidden;
+        }
+
+        /* ============================================
+           HERO SECTION
+           Warm, authentic background with community focus
+           High-quality image from Unsplash: diverse community support
+           ============================================ */
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(
+                rgba(92, 64, 92, 0.80),
+                rgba(139, 101, 76, 0.75)
+            ), url('https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            /* Improve image sharpness */
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.15) 100%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: var(--space-xl) var(--space-md);
+            animation: heroFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Improved fade-in animation */
+        @keyframes heroFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title,
+        .hero-subtitle {
+            color: var(--color-text-light);
+            /* Improved text rendering for sharpness */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            /* Better text shadow for contrast */
+            text-shadow:
+                0 2px 4px rgba(0, 0, 0, 0.3),
+                0 4px 12px rgba(0, 0, 0, 0.2),
+                0 1px 2px rgba(0, 0, 0, 0.4);
+            font-weight: 600;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            font-size: clamp(var(--text-2xl), 5vw, var(--text-3xl));
+            margin-bottom: var(--space-md);
+            line-height: 1.3;
+            animation: heroFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(var(--text-base), 2.5vw, var(--text-lg));
+            margin-bottom: var(--space-xl);
+            font-weight: 400;
+            line-height: 1.6;
+            opacity: 0.98;
+            animation: heroFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s backwards;
+        }
+
+        /* ============================================
+           BUTTONS
+           ============================================ */
+        .btn {
+            display: inline-block;
+            padding: var(--space-sm) var(--space-lg);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            text-align: center;
+            font-family: var(--font-primary);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+            color: var(--color-text-light);
+            box-shadow: var(--shadow-sm);
+            animation: heroFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s backwards;
+        }
+
+        .btn-primary:hover, .btn-primary:focus {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        /* ============================================
+           IMPACT & STATISTICS SECTION
+           ============================================ */
+        .impact-stats {
+            background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+            color: var(--color-text-light);
+            padding: var(--space-2xl) 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: var(--space-lg);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            backdrop-filter: blur(10px);
+            transition: all var(--transition-base);
+        }
+
+        .stat-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .stat-number {
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            font-family: var(--font-display);
+            color: var(--color-accent-light);
+            margin-bottom: var(--space-sm);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: var(--text-sm);
+            opacity: 0.95;
+            line-height: 1.5;
+        }
+
+        .impact-statement {
+            max-width: 900px;
+            margin: 0 auto var(--space-xl);
+            text-align: center;
+            font-size: var(--text-lg);
+            line-height: 1.8;
+            opacity: 0.98;
+        }
+
+        /* ============================================
+           WHAT WE DO SECTION
+           ============================================ */
+        .what-we-do {
+            background-color: var(--color-background);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-xl);
+        }
+
+        .service-card {
+            padding: var(--space-lg);
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-base);
+            border: 1px solid var(--color-border);
+        }
+
+        .service-card:hover, .service-card:focus-within {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent-light));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-md);
+            font-size: var(--text-xl);
+        }
+
+        .service-title {
+            font-size: var(--text-lg);
+            margin-bottom: var(--space-sm);
+        }
+
+        .service-description {
+            color: var(--color-text-secondary);
+            margin-bottom: 0;
+        }
+
+        /* ============================================
+           VISION & MISSION SECTION
+           ============================================ */
+        .vision-mission {
+            background-color: var(--color-background-alt);
+        }
+
+        .vision-mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        .vm-card {
+            padding: var(--space-xl);
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vm-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+        }
+
+        .vm-label {
+            font-size: var(--text-xs);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--color-accent);
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        .vm-title {
+            font-size: var(--text-xl);
+            color: var(--color-primary-dark);
+            margin-bottom: var(--space-md);
+        }
+
+        .vm-description {
+            color: var(--color-text-secondary);
+            line-height: 1.8;
+            margin-bottom: 0;
+        }
+
+        /* ============================================
+           ABOUT SECTION
+           ============================================ */
+        .about {
+            background-color: var(--color-background);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            font-size: var(--text-base);
+            line-height: 1.9;
+            color: var(--color-text-secondary);
+        }
+
+        .about-highlight {
+            background: linear-gradient(135deg,
+                rgba(123, 94, 123, 0.08),
+                rgba(212, 165, 116, 0.08)
+            );
+            padding: var(--space-lg);
+            border-left: 4px solid var(--color-accent);
+            border-radius: var(--radius-sm);
+            margin: var(--space-lg) 0;
+        }
+
+        /* ============================================
+           CORE VALUES SECTION
+           ============================================ */
+        .core-values {
+            background: var(--color-background);
+            padding: var(--space-2xl) 0;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: var(--space-lg);
+            margin-top: var(--space-xl);
+        }
+
+        .value-card {
+            padding: var(--space-xl);
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--color-accent);
+            transition: all var(--transition-base);
+            grid-column: span 2; /* Each card spans 2 columns in 6-column grid */
+        }
+
+        /* Center the last 2 cards by positioning them in the middle columns */
+        .value-card:nth-child(4) {
+            grid-column: 2 / 4;
+        }
+
+        .value-card:nth-child(5) {
+            grid-column: 4 / 6;
+        }
+
+        /* Responsive: Single column on mobile */
+        @media (max-width: 768px) {
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .value-card {
+                grid-column: 1 !important;
+            }
+        }
+
+        /* Responsive: 2 columns for tablets */
+        @media (min-width: 769px) and (max-width: 1100px) {
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .value-card {
+                grid-column: span 1 !important;
+            }
+        }
+
+        .value-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-left-color: var(--color-primary);
+        }
+
+        .value-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-md);
+            font-size: var(--text-lg);
+        }
+
+        .value-title {
+            font-size: var(--text-lg);
+            font-weight: 700;
+            color: var(--color-primary-dark);
+            margin-bottom: var(--space-sm);
+        }
+
+        .value-description {
+            font-size: var(--text-sm);
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+
+        .values-quote {
+            max-width: 800px;
+            margin: var(--space-xl) auto 0;
+            padding: var(--space-lg);
+            background: linear-gradient(135deg,
+                rgba(123, 94, 123, 0.08),
+                rgba(212, 165, 116, 0.08)
+            );
+            border-left: 4px solid var(--color-primary);
+            border-radius: var(--radius-sm);
+            font-size: var(--text-lg);
+            font-style: italic;
+            color: var(--color-primary-dark);
+            text-align: center;
+        }
+
+        /* ============================================
+           BOARD SECTION
+           ============================================ */
+        .board {
+            background-color: var(--color-background-alt);
+            position: relative;
+        }
+
+        /* Desktop carousel layout - Show 3 cards at once */
+        .board-carousel-wrapper {
+            position: relative;
+            margin-top: var(--space-xl);
+            overflow: visible; /* Changed from hidden to allow buttons to show */
+            padding: 0 20px; /* Reduced from 80px to minimize white space */
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .board-carousel-container {
+            overflow: hidden; /* Moved overflow hidden here */
+            position: relative;
+        }
+
+        .board-grid {
+            display: flex;
+            gap: var(--space-md);
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        /* Carousel navigation buttons - Modern design */
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .carousel-nav:hover {
+            background: var(--color-primary);
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(123, 94, 123, 0.3);
+        }
+
+        .carousel-nav:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .carousel-nav.prev {
+            left: -20px; /* Position outside container for better visibility */
+        }
+
+        .carousel-nav.next {
+            right: -20px; /* Position outside container for better visibility */
+        }
+
+        /* Carousel indicators - Progress dots with animation */
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-top: var(--space-xl);
+            padding: var(--space-md) 0;
+        }
+
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--color-border);
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-indicator:hover {
+            background: var(--color-primary-light);
+            transform: scale(1.2);
+        }
+
+        .carousel-indicator.active {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            width: 40px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(123, 94, 123, 0.4);
+        }
+
+        /* Animated progress bar inside active indicator */
+        .carousel-indicator.active::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: rgba(255, 255, 255, 0.5);
+            animation: progress 4s linear;
+        }
+
+        @keyframes progress {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+
+        .board-member {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid var(--color-border);
+            flex: 0 0 calc(33.333% - 20px);
+            max-width: calc(33.333% - 20px);
+            min-width: calc(33.333% - 20px);
+            display: flex;
+            flex-direction: column;
+            min-height: 690px; /* Adjusted for increased image height */
+        }
+
+        .board-member:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 24px rgba(123, 94, 123, 0.2);
+        }
+
+        /* Make all cards the same height in the carousel */
+        .board-grid {
+            align-items: stretch;
+        }
+
+        /* Responsive: Single column stack on mobile */
+        @media (max-width: 768px) {
+            .board-carousel-wrapper {
+                padding: 0;
+            }
+
+            .board-grid {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+
+            .board-member {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+
+            .carousel-nav,
+            .carousel-indicators {
+                display: none;
+            }
+        }
+
+        /* Tablet view - Show 2 cards */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .board-member {
+                flex: 0 0 calc(50% - 16px);
+                max-width: calc(50% - 16px);
+                min-width: calc(50% - 16px);
+            }
+        }
+
+        .board-member-image {
+            width: 100%;
+            height: 340px; /* Increased from 300px for better face visibility */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .board-member-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .board-member:hover .board-member-image::after {
+            opacity: 1;
+        }
+
+        .board-member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 30%; /* Focus on upper portion where faces are */
+            transition: transform 0.5s ease;
+        }
+
+        /* Specific fix for Solace's image - use center positioning */
+        .board-member[data-member="solace"] .board-member-image img {
+            object-position: center center; /* Center positioning for better framing */
+        }
+
+        .board-member:hover .board-member-image img {
+            transform: scale(1.05);
+        }
+
+        .board-member-info {
+            padding: var(--space-lg);
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1; /* Allow info section to grow and fill space */
+        }
+
+        .board-member-name {
+            font-size: var(--text-xl);
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+            color: var(--color-primary-dark);
+            font-family: var(--font-display);
+        }
+
+        .board-member-role {
+            font-size: var(--text-sm);
+            color: var(--color-accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-sm);
+            border-bottom: 2px solid var(--color-accent-light);
+        }
+
+        .board-member-bio {
+            font-size: var(--text-xs);
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--space-md);
+            flex-grow: 1; /* Push content below to bottom */
+        }
+
+        /* Social Media Links - Clean icon design */
+        .board-member-social {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm); /* Tighter spacing without wrapper boxes */
+            margin-bottom: var(--space-md);
+            flex-wrap: wrap;
+        }
+
+        .board-member-social .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-primary);
+            transition: all var(--transition-base);
+            /* Remove wrapper box completely - override general .social-link styles */
+            padding: 2px;
+            background: none;           /* Remove purple background */
+            border-radius: 0;           /* Remove rounded corners */
+            min-width: auto;            /* Remove minimum width */
+        }
+
+        .board-member-social .social-link svg {
+            width: 32px;  /* Larger icons for better visibility without box */
+            height: 32px;
+            fill: currentColor;
+            transition: all var(--transition-base);
+        }
+
+        .board-member-social .social-link:hover,
+        .board-member-social .social-link:focus {
+            color: var(--color-accent);
+            transform: translateY(-2px) scale(1.1);  /* Subtle lift effect */
+        }
+
+        .board-member-social .social-link:hover svg,
+        .board-member-social .social-link:focus svg {
+            filter: drop-shadow(0 3px 6px rgba(212, 165, 116, 0.4));
+        }
+
+        /* Expandable Bio Section */
+        .board-member-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-slow);
+        }
+
+        .board-member-details.expanded {
+            max-height: 1000px;
+        }
+
+        .board-member-full-bio {
+            padding-top: var(--space-sm);
+            font-size: var(--text-xs);
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            border-top: 1px solid var(--color-border);
+            margin-top: var(--space-sm);
+        }
+
+        .board-member-full-bio p {
+            margin-bottom: var(--space-sm);
+        }
+
+        .board-member-full-bio p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* View More Button */
+        .btn-view-more {
+            width: 100%;
+            padding: var(--space-sm);
+            background: transparent;
+            border: 2px solid var(--color-border);
+            color: var(--color-primary);
+            font-size: var(--text-xs);
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+        }
+
+        .btn-view-more:hover, .btn-view-more:focus {
+            border-color: var(--color-primary);
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-view-more .icon {
+            transition: transform var(--transition-base);
+        }
+
+        .btn-view-more.active .icon {
+            transform: rotate(180deg);
+        }
+
+        /* ============================================
+           SDG ALIGNMENT SECTION
+           ============================================ */
+        .sdg-section {
+            background: var(--color-background-alt);
+            padding: var(--space-2xl) 0;
+        }
+
+        .sdg-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-lg);
+            margin-top: var(--space-xl);
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Responsive: Single column on mobile */
+        @media (max-width: 768px) {
+            .sdg-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .sdg-card {
+            padding: var(--space-lg);
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sdg-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--color-primary);
+        }
+
+        .sdg-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .sdg-number {
+            display: inline-block;
+            background: var(--color-primary);
+            color: white;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-size: var(--text-xs);
+            margin-bottom: var(--space-sm);
+        }
+
+        .sdg-title {
+            font-size: var(--text-base);
+            font-weight: 700;
+            color: var(--color-primary-dark);
+            margin-bottom: var(--space-sm);
+        }
+
+        .sdg-focus {
+            font-size: var(--text-xs);
+            color: var(--color-accent);
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sdg-contribution {
+            font-size: var(--text-sm);
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+
+        /* ============================================
+           CTA SECTION
+           ============================================ */
+        .cta-section {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+            color: var(--color-text-light);
+            text-align: center;
+            padding: var(--space-2xl) 0;
+        }
+
+        .cta-title {
+            color: var(--color-text-light);
+            font-size: var(--text-2xl);
+            margin-bottom: var(--space-md);
+        }
+
+        .cta-description {
+            font-size: var(--text-base);
+            margin-bottom: var(--space-xl);
+            opacity: 0.95;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--color-primary);
+            padding: var(--space-md) var(--space-xl);
+            font-size: var(--text-base);
+        }
+
+        .btn-secondary:hover, .btn-secondary:focus {
+            background: var(--color-background);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ============================================
+           JOIN COMMUNITY SECTION
+           ============================================ */
+        .join-community-section {
+            background-color: var(--color-background-alt);
+            padding: var(--space-2xl) 0;
+            text-align: center;
+        }
+
+        .join-community-description {
+            max-width: 700px;
+            margin: 0 auto var(--space-xl);
+            font-size: var(--text-base);
+            line-height: 1.8;
+            color: var(--color-text-secondary);
+        }
+
+        /* ============================================
+           VOLUNTEER SECTION
+           ============================================ */
+        .volunteer-section {
+            background-color: var(--color-background);
+            padding: var(--space-2xl) 0;
+        }
+
+        .volunteer-intro {
+            max-width: 800px;
+            margin: 0 auto var(--space-xl);
+            text-align: center;
+            font-size: var(--text-base);
+            line-height: 1.8;
+            color: var(--color-text-secondary);
+        }
+
+        .volunteer-list {
+            max-width: 900px;
+            margin: 0 auto var(--space-xl);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-md);
+            list-style: none;
+        }
+
+        .volunteer-list li {
+            padding: var(--space-md);
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--color-accent);
+            transition: all var(--transition-base);
+        }
+
+        .volunteer-list li:hover {
+            transform: translateX(4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .volunteer-cta {
+            text-align: center;
+            margin-top: var(--space-xl);
+        }
+
+        .volunteer-subtitle {
+            font-size: var(--text-lg);
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+            color: var(--color-primary);
+        }
+
+        /* ============================================
+           SUPPORT SECTION
+           ============================================ */
+        .support-section {
+            background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent-light));
+            color: var(--color-text-primary);
+            padding: var(--space-2xl) 0;
+        }
+
+        .support-intro {
+            max-width: 800px;
+            margin: 0 auto var(--space-xl);
+            text-align: center;
+            font-size: var(--text-base);
+            line-height: 1.8;
+        }
+
+        .support-list {
+            max-width: 900px;
+            margin: 0 auto var(--space-xl);
+            list-style: none;
+            display: grid;
+            gap: var(--space-md);
+        }
+
+        .support-list li {
+            padding: var(--space-md) var(--space-md) var(--space-md) var(--space-xl);
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: var(--radius-md);
+            position: relative;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .support-list li::before {
+            content: '✓';
+            position: absolute;
+            left: var(--space-md);
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-primary);
+            font-weight: 700;
+            font-size: var(--text-lg);
+        }
+
+        .support-contact {
+            text-align: center;
+            margin-top: var(--space-xl);
+        }
+
+        .support-email {
+            display: inline-block;
+            padding: var(--space-md) var(--space-xl);
+            background: white;
+            color: var(--color-primary);
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-base);
+        }
+
+        .support-email:hover, .support-email:focus {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            color: var(--color-primary-dark);
+        }
+
+        /* ============================================
+           CONTACT SECTION
+           ============================================ */
+        .contact-section {
+            background-color: var(--color-background);
+            padding: var(--space-2xl) 0;
+            text-align: center;
+        }
+
+        .contact-email {
+            font-size: var(--text-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .contact-email a {
+            color: var(--color-primary);
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-lg);
+            flex-wrap: wrap;
+            margin-top: var(--space-lg);
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-sm) var(--space-md);
+            background: var(--color-primary);
+            color: white;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all var(--transition-base);
+            min-width: 140px;
+            justify-content: center;
+        }
+
+        .social-link:hover, .social-link:focus {
+            background: var(--color-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            color: white;
+        }
+
+        /* ============================================
+           MODAL - Subscription Form
+           WCAG-compliant with focus trap & keyboard navigation
+           ============================================ */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--transition-base), visibility var(--transition-base);
+            padding: var(--space-md);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            max-width: 500px;
+            width: 100%;
+            padding: var(--space-xl);
+            position: relative;
+            transform: scale(0.9);
+            transition: transform var(--transition-base);
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: var(--space-md);
+            right: var(--space-md);
+            background: transparent;
+            border: none;
+            font-size: var(--text-xl);
+            cursor: pointer;
+            color: var(--color-text-secondary);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-fast);
+        }
+
+        .modal-close:hover, .modal-close:focus {
+            background: var(--color-background-alt);
+            color: var(--color-text-primary);
+        }
+
+        .modal-header {
+            margin-bottom: var(--space-lg);
+        }
+
+        .modal-title {
+            font-size: var(--text-xl);
+            color: var(--color-primary-dark);
+            margin-bottom: var(--space-sm);
+        }
+
+        .modal-subtitle {
+            font-size: var(--text-sm);
+            color: var(--color-text-secondary);
+            margin-bottom: 0;
+        }
+
+        .form-group {
+            margin-bottom: var(--space-md);
+        }
+
+        .form-label {
+            display: block;
+            font-size: var(--text-sm);
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+            color: var(--color-text-primary);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--space-sm) var(--space-md);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            font-size: var(--text-sm);
+            font-family: var(--font-primary);
+            transition: border-color var(--transition-fast);
+        }
+
+        .form-input:hover {
+            border-color: var(--color-primary-light);
+        }
+
+        .form-input:focus {
+            border-color: var(--color-primary);
+            outline: none;
+        }
+
+        .form-input.error {
+            border-color: var(--color-error);
+        }
+
+        .form-error {
+            font-size: var(--text-xs);
+            color: var(--color-error);
+            margin-top: var(--space-xs);
+            display: none;
+        }
+
+        .form-error.visible {
+            display: block;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: var(--space-md);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: var(--text-base);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            position: relative;
+        }
+
+        .form-submit:hover, .form-submit:focus {
+            background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .form-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-submit.loading::after {
+            content: '';
+            position: absolute;
+            right: var(--space-md);
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 600ms linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: translateY(-50%) rotate(360deg); }
+        }
+
+        .form-success {
+            text-align: center;
+            padding: var(--space-lg);
+        }
+
+        .success-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--color-success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--space-md);
+            font-size: var(--text-2xl);
+            color: white;
+            animation: scaleIn var(--transition-base);
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        .success-title {
+            font-size: var(--text-lg);
+            color: var(--color-success);
+            margin-bottom: var(--space-sm);
+        }
+
+        .success-message {
+            font-size: var(--text-sm);
+            color: var(--color-text-secondary);
+            margin-bottom: 0;
+        }
+
+        /* ============================================
+           FOOTER
+           Modern, clean design with subtle animations
+           ============================================ */
+        .footer {
+            background: linear-gradient(135deg, #2C2C2C 0%, #3D3D3D 100%);
+            color: #FFFFFF;
+            padding: var(--space-2xl) 0 var(--space-lg);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Subtle background pattern for visual interest */
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(123, 94, 123, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(212, 165, 116, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .footer .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-brand {
+            margin-bottom: var(--space-xl);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .footer-brand h2 {
+            font-size: var(--text-xl);
+            color: #FFFFFF;
+            margin-bottom: var(--space-sm);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-tagline {
+            font-size: var(--text-base);
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: var(--space-md);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .footer-email-link {
+            display: inline-block;
+            color: var(--color-accent-light);
+            font-weight: 600;
+            font-size: var(--text-base);
+            text-decoration: none;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-base);
+        }
+
+        .footer-email-link:hover,
+        .footer-email-link:focus {
+            color: #FFFFFF;
+            background: rgba(212, 165, 116, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Animated social links */
+        .footer-social {
+            margin-top: var(--space-xl);
+            animation: fadeInUp 0.6s ease-out 0.2s backwards;
+        }
+
+        .footer-social h3 {
+            font-size: var(--text-base);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--space-md);
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .footer .social-links {
+            gap: var(--space-md);
+            margin-top: var(--space-md);
+        }
+
+        .footer .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.9);
+            transition: all var(--transition-base);
+            padding: var(--space-sm);
+            min-width: 48px;
+            min-height: 48px;
+            animation: fadeInScale 0.5s ease-out backwards;
+        }
+
+        .footer .social-link svg {
+            width: 32px;
+            height: 32px;
+            fill: currentColor;
+            transition: all var(--transition-base);
+        }
+
+        .footer .social-link:nth-child(1) { animation-delay: 0.3s; }
+        .footer .social-link:nth-child(2) { animation-delay: 0.4s; }
+        .footer .social-link:nth-child(3) { animation-delay: 0.5s; }
+        .footer .social-link:nth-child(4) { animation-delay: 0.6s; }
+
+        .footer .social-link:hover,
+        .footer .social-link:focus {
+            color: var(--color-accent);
+            transform: translateY(-4px) scale(1.2);
+        }
+
+        .footer .social-link:hover svg,
+        .footer .social-link:focus svg {
+            filter: drop-shadow(0 4px 8px rgba(212, 165, 116, 0.5));
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(255, 255, 255, 0.3) 50%,
+                transparent 100%
+            );
+            margin: var(--space-xl) auto;
+            max-width: 600px;
+        }
+
+        .footer-content {
+            font-size: var(--text-sm);
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: var(--space-lg);
+            animation: fadeInUp 0.6s ease-out 0.4s backwards;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-lg);
+            list-style: none;
+            margin-bottom: var(--space-md);
+        }
+
+        .footer-link {
+            color: var(--color-text-light);
+            font-size: var(--text-sm);
+        }
+
+        .footer-link:hover, .footer-link:focus {
+            color: var(--color-accent-light);
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+           Mobile-first approach with breakpoint adjustments
+           ============================================ */
+        @media (max-width: 768px) {
+            :root {
+                --text-3xl: 2rem;
+                --text-2xl: 1.75rem;
+                --text-xl: 1.5rem;
+                --space-2xl: 4rem;
+            }
+
+            /* ========== MOBILE NAVIGATION ========== */
+
+            /* Show hamburger button on mobile */
+            .mobile-menu-toggle {
+                display: flex !important; /* Force display on mobile */
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                /* Solid purple background for visibility */
+                background: var(--color-primary);
+                border-radius: var(--radius-sm);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                /* Ensure it's above overlay */
+                z-index: 1003;
+                position: relative;
+            }
+
+            /* Make hamburger lines white on mobile for contrast */
+            .mobile-menu-toggle .hamburger-line {
+                background-color: white !important;
+            }
+
+            /* Hide full logo, show icon on mobile */
+            .logo-full {
+                display: none;
+            }
+
+            .logo-icon {
+                display: block;
+                height: 40px;
+                width: auto;
+            }
+
+            /* Mobile navigation container */
+            .main-nav {
+                position: fixed;
+                top: 0;
+                right: -100%; /* Hidden off-screen by default */
+                width: 280px;
+                max-width: 85vw;
+                height: 100vh;
+                background: var(--color-background);
+                box-shadow: -4px 0 24px rgba(0, 0, 0, 0.2);
+                padding: 80px var(--space-lg) var(--space-xl);
+                z-index: 1002; /* Much higher than overlay */
+                transition: right var(--transition-base);
+                overflow-y: auto;
+                /* Force hardware acceleration and proper stacking */
+                transform: translateZ(0);
+                will-change: transform;
+                /* Ensure clickable */
+                pointer-events: auto;
+            }
+
+            /* Mobile nav visible state */
+            .main-nav.mobile-nav-open {
+                right: 0;
+            }
+
+            /* Mobile nav links */
+            .nav {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .nav li {
+                border-bottom: 1px solid var(--color-border);
+            }
+
+            .nav li:last-child {
+                border-bottom: none;
+            }
+
+            .nav-link {
+                display: block;
+                padding: var(--space-md) 0;
+                font-size: var(--text-base);
+                /* Ensure tap targets are at least 44px */
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                /* Ensure clickable */
+                pointer-events: auto;
+                cursor: pointer;
+                /* Proper stacking */
+                position: relative;
+                z-index: 1;
+            }
+
+            .nav-link::after {
+                display: none; /* Remove underline animation on mobile */
+            }
+
+            /* Mobile nav overlay backdrop - NO BLUR to prevent rendering issues */
+            .mobile-nav-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5); /* Solid overlay, no blur */
+                z-index: 1000; /* Below menu (1002) but above content */
+                opacity: 0;
+                transition: opacity var(--transition-base);
+                /* Ensure it's behind menu but above content */
+                transform: translateZ(0);
+                /* Allow clicks through when not visible */
+                pointer-events: none;
+            }
+
+            .mobile-nav-overlay.visible {
+                display: block;
+                opacity: 1;
+                pointer-events: auto; /* Enable clicks when visible */
+            }
+
+            /* Keep header content aligned */
+            .header-content {
+                flex-direction: row; /* Keep logo and hamburger on same row */
+                justify-content: space-between;
+            }
+
+            /* ========== GENERAL MOBILE LAYOUT ========== */
+
+            .hero {
+                min-height: 70vh;
+                /* Disable fixed background on mobile for performance */
+                background-attachment: scroll;
+            }
+
+            .section {
+                padding: var(--space-xl) 0;
+            }
+
+            .services-grid,
+            .vision-mission-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Ensure stat cards stack nicely */
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-md);
+            }
+
+            /* Improve board member image sizing on tablets/mobile */
+            .board-member-image {
+                height: 300px; /* Good height for tablet screens */
+            }
+
+            .board-member-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            /* Make buttons full-width on very small screens for easier tapping */
+            .btn {
+                min-width: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Extra small screens - optimize for smallest devices */
+
+            .container {
+                padding: 0 var(--space-sm);
+            }
+
+            .modal {
+                padding: var(--space-md);
+            }
+
+            /* Reduce font sizes slightly for very small screens */
+            :root {
+                --text-3xl: 1.75rem;
+                --text-2xl: 1.5rem;
+                --text-xl: 1.25rem;
+            }
+
+            /* Make mobile nav slightly narrower on very small screens */
+            .main-nav {
+                width: 260px;
+                padding: 70px var(--space-md) var(--space-lg);
+            }
+
+            /* Stack board member cards more compactly */
+            .board-member {
+                padding: var(--space-md);
+            }
+
+            .board-member-image {
+                height: 240px; /* Maintain good height on small screens */
+            }
+
+            .board-member-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover; /* Ensure proper image fitting */
+            }
+
+            /* Touch-friendly social icons without wrapper box */
+            .board-member-social .social-link {
+                padding: 6px; /* Minimal padding for touch targets */
+                background: none;           /* Ensure no background on mobile */
+                border-radius: 0;           /* Ensure no rounded corners on mobile */
+            }
+
+            .board-member-social .social-link svg {
+                width: 36px;  /* Larger icons = easier to tap without box */
+                height: 36px;
+            }
+
+            .footer .social-link {
+                min-width: 56px;
+                min-height: 56px;
+                padding: var(--space-md);
+            }
+
+            .footer .social-link svg {
+                width: 36px;
+                height: 36px;
+            }
+
+            /* Ensure buttons are easy to tap */
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                padding: var(--space-md) var(--space-lg);
+            }
+
+            /* Optimize stat cards for small screens */
+            .stat-card {
+                padding: var(--space-md);
+            }
+
+            .stat-number {
+                font-size: var(--text-2xl);
+            }
+
+            /* Reduce service card padding */
+            .service-card {
+                padding: var(--space-md);
+            }
+
+            /* Improve form usability on small screens */
+            .form-input,
+            .form-textarea {
+                font-size: 16px; /* Prevents iOS zoom on focus */
+            }
+        }
+
+        /* Desktop - ensure mobile nav elements are hidden */
+        @media (min-width: 769px) {
+            /* Force hide mobile menu elements on desktop */
+            .mobile-menu-toggle {
+                display: none !important;
+            }
+
+            .mobile-nav-overlay {
+                display: none !important;
+            }
+
+            /* Ensure desktop logo is visible */
+            .logo-full {
+                display: block;
+            }
+
+            .logo-icon {
+                display: none;
+            }
+
+            /* Desktop nav positioning - place it in header area */
+            /* Since nav is now outside header DOM, use fixed positioning */
+            .main-nav {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: auto;
+                height: auto;
+                background: transparent;
+                box-shadow: none;
+                padding: var(--space-sm) var(--space-md);
+                /* Ensure it's above header content but below modals */
+                z-index: 101;
+                /* Align with header height */
+                display: flex;
+                align-items: center;
+            }
+
+            /* Desktop nav should flow horizontally */
+            .nav {
+                flex-direction: row;
+                gap: var(--space-lg);
+            }
+
+            .nav li {
+                border-bottom: none;
+            }
+
+            .nav-link {
+                padding: var(--space-xs) 0;
+                font-size: var(--text-sm);
+                min-height: auto;
+            }
+
+            .nav-link::after {
+                display: block; /* Show underline animation on desktop */
+            }
+        }
+
+        /* ============================================
+           UTILITY CLASSES
+           ============================================ */
+        /* Screen reader only - but visible on focus for skip links */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* Make skip link visible when focused */
+        .sr-only:focus {
+            position: fixed;
+            top: var(--space-sm);
+            left: var(--space-sm);
+            width: auto;
+            height: auto;
+            padding: var(--space-sm) var(--space-md);
+            margin: 0;
+            overflow: visible;
+            clip: auto;
+            white-space: normal;
+            background: var(--color-primary);
+            color: var(--color-text-light);
+            z-index: 9999;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-lg);
+            font-weight: 600;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-0 {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip link for keyboard users - ACCESSIBILITY -->
+    <a href="#hero" class="sr-only">Skip to main content</a>
+
+    <!-- ============================================
+         HEADER & NAVIGATION
+         Sticky header with logo and anchor navigation
+         ============================================ -->
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <a href="#hero" class="logo" aria-label="The Mum Bridge & Care Foundation Home">
+                    <!-- Full logo for desktop -->
+                    <img src="assets/logo/the-mum-bridge-logo.png" alt="The Mum Bridge & Care Foundation Logo" class="logo-img logo-full">
+                    <!-- Icon logo for mobile -->
+                    <img src="assets/logo/the-mum-bridge-icon.png" alt="The Mum Bridge & Care Foundation" class="logo-img logo-icon">
+                </a>
+
+                <!-- Mobile menu toggle button -->
+                <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="main-nav">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile navigation - outside header to fix z-index stacking context -->
+    <!-- On desktop, CSS positions this to appear in header. On mobile, it's fixed positioned. -->
+    <nav id="main-nav" class="main-nav" role="navigation" aria-label="Main navigation">
+        <ul class="nav">
+            <li><a href="#what-we-do" class="nav-link">What We Do</a></li>
+            <li><a href="#vision-mission" class="nav-link">Vision & Mission</a></li>
+            <li><a href="#about" class="nav-link">About Us</a></li>
+            <li><a href="#board" class="nav-link">Our Team</a></li>
+            <li><a href="#join-title" class="nav-link">Join</a></li>
+            <li><a href="#volunteer-title" class="nav-link">Volunteer</a></li>
+            <li><a href="#contact-title" class="nav-link">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Mobile navigation overlay backdrop -->
+    <div class="mobile-nav-overlay" aria-hidden="true"></div>
+
+    <!-- ============================================
+         HERO SECTION
+         Welcoming, dignified introduction with clear purpose
+         Animation: Staggered fade-in elements
+         ============================================ -->
+    <section id="hero" class="hero" role="region" aria-label="Welcome">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                Building Bridges to Motherhood, Belonging, and Opportunity
+            </h1>
+            <p class="hero-subtitle">
+                A world where every mother with disability has equal access, opportunity, and support to thrive in motherhood and society.
+            </p>
+            <a href="https://forms.gle/oCtCgwcdmKPBs2t97" target="_blank" rel="noopener noreferrer" class="btn btn-primary" aria-label="Join our support circle (opens in new tab)">
+                Join Our Community
+            </a>
+        </div>
+    </section>
+
+    <!-- ============================================
+         IMPACT & STATISTICS SECTION
+         Powerful data showcasing the problem and our reach
+         ============================================ -->
+    <section class="impact-stats" role="region" aria-label="Impact and Statistics">
+        <div class="container">
+            <p class="impact-statement">
+                Globally, around 20% of women live with a disability. In Nigeria, 7.5% of women aged 15 and older live with some functional difficulty. These mothers face barriers at every turn—but together, we're building a world where they can thrive.
+            </p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">20%</span>
+                    <p class="stat-label">Of women globally live with a disability</p>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-number">7.5%</span>
+                    <p class="stat-label">Of Nigerian women aged 15+ live with functional difficulty</p>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-number">29M</span>
+                    <p class="stat-label">Nigerians live with disabilities across all age groups</p>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-number">51M+</span>
+                    <p class="stat-label">Active WhatsApp users in Nigeria enable our digital reach</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         WHAT WE DO SECTION
+         Clear explanation of services with visual hierarchy
+         Image suggestions: Community meetings, resource sharing,
+         supportive conversations (authentic, not staged)
+         ============================================ -->
+    <section id="what-we-do" class="section what-we-do" role="region" aria-labelledby="what-we-do-title">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" id="what-we-do-title">What We Do</h2>
+                <p>We create pathways to connection, access, and opportunity for mothers with disabilities through community-driven support and practical resources.</p>
+            </div>
+
+            <div class="services-grid">
+                <article class="service-card">
+                    <div class="service-icon" aria-hidden="true">🤝</div>
+                    <h3 class="service-title">Peer Support Networks</h3>
+                    <p class="service-description">
+                        Reduce isolation and build belonging through WhatsApp groups, peer circles, and virtual hangouts that create increased social connection and emotional wellbeing.
+                    </p>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon" aria-hidden="true">📚</div>
+                    <h3 class="service-title">Resource Access</h3>
+                    <p class="service-description">
+                        Provide practical, accessible parenting tools through co-created guides, audio and video resources that improve parenting confidence and access to information.
+                    </p>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon" aria-hidden="true">📖</div>
+                    <h3 class="service-title">Storytelling & Advocacy</h3>
+                    <p class="service-description">
+                        Shift public perception and increase visibility through story campaigns, external features, and partnerships that ensure mothers with disabilities are represented in public narratives.
+                    </p>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon" aria-hidden="true">♿</div>
+                    <h3 class="service-title">Accessibility Consulting</h3>
+                    <p class="service-description">
+                        Test earned revenue model through event audits, planning support, and training that creates more inclusive spaces for everyone.
+                    </p>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon" aria-hidden="true">🛠️</div>
+                    <h3 class="service-title">Assistive Access (Future)</h3>
+                    <p class="service-description">
+                        Improve daily mobility and participation through device partnerships and distribution that will be developed based on Year 2 partnerships.
+                    </p>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon" aria-hidden="true">💼</div>
+                    <h3 class="service-title">Livelihoods Support (Future)</h3>
+                    <p class="service-description">
+                        Boost financial independence through skills training, mentorship, and microbusiness support to be developed in Year 2 based on capacity.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         VISION & MISSION SECTION
+         Side-by-side cards with clear differentiation
+         Scroll-based animation triggers on visibility
+         ============================================ -->
+    <section id="vision-mission" class="section vision-mission" role="region" aria-labelledby="vision-mission-title">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" id="vision-mission-title">Our Purpose</h2>
+            </div>
+
+            <div class="vision-mission-grid">
+                <article class="vm-card">
+                    <span class="vm-label">Our Vision</span>
+                    <h3 class="vm-title">A World Where Every Mother Thrives</h3>
+                    <p class="vm-description">
+                        A world where every mother with disability has equal access, opportunity, and support to thrive in motherhood and society.
+                    </p>
+                </article>
+
+                <article class="vm-card">
+                    <span class="vm-label">Our Mission</span>
+                    <h3 class="vm-title">Building an Inclusive Global Community</h3>
+                    <p class="vm-description">
+                        We exist to build an inclusive global community where mothers with disabilities can connect with one another through peer support networks, access practical resources for parenting and everyday life, share lived experiences to shift harmful narratives, build emotional resilience that reduces isolation, and advocate for inclusion in healthcare, parenting systems, workplaces, and social protection.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         ABOUT SECTION
+         Story-driven, human-centered narrative
+         Warm, authentic tone focused on "why"
+         ============================================ -->
+    <section id="about" class="section about" role="region" aria-labelledby="about-title">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" id="about-title">About The Mum Bridge & Care Foundation</h2>
+            </div>
+
+            <div class="about-content">
+                <p class="about-text">
+                    Globally, around 20% of women live with a disability. In Nigeria, about 7.5% of women aged 15 and older live with some functional difficulty. Mothers with disabilities face barriers at every turn: inaccessible healthcare facilities, social isolation from stigma, and economic exclusion from inflexible work environments.
+                </p>
+
+                <div class="about-highlight">
+                    <p class="mb-0">
+                        <strong>"We see mothers not through their limitations, but through their strength."</strong>
+                    </p>
+                </div>
+
+                <p class="about-text">
+                    The Mum Bridge & Care Foundation is founded and led by a mother with disability who understands the realities and barriers mothers with disabilities face. This lived experience ensures authenticity and meaningful community trust. Mothers with disabilities may face examination tables they cannot access, prenatal classes without sign language interpreters, or playgrounds their children attend but they cannot enter.
+                </p>
+
+                <p class="about-text">
+                    The NGO is governed by a diverse Board of Trustees with proven expertise in operations, business consulting, communications, and technology. Our board chair is herself a mother who leads a community for women, adding valuable perspective on community-building and women's empowerment to our strategic direction.
+                </p>
+
+                <p class="about-text mb-0">
+                    Backed by this combination of lived experience, professional expertise, and governance strength, The Mum Bridge & Care Foundation is positioned to build strong partnerships and deliver measurable change for mothers with disabilities and their families. By intentionally supporting mothers with disabilities to access health services, economic opportunities, and community belonging, we create ripple effects that improve outcomes for children, families, and society at large.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CORE VALUES SECTION
+         Our guiding principles and commitment
+         ============================================ -->
+    <section class="section core-values" role="region" aria-labelledby="values-title">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" id="values-title">Our Core Values</h2>
+                <p>The principles that guide every decision we make and every mother we support.</p>
+            </div>
+
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon" aria-hidden="true">🤝</div>
+                    <h3 class="value-title">Inclusion</h3>
+                    <p class="value-description">
+                        Every mother with disability belongs, no matter her background, story, or ability. We create spaces where all mothers are welcomed and valued.
+                    </p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon" aria-hidden="true">❤️</div>
+                    <h3 class="value-title">Empathy</h3>
+                    <p class="value-description">
+                        Support rooted in understanding and shared humanity. We listen with compassion and respond with care that honors each mother's experience.
+                    </p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon" aria-hidden="true">🎯</div>
+                    <h3 class="value-title">Lived Experience Leadership</h3>
+                    <p class="value-description">
+                        Guidance shaped by lived experience, not assumptions. Mothers with disabilities lead and inform everything we do.
+                    </p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon" aria-hidden="true">💪</div>
+                    <h3 class="value-title">Empowerment</h3>
+                    <p class="value-description">
+                        Helping mothers find their voice, confidence, and independence. We build capacity, not dependency.
+                    </p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon" aria-hidden="true">📖</div>
+                    <h3 class="value-title">Storytelling</h3>
+                    <p class="value-description">
+                        Sharing real stories to connect hearts and inspire change. Every mother's story has the power to transform perspectives.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         BOARD OF DIRECTORS & TRUSTEES
+         Professional card grid with hover effects
+         Placeholder initials - replace with actual photos
+         ============================================ -->
+    <section id="board" class="section board" role="region" aria-labelledby="board-title">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" id="board-title">Board of Trustees</h2>
+                <p>Guided by experienced leaders with proven expertise in operations, business consulting, communications, and technology—all committed to building an inclusive world for mothers with disabilities.</p>
+            </div>
+
+            <div class="board-carousel-wrapper">
+                <button class="carousel-nav prev" aria-label="Previous board member" id="boardPrevBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+
+                <div class="board-carousel-container">
+                    <div class="board-grid" id="boardCarousel">
+                <!-- Board Member 1: Solace Olabode - Founder -->
+                <article class="board-member" data-member="solace">
+                    <div class="board-member-image">
+                        <img src="assets/directors/solace-olabode.jpg" alt="Portrait of Solace Olabode">
+                    </div>
+                    <div class="board-member-info">
+                        <h3 class="board-member-name">Solace Olabode</h3>
+                        <p class="board-member-role">Founder & Trustee</p>
+                        <p class="board-member-bio">
+                            Hard of hearing mother and Founder of The Mum Bridge & Care Foundation, leading the organisation's vision of building inclusive community support for mothers living with disabilities.
+                        </p>
+
+                        <!-- Social Media Links -->
+                        <div class="board-member-social">
+                            <a href="https://www.linkedin.com/in/solaceolabode" class="social-link" aria-label="Solace Olabode LinkedIn" target="_blank" rel="noopener noreferrer">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                            </a>
+                        </div>
+
+                        <!-- Expandable Details -->
+                        <div class="board-member-details">
+                            <div class="board-member-full-bio">
+                                <p><strong>Background:</strong> As a hard of hearing mother herself, Solace brings authentic lived experience to the organisation's leadership and ensures that the voices of mothers with disabilities remain at the centre of every decision. With a strong foundation in Human Resource Management, she builds people systems that drive performance and workplace inclusion.</p>
+                                <p><strong>Leadership:</strong> She currently serves as HR Manager at Seenergy Digital Solutions, where her work focuses on creating environments where people are empowered to succeed. She brings this expertise to The Mum Bridge & Care Foundation, ensuring that the organisation operates with strong people strategy and community-centred culture.</p>
+                                <p><strong>Vision:</strong> Within The Mum Bridge & Care Foundation, Solace provides strategic direction, champions the mission, and ensures that mothers with disabilities are connected to resources, peer support, and economic opportunities. She leads with the conviction that when mothers with disabilities are seen and supported, they thrive. When mothers thrive, their families do too.</p>
+                            </div>
+                        </div>
+
+                        <button class="btn-view-more" aria-expanded="false">
+                            <span>View More</span>
+                            <span class="icon" aria-hidden="true">▼</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Board Member 2: Adedotun Soyemi -->
+                <article class="board-member">
+                    <div class="board-member-image">
+                        <img src="assets/directors/adedotun-soyemi.jpg" alt="Portrait of Adedotun Soyemi">
+                    </div>
+                    <div class="board-member-info">
+                        <h3 class="board-member-name">Adedotun Soyemi</h3>
+                        <p class="board-member-role">Chairperson</p>
+                        <p class="board-member-bio">
+                            Strategic Communications Professional, Co-founder of Thirty32 Media, and Convener of the ROAR Conference empowering women to step into their full power.
+                        </p>
+
+                        <div class="board-member-social">
+                            <a href="https://www.linkedin.com/in/adedotunsoyemi" class="social-link" aria-label="Adedotun Soyemi LinkedIn" target="_blank" rel="noopener noreferrer">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                            </a>
+                            </div>
+
+                        <div class="board-member-details">
+                            <div class="board-member-full-bio">
+                                <p><strong>Background:</strong> To the people who love her most, Dotun is a wife, mother, sister, and friend. She is on an assignment to help people reinvent themselves and empower women and mothers to step into their full power, thrive, and build legacies their generations will be proud of.</p>
+                                <p><strong>Leadership:</strong> As Co-founder of Thirty32 Media and Communications, she helps leaders and founders launch projects that matter, craft communications that truly connect, and execute campaigns that grow influence, impact, and income. She has executed projects for The W Community, Leading Ladies Africa, Supply Chain Africa, and Bono Energy.</p>
+                                <p><strong>Impact:</strong> Dotun is the Convener of the ROAR Conference, helping women heal, gain clarity, and step confidently into leadership. She is also a Grow With Renny Mentor and hosts The Audacity Series podcast, spotlighting believers whose lives shine brighter for the gospel.</p>
+                            </div>
+                        </div>
+
+                        <button class="btn-view-more" aria-expanded="false">
+                            <span>View More</span>
+                            <span class="icon" aria-hidden="true">▼</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Board Member 3: Sarah George-Ashiru -->
+                <article class="board-member">
+                    <div class="board-member-image">
+                        <img src="assets/directors/sarah-george-ashiru.jpg" alt="Portrait of Sarah George-Ashiru">
+                    </div>
+                    <div class="board-member-info">
+                        <h3 class="board-member-name">Sarah George-Ashiru</h3>
+                        <p class="board-member-role">Deputy Chairperson</p>
+                        <p class="board-member-bio">
+                            CEO of Deah Solutions LLC, specializing in operations design, talent pipelines, and high-performance team development for small businesses and social-impact organisations.
+                        </p>
+
+                        <div class="board-member-social">
+                            <a href="https://www.linkedin.com/in/sarahgeorgeashiru" class="social-link" aria-label="Sarah George-Ashiru LinkedIn" target="_blank" rel="noopener noreferrer">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                            </a>
+                            </div>
+
+                        <div class="board-member-details">
+                            <div class="board-member-full-bio">
+                                <p><strong>Background:</strong> With nearly a decade of experience building systems that help organisations scale, Sarah believes that the greatest threat to any mission-driven institution is not a lack of vision, but a lack of structure. Her career has centred on helping founders and growth-stage teams replace overwhelm with clarity by transforming fragmented workflows into automated, measurable, and sustainable operational systems.</p>
+                                <p><strong>Leadership:</strong> As CEO of Deah Solutions LLC, her expertise spans operational excellence, leadership coaching, marketing discipline, and culture-building, helping teams accelerate results and achieve milestones ahead of schedule.</p>
+                                <p><strong>Commitment:</strong> Within The Mum Bridge & Care Foundation, she ensures that the organisation's programmes, partnerships, and community initiatives operate with precision, accountability, and measurable impact. Sarah's leadership reflects a deep commitment to building inclusive ecosystems where women, especially mothers with disabilities, can thrive with dignity, support, and opportunity.</p>
+                            </div>
+                        </div>
+
+                        <button class="btn-view-more" aria-expanded="false">
+                            <span>View More</span>
+                            <span class="icon" aria-hidden="true">▼</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Board Member 4: Kehinde Owoputi -->
+                <article class="board-member">
+                    <div class="board-member-image">
+                        <img src="assets/directors/kehinde-owoputi.jpg" alt="Portrait of Kehinde Owoputi">
+                    </div>
+                    <div class="board-member-info">
+                        <h3 class="board-member-name">Kehinde Owoputi</h3>
+                        <p class="board-member-role">Trustee</p>
+                        <p class="board-member-bio">
+                            Engineering Manager at Sabi with over eight years of experience creating innovative software solutions that enhance business productivity and digital accessibility.
+                        </p>
+
+                        <div class="board-member-social">
+                            <a href="https://www.linkedin.com/in/kehindeowoputi" class="social-link" aria-label="Kehinde Owoputi LinkedIn" target="_blank" rel="noopener noreferrer">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                            </a>
+                            </div>
+
+                        <div class="board-member-details">
+                            <div class="board-member-full-bio">
+                                <p><strong>Background:</strong> With over eight years of experience as a software engineer and engineering leader, Kehinde is seasoned in creating and innovating software solutions that enhance business productivity. He is experienced in all aspects of the software development lifecycle and end-to-end project management, from the ideation stage through development to delivery.</p>
+                                <p><strong>Leadership:</strong> Currently serving as an Engineering Manager at Sabi, Kehinde is consistently recognized as a hands-on and competent leader, skilled at coordinating cross-functional teams and organizing events in fast-paced and deadline-driven environments. His technical background ensures that projects are delivered on time, within budget, and with measurable impact.</p>
+                                <p><strong>Commitment:</strong> Within The Mum Bridge & Care Foundation, he ensures that the organisation operates efficiently, leverages technology effectively, and maintains high standards of digital accessibility and system performance. Kehinde's leadership reflects his commitment to using technology as a tool for inclusion and ensuring that mothers living with disabilities have access to reliable, user-friendly digital systems.</p>
+                            </div>
+                        </div>
+
+                        <button class="btn-view-more" aria-expanded="false">
+                            <span>View More</span>
+                            <span class="icon" aria-hidden="true">▼</span>
+                        </button>
+                    </div>
+                </article>
+                    </div>
+                </div>
+
+                <button class="carousel-nav next" aria-label="Next board member" id="boardNextBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+
+                <div class="carousel-indicators" id="boardIndicators">
+                    <button class="carousel-indicator active" aria-label="View 1"></button>
+                    <button class="carousel-indicator" aria-label="View 2"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SDG ALIGNMENT SECTION
+         Our contribution to global sustainable development goals
+         ============================================ -->
+    <section class="section sdg-section" role="region" aria-labelledby="sdg-title">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" id="sdg-title">Aligned with Global Goals</h2>
+                <p>The Mum Bridge & Care Foundation directly advances the United Nations Sustainable Development Goals by centering mothers with disabilities in health, work, and leadership.</p>
+            </div>
+
+            <div class="sdg-grid">
+                <div class="sdg-card">
+                    <span class="sdg-number">SDG 3</span>
+                    <h3 class="sdg-title">Good Health & Wellbeing</h3>
+                    <p class="sdg-focus">Maternal health access and emotional wellbeing</p>
+                    <p class="sdg-contribution">
+                        Peer support, mental health guidance, and improved access to assistive tools and services that strengthen maternal health outcomes.
+                    </p>
+                </div>
+
+                <div class="sdg-card">
+                    <span class="sdg-number">SDG 5</span>
+                    <h3 class="sdg-title">Gender Equality</h3>
+                    <p class="sdg-focus">Women's agency and protection from discrimination</p>
+                    <p class="sdg-contribution">
+                        Empowering mothers with disabilities as leaders in their families and communities, challenging gender-based barriers.
+                    </p>
+                </div>
+
+                <div class="sdg-card">
+                    <span class="sdg-number">SDG 8</span>
+                    <h3 class="sdg-title">Decent Work & Economic Growth</h3>
+                    <p class="sdg-focus">Skill-building and income inclusion</p>
+                    <p class="sdg-contribution">
+                        Pathways to home-based and digital livelihoods for mothers facing workplace barriers and economic exclusion.
+                    </p>
+                </div>
+
+                <div class="sdg-card">
+                    <span class="sdg-number">SDG 10</span>
+                    <h3 class="sdg-title">Reduced Inequalities</h3>
+                    <p class="sdg-focus">Disability inclusion and social participation</p>
+                    <p class="sdg-contribution">
+                        Challenging stigma, promoting accessibility, and strengthening disability rights engagement across all levels of society.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CALL TO ACTION SECTION
+         Emotionally resonant CTA with modal trigger
+         ============================================ -->
+    <section class="section cta-section" role="region" aria-labelledby="cta-title">
+        <div class="container">
+            <h2 class="cta-title" id="cta-title">Join the Movement</h2>
+            <p class="cta-description">
+                Be part of building a world where every mother with disability has equal access, opportunity, and support to thrive. Subscribe to stay connected with resources, stories, and opportunities to make a difference.
+            </p>
+            <button class="btn btn-secondary" id="cta-button" aria-label="Subscribe to our newsletter">
+                Subscribe to Our Newsletter
+            </button>
+        </div>
+    </section>
+
+    <!-- ============================================
+         JOIN OUR COMMUNITY SECTION
+         ============================================ -->
+    <section class="section join-community-section" role="region" aria-labelledby="join-title">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" id="join-title">Join Our Community</h2>
+            </div>
+            <p class="join-community-description">
+                Whether you are navigating pregnancy, raising young children, or parenting older children while managing a disability or chronic condition, there is a place for you here.
+            </p>
+            <a href="https://forms.gle/oCtCgwcdmKPBs2t97" target="_blank" rel="noopener noreferrer" class="btn btn-primary" aria-label="Join the community (opens in new tab)">
+                Join the Community
+            </a>
+        </div>
+    </section>
+
+    <!-- ============================================
+         VOLUNTEER SECTION
+         ============================================ -->
+    <section class="section volunteer-section" role="region" aria-labelledby="volunteer-title">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" id="volunteer-title">Volunteer With Us</h2>
+            </div>
+            <p class="volunteer-intro">
+                Help us build the bridge. Share your skills, time, and passion.
+            </p>
+            <p class="volunteer-intro">
+                We welcome volunteers who can contribute to storytelling, translation (Yoruba, Igbo, Hausa, Pidgin), community moderation, content design and social media, accessibility review and testing, or resource curation and research.
+            </p>
+
+            <div class="volunteer-cta">
+                <p class="volunteer-subtitle">Who can volunteer?</p>
+                <ul class="volunteer-list">
+                    <li>Mums with disabilities</li>
+                    <li>Anyone committed to inclusion</li>
+                </ul>
+            </div>
+
+            <div class="volunteer-cta">
+                <a href="https://forms.gle/jLUxeg6rG1fuPZa27" target="_blank" rel="noopener noreferrer" class="btn btn-primary" aria-label="Volunteer with us (opens in new tab)">
+                    Volunteer With Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SUPPORT SECTION
+         ============================================ -->
+    <section class="section support-section" role="region" aria-labelledby="support-title">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" id="support-title">Support The Mum Bridge & Care Foundation</h2>
+            </div>
+            <p class="support-intro">
+                Every mother deserves support, opportunity, and community, and you can help make that possible.
+            </p>
+            <p class="support-intro">
+                Your contribution, whether through financial support, resources, partnerships, or initiatives, helps us:
+            </p>
+
+            <ul class="support-list">
+                <li>Provide accessible resources and support for mums living with disabilities</li>
+                <li>Run skills programs that create pathways to financial independence</li>
+                <li>Amplify advocacy and storytelling to shift public perception</li>
+                <li>Expand our reach to more mothers living with disabilities</li>
+            </ul>
+
+            <div class="support-contact">
+                <p style="margin-bottom: var(--space-md); font-size: var(--text-lg); font-weight: 600;">To support The Mum Bridge & Care Foundation, email us:</p>
+                <a href="mailto:themumbridge@gmail.com" class="support-email" aria-label="Email The Mum Bridge & Care Foundation">
+                    themumbridge@gmail.com
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CONTACT SECTION
+         ============================================ -->
+    <section class="section contact-section" role="region" aria-labelledby="contact-title">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" id="contact-title">Get In Touch</h2>
+            </div>
+
+            <div class="contact-email">
+                <p style="font-size: var(--text-lg); line-height: 1.8; margin-bottom: var(--space-lg);">
+                    Have questions or want to learn more about The Mum Bridge & Care Foundation? We'd love to hear from you.
+                </p>
+                <p style="margin-top: var(--space-lg);">
+                    <strong>Email:</strong> <a href="mailto:themumbridge@gmail.com">themumbridge@gmail.com</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <!-- Brand Section -->
+            <div class="footer-brand">
+                <h2>The Mum Bridge & Care Foundation</h2>
+                <p class="footer-tagline">
+                    A community helping mothers living with disabilities to thrive
+                </p>
+                <a href="mailto:themumbridge@gmail.com" class="footer-email-link" aria-label="Email The Mum Bridge & Care Foundation">
+                    themumbridge@gmail.com
+                </a>
+            </div>
+
+            <!-- Social Media Section -->
+            <div class="footer-social">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/themumbridge" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram (opens in new tab)">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="https://www.facebook.com/themumbridge" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook (opens in new tab)">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/company/themumbridge" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn (opens in new tab)">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    </a>
+                    <a href="https://twitter.com/themumbridge" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter (opens in new tab)">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="footer-divider"></div>
+
+            <!-- Copyright -->
+            <p class="footer-content">
+                &copy; 2025 The Mum Bridge & Care Foundation. All rights reserved.<br>
+                Registered in Nigeria - CAC: 9112955
+            </p>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         MODAL - SUBSCRIPTION FORM
+         WCAG-compliant with:
+         - Focus trap (tabs contained within modal)
+         - ESC key to close
+         - Focus restoration after close
+         - Keyboard accessible
+         ============================================ -->
+    <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal" id="modal">
+            <button class="modal-close" id="modal-close" aria-label="Close subscription form">
+                &times;
+            </button>
+
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-title">Join Our Community</h2>
+                <p class="modal-subtitle">Stay connected with resources, stories, and opportunities to make a difference.</p>
+            </div>
+
+            <!-- Form View -->
+            <form id="subscription-form" novalidate>
+                <div class="form-group">
+                    <label for="first-name" class="form-label">First Name</label>
+                    <input
+                        type="text"
+                        id="first-name"
+                        name="firstName"
+                        class="form-input"
+                        required
+                        aria-required="true"
+                        aria-describedby="first-name-error"
+                    >
+                    <span class="form-error" id="first-name-error" role="alert">Please enter your first name</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="last-name" class="form-label">Last Name</label>
+                    <input
+                        type="text"
+                        id="last-name"
+                        name="lastName"
+                        class="form-input"
+                        required
+                        aria-required="true"
+                        aria-describedby="last-name-error"
+                    >
+                    <span class="form-error" id="last-name-error" role="alert">Please enter your last name</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        class="form-input"
+                        required
+                        aria-required="true"
+                        aria-describedby="email-error"
+                    >
+                    <span class="form-error" id="email-error" role="alert">Please enter a valid email address</span>
+                </div>
+
+                <button type="submit" class="btn form-submit" id="form-submit">
+                    Subscribe
+                </button>
+            </form>
+
+            <!-- Success View (hidden by default) -->
+            <div class="form-success" id="form-success" style="display: none;">
+                <div class="success-icon" aria-hidden="true">✓</div>
+                <h3 class="success-title">Welcome to Our Community!</h3>
+                <p class="success-message">
+                    Thank you for joining us. You'll receive our newsletter and updates soon.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * ==============================================
+         * JAVASCRIPT - VANILLA ES6+
+         * Progressive enhancement for interactions
+         * ==============================================
+         */
+
+        // ============================================
+        // CONFIGURATION
+        // Replace with your actual API endpoint and key
+        // ============================================
+        const SUBSCRIPTION_API_KEY = "YOUR_API_KEY_HERE";
+        const SUBSCRIPTION_API_URL = "https://api.yourservice.com/subscribe"; // e.g., Mailchimp, ConvertKit, etc.
+
+        // ============================================
+        // MAIN INITIALIZATION - Wait for DOM to be ready
+        // ============================================
+        function initializeWebsite() {
+            console.log('🚀 Initializing The Mum Bridge & Care Foundation website...');
+
+            // ============================================
+            // SCROLL ANIMATIONS - Intersection Observer
+            // Reveals sections as they enter viewport
+            // Respects prefers-reduced-motion
+            // ============================================
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // Unobserve after animating to improve performance
+                        sectionObserver.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all sections for scroll-based animations
+            const sections = document.querySelectorAll('.section');
+            if (sections.length > 0) {
+                sections.forEach(section => {
+                    sectionObserver.observe(section);
+                });
+                console.log('✓ Initialized scroll animations for', sections.length, 'sections');
+            }
+
+        // ============================================
+        // MODAL MANAGEMENT
+        // Handles opening, closing, focus trap, keyboard navigation
+        // ============================================
+        const modalOverlay = document.getElementById('modal-overlay');
+        const modal = document.getElementById('modal');
+        const modalClose = document.getElementById('modal-close');
+        const subscriptionForm = document.getElementById('subscription-form');
+        const formSuccess = document.getElementById('form-success');
+
+        // All elements that can trigger the modal
+        const modalTriggers = [
+            document.getElementById('hero-cta'),
+            document.getElementById('cta-button')
+        ].filter(el => el !== null); // Filter out null elements to prevent errors
+
+        // Log warning if no triggers found
+        if (modalTriggers.length === 0) {
+            console.warn('⚠️ No modal triggers found - modal will not open');
+        } else {
+            console.log('✓ Found', modalTriggers.length, 'modal trigger(s)');
+        }
+
+        // Store the element that triggered the modal for focus restoration
+        let modalTriggerElement = null;
+
+        // Focusable elements for focus trap
+        const FOCUSABLE_SELECTORS = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
+        /**
+         * Open modal with focus trap and ARIA management
+         */
+        function openModal(triggerElement) {
+            modalTriggerElement = triggerElement;
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scroll
+
+            // Focus first input field for better UX
+            setTimeout(() => {
+                const firstInput = modal.querySelector('input');
+                if (firstInput) firstInput.focus();
+            }, 100);
+        }
+
+        /**
+         * Close modal and restore focus to trigger element
+         */
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+
+            // Reset form state
+            setTimeout(() => {
+                resetForm();
+            }, 300);
+
+            // Restore focus to trigger element (WCAG requirement)
+            if (modalTriggerElement) {
+                modalTriggerElement.focus();
+                modalTriggerElement = null;
+            }
+        }
+
+        /**
+         * Reset form to initial state
+         */
+        function resetForm() {
+            subscriptionForm.reset();
+            subscriptionForm.style.display = 'block';
+            formSuccess.style.display = 'none';
+
+            // Clear all error states
+            document.querySelectorAll('.form-input').forEach(input => {
+                input.classList.remove('error');
+            });
+            document.querySelectorAll('.form-error').forEach(error => {
+                error.classList.remove('visible');
+            });
+        }
+
+        /**
+         * Focus trap - keeps tab navigation within modal
+         */
+        function handleFocusTrap(e) {
+            if (!modalOverlay.classList.contains('active')) return;
+
+            const focusableElements = modal.querySelectorAll(FOCUSABLE_SELECTORS);
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+
+            // Tab forward from last element -> go to first
+            if (e.key === 'Tab' && !e.shiftKey && document.activeElement === lastElement) {
+                e.preventDefault();
+                firstElement.focus();
+            }
+
+            // Shift+Tab backward from first element -> go to last
+            if (e.key === 'Tab' && e.shiftKey && document.activeElement === firstElement) {
+                e.preventDefault();
+                lastElement.focus();
+            }
+        }
+
+        // Attach modal event listeners only if elements exist
+        if (modalTriggers.length > 0) {
+            modalTriggers.forEach(trigger => {
+                if (trigger) {
+                    trigger.addEventListener('click', () => openModal(trigger));
+                }
+            });
+        }
+
+        if (modalClose) {
+            modalClose.addEventListener('click', closeModal);
+        }
+
+        // Close on overlay click (but not modal content click)
+        if (modalOverlay) {
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) closeModal();
+            });
+
+            // ESC key to close modal (WCAG requirement)
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                    closeModal();
+                }
+                handleFocusTrap(e);
+            });
+        }
+
+        // ============================================
+        // FORM VALIDATION & SUBMISSION
+        // Client-side validation with accessible error messages
+        // ============================================
+
+        /**
+         * Validate email format
+         */
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        /**
+         * Show error for specific field
+         */
+        function showError(fieldId, message) {
+            const input = document.getElementById(fieldId);
+            const error = document.getElementById(`${fieldId}-error`);
+
+            input.classList.add('error');
+            error.textContent = message;
+            error.classList.add('visible');
+
+            // Announce error to screen readers
+            error.setAttribute('role', 'alert');
+        }
+
+        /**
+         * Clear error for specific field
+         */
+        function clearError(fieldId) {
+            const input = document.getElementById(fieldId);
+            const error = document.getElementById(`${fieldId}-error`);
+
+            input.classList.remove('error');
+            error.classList.remove('visible');
+        }
+
+        /**
+         * Validate all form fields
+         */
+        function validateForm(formData) {
+            let isValid = true;
+
+            // Clear all previous errors
+            ['first-name', 'last-name', 'email'].forEach(clearError);
+
+            // Validate first name
+            if (!formData.firstName.trim()) {
+                showError('first-name', 'Please enter your first name');
+                isValid = false;
+            }
+
+            // Validate last name
+            if (!formData.lastName.trim()) {
+                showError('last-name', 'Please enter your last name');
+                isValid = false;
+            }
+
+            // Validate email
+            if (!formData.email.trim()) {
+                showError('email', 'Please enter your email address');
+                isValid = false;
+            } else if (!isValidEmail(formData.email)) {
+                showError('email', 'Please enter a valid email address');
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        /**
+         * Submit form data to subscription service
+         * This is a client-side simulation - replace with actual API call
+         */
+        async function submitSubscription(formData) {
+            // Simulated API call - replace with your actual subscription service
+            // Example for Mailchimp, ConvertKit, EmailOctopus, etc.
+
+            /* REAL IMPLEMENTATION EXAMPLE:
+            const response = await fetch(SUBSCRIPTION_API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${SUBSCRIPTION_API_KEY}`
+                },
+                body: JSON.stringify({
+                    email: formData.email,
+                    firstName: formData.firstName,
+                    lastName: formData.lastName
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Subscription failed');
+            }
+
+            return await response.json();
+            */
+
+            // Simulated delay for demo purposes
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    console.log('Subscription data:', formData);
+                    console.log('API Key (replace with real key):', SUBSCRIPTION_API_KEY);
+                    resolve({ success: true });
+                }, 1500);
+            });
+        }
+
+        /**
+         * Handle form submission
+         */
+        subscriptionForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const submitButton = document.getElementById('form-submit');
+            const formData = {
+                firstName: document.getElementById('first-name').value,
+                lastName: document.getElementById('last-name').value,
+                email: document.getElementById('email').value
+            };
+
+            // Validate form
+            if (!validateForm(formData)) {
+                // Focus first error field
+                const firstError = modal.querySelector('.form-input.error');
+                if (firstError) firstError.focus();
+                return;
+            }
+
+            // Show loading state
+            submitButton.disabled = true;
+            submitButton.classList.add('loading');
+            submitButton.textContent = 'Subscribing...';
+
+            try {
+                // Submit to subscription service
+                await submitSubscription(formData);
+
+                // Show success state
+                subscriptionForm.style.display = 'none';
+                formSuccess.style.display = 'block';
+
+                // Auto-close modal after 3 seconds
+                setTimeout(() => {
+                    closeModal();
+                }, 3000);
+
+            } catch (error) {
+                console.error('Subscription error:', error);
+                showError('email', 'Something went wrong. Please try again.');
+                submitButton.disabled = false;
+                submitButton.classList.remove('loading');
+                submitButton.textContent = 'Subscribe';
+            }
+        });
+
+        // ============================================
+        // REAL-TIME FIELD VALIDATION
+        // Clear errors as user types
+        // ============================================
+        ['first-name', 'last-name', 'email'].forEach(fieldId => {
+            const input = document.getElementById(fieldId);
+            input.addEventListener('input', () => {
+                if (input.classList.contains('error')) {
+                    clearError(fieldId);
+                }
+            });
+        });
+
+        // ============================================
+        // SMOOTH SCROLL FOR ANCHOR LINKS
+        // Enhanced navigation experience - CAPTURE PHASE
+        // ============================================
+        const smoothScrollLinks = document.querySelectorAll('a[href^="#"]');
+        console.log('📜 Found', smoothScrollLinks.length, 'anchor links for smooth scroll');
+
+        smoothScrollLinks.forEach(anchor => {
+            // Use capture phase (true) to run BEFORE bubble phase handlers
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                console.log('🔗 [CAPTURE] Smooth scroll clicked:', targetId);
+
+                // Skip empty, # only, or #hero
+                if (!targetId || targetId === '#' || targetId === '#hero') {
+                    console.log('⏭️ Skipping smooth scroll');
+                    return;
+                }
+
+                // Find the target element
+                let targetElement = document.querySelector(targetId);
+
+                // Fallback: try getElementById if querySelector fails
+                if (!targetElement && targetId.startsWith('#')) {
+                    const idOnly = targetId.substring(1);
+                    targetElement = document.getElementById(idOnly);
+                    console.log('🔍 getElementById fallback:', idOnly, targetElement ? '✓' : '✗');
+                }
+
+                if (targetElement) {
+                    e.preventDefault(); // Prevent default link behavior
+
+                    console.log('✅ FOUND TARGET:', targetId);
+                    console.log('   Element:', targetElement.tagName, targetElement.className || targetElement.id);
+
+                    // Scroll with offset for fixed header (larger for mobile)
+                    const headerOffset = 100;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    console.log('📍 Scrolling to position:', offsetPosition, '(current:', window.pageYOffset, ')');
+
+                    // Perform the scroll
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if it's open
+                    const mobileNav = document.querySelector('.main-nav');
+                    const mobileOverlay = document.querySelector('.mobile-nav-overlay');
+                    const mobileToggle = document.querySelector('.mobile-menu-toggle');
+
+                    if (mobileNav && mobileNav.classList.contains('mobile-nav-open')) {
+                        console.log('📱 Closing mobile menu...');
+
+                        // CRITICAL FIX: Remove body overflow immediately to allow scrolling
+                        // This fixes mobile navigation by enabling scroll before window.scrollTo() executes
+                        document.body.classList.remove('mobile-menu-open');
+                        if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');
+
+                        // Visual menu transition can be delayed for smooth animation
+                        setTimeout(() => {
+                            mobileNav.classList.remove('mobile-nav-open');
+                            if (mobileOverlay) mobileOverlay.classList.remove('visible');
+                            console.log('✅ Mobile menu closed');
+                        }, 300);
+                    }
+
+                    // Focus for accessibility
+                    setTimeout(() => {
+                        targetElement.setAttribute('tabindex', '-1');
+                        targetElement.focus();
+                        console.log('🎯 Focused element');
+                    }, 700);
+                } else {
+                    console.error('❌ Element NOT found for:', targetId);
+                    console.log('Available sections:', Array.from(document.querySelectorAll('[id]')).map(el => el.id));
+                }
+            }, true); // CAPTURE PHASE - runs before bubble phase
+        });
+
+        // ============================================
+        // BOARD CAROUSEL - Show 3 cards, auto-slide
+        // Displays 3 cards at once, smoothly transitions
+        // Auto-advances every 3 seconds (better UX than 1s)
+        // ============================================
+        (function initBoardCarousel() {
+            const carousel = document.getElementById('boardCarousel');
+            const prevBtn = document.getElementById('boardPrevBtn');
+            const nextBtn = document.getElementById('boardNextBtn');
+            const indicators = document.querySelectorAll('#boardIndicators .carousel-indicator');
+            const boardMembers = document.querySelectorAll('.board-member');
+
+            if (!carousel || boardMembers.length === 0) return;
+
+            let currentIndex = 0;
+            let autoPlayInterval;
+            const isMobile = window.innerWidth <= 768;
+            const isTablet = window.innerWidth > 768 && window.innerWidth <= 1024;
+
+            // Skip carousel on mobile
+            if (isMobile) return;
+
+            // Calculate how many cards to show at once
+            const cardsToShow = isTablet ? 2 : 3;
+            const maxIndex = boardMembers.length - cardsToShow;
+
+            function updateCarousel(index, smooth = true) {
+                // Ensure index is within bounds
+                currentIndex = Math.max(0, Math.min(index, maxIndex));
+
+                const cardWidth = boardMembers[0].offsetWidth;
+                const gap = parseFloat(getComputedStyle(carousel).gap) || 24;
+                const offset = -(currentIndex * (cardWidth + gap));
+
+                carousel.style.transform = `translateX(${offset}px)`;
+                carousel.style.transition = smooth ? 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)' : 'none';
+
+                // Update indicators - show which "page" we're on
+                indicators.forEach((indicator, i) => {
+                    const isActive = i === currentIndex;
+                    indicator.classList.toggle('active', isActive);
+
+                    // Restart animation on active indicator
+                    if (isActive) {
+                        // Remove and re-add to restart animation
+                        indicator.style.animation = 'none';
+                        setTimeout(() => {
+                            indicator.style.animation = '';
+                        }, 10);
+                    }
+                });
+
+                // Update navigation buttons visibility
+                prevBtn.style.opacity = currentIndex === 0 ? '0.3' : '1';
+                prevBtn.style.pointerEvents = currentIndex === 0 ? 'none' : 'auto';
+                nextBtn.style.opacity = currentIndex >= maxIndex ? '0.3' : '1';
+                nextBtn.style.pointerEvents = currentIndex >= maxIndex ? 'none' : 'auto';
+            }
+
+            function nextSlide() {
+                if (currentIndex < maxIndex) {
+                    updateCarousel(currentIndex + 1);
+                } else {
+                    // Loop back to start smoothly
+                    updateCarousel(0);
+                }
+            }
+
+            function prevSlide() {
+                if (currentIndex > 0) {
+                    updateCarousel(currentIndex - 1);
+                }
+            }
+
+            function startAutoPlay() {
+                stopAutoPlay(); // Clear any existing interval
+                autoPlayInterval = setInterval(() => {
+                    nextSlide();
+                }, 4000); // Auto-advance every 4 seconds for optimal readability
+            }
+
+            function stopAutoPlay() {
+                if (autoPlayInterval) {
+                    clearInterval(autoPlayInterval);
+                }
+            }
+
+            // Event listeners
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                stopAutoPlay();
+                startAutoPlay(); // Restart auto-play after manual interaction
+            });
+
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                stopAutoPlay();
+                startAutoPlay();
+            });
+
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    updateCarousel(index);
+                    stopAutoPlay();
+                    startAutoPlay();
+                });
+            });
+
+            // Pause on hover for better UX
+            const wrapper = carousel.closest('.board-carousel-wrapper');
+            if (wrapper) {
+                wrapper.addEventListener('mouseenter', stopAutoPlay);
+                wrapper.addEventListener('mouseleave', startAutoPlay);
+            }
+
+            // Handle window resize
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    const newIsMobile = window.innerWidth <= 768;
+                    if (newIsMobile !== isMobile) {
+                        location.reload(); // Reload if switching between mobile/desktop
+                    } else {
+                        updateCarousel(currentIndex, false);
+                    }
+                }, 250);
+            });
+
+            // Initialize
+            updateCarousel(0);
+
+            // Start auto-play after a short delay to ensure DOM is ready
+            setTimeout(() => {
+                startAutoPlay();
+                console.log('✓ Board carousel initialized:', boardMembers.length, 'members, showing', cardsToShow, 'at once');
+                console.log('✓ Auto-play started - advancing every 4 seconds');
+            }, 100);
+        })();
+
+        // ============================================
+        // BOARD MEMBER EXPANDABLE DETAILS
+        // Toggle "View More" to show/hide detailed bios
+        // Accessible with keyboard and screen readers
+        // ============================================
+        document.querySelectorAll('.btn-view-more').forEach(button => {
+            button.addEventListener('click', function() {
+                const boardMember = this.closest('.board-member');
+                const detailsSection = boardMember.querySelector('.board-member-details');
+                const isExpanded = detailsSection.classList.contains('expanded');
+
+                // Toggle expanded state
+                if (isExpanded) {
+                    detailsSection.classList.remove('expanded');
+                    this.classList.remove('active');
+                    this.setAttribute('aria-expanded', 'false');
+                    this.querySelector('span:first-child').textContent = 'View More';
+                } else {
+                    detailsSection.classList.add('expanded');
+                    this.classList.add('active');
+                    this.setAttribute('aria-expanded', 'true');
+                    this.querySelector('span:first-child').textContent = 'View Less';
+                }
+            });
+        });
+
+        // ============================================
+        // MOBILE NAVIGATION
+        // Accessible hamburger menu with focus trap
+        // ============================================
+
+        // ============================================
+        // MOBILE NAVIGATION - IMPROVED & DEBUGGED
+        // ============================================
+
+        (function() {
+            'use strict';
+
+            // Wait for DOM to be fully loaded
+            function initMobileNav() {
+                console.log('🔧 Initializing mobile navigation...');
+
+                const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+                const mobileNav = document.querySelector('.main-nav');
+                const mobileOverlay = document.querySelector('.mobile-nav-overlay');
+                const navLinks = document.querySelectorAll('.nav-link');
+
+                // Debug: Log element detection
+                console.log('📱 Mobile Menu Toggle:', mobileMenuToggle ? 'FOUND ✓' : 'NOT FOUND ✗');
+                console.log('📱 Main Nav:', mobileNav ? 'FOUND ✓' : 'NOT FOUND ✗');
+                console.log('📱 Overlay:', mobileOverlay ? 'FOUND ✓' : 'NOT FOUND ✗');
+
+                // Check if elements exist
+                if (!mobileMenuToggle || !mobileNav || !mobileOverlay) {
+                    console.error('❌ Mobile navigation elements not found!');
+                    return;
+                }
+
+                console.log('✅ All mobile nav elements found, setting up...');
+
+                let isOpen = false;
+
+                /**
+                 * Open mobile navigation menu
+                 */
+                function openMobileNav() {
+                    console.log('🔓 Opening mobile nav...');
+                    isOpen = true;
+                    mobileNav.classList.add('mobile-nav-open');
+                    mobileOverlay.classList.add('visible');
+                    document.body.classList.add('mobile-menu-open');
+                    mobileMenuToggle.setAttribute('aria-expanded', 'true');
+                    console.log('✅ Mobile nav opened');
+                }
+
+                /**
+                 * Close mobile navigation menu
+                 */
+                function closeMobileNav() {
+                    console.log('🔒 Closing mobile nav...');
+                    isOpen = false;
+                    mobileNav.classList.remove('mobile-nav-open');
+                    mobileOverlay.classList.remove('visible');
+                    document.body.classList.remove('mobile-menu-open');
+                    mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                    console.log('✅ Mobile nav closed');
+                }
+
+                /**
+                 * Toggle mobile menu state
+                 */
+                function toggleMobileNav(e) {
+                    console.log('🎯 Toggle clicked, current state:', isOpen ? 'open' : 'closed');
+                    if (e) e.preventDefault();
+
+                    if (isOpen) {
+                        closeMobileNav();
+                    } else {
+                        openMobileNav();
+                    }
+                }
+
+                // Hamburger button click handler
+                console.log('🔗 Attaching click handler to hamburger button...');
+                mobileMenuToggle.addEventListener('click', function(e) {
+                    console.log('🖱️ Hamburger button clicked!');
+                    toggleMobileNav(e);
+                }, { passive: false });
+
+                // Also try using touchstart for better mobile responsiveness
+                mobileMenuToggle.addEventListener('touchstart', function(e) {
+                    console.log('👆 Hamburger button touched!');
+                    e.preventDefault();
+                    toggleMobileNav(e);
+                }, { passive: false });
+
+                // Close menu when clicking overlay
+                mobileOverlay.addEventListener('click', function() {
+                    console.log('🖱️ Overlay clicked');
+                    closeMobileNav();
+                });
+
+                // Note: Nav link clicks are handled by the global smooth scroll handler
+                // which runs in capture phase and handles both scrolling and menu closing
+
+                // ESC key to close
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && isOpen) {
+                        console.log('⌨️ ESC key pressed');
+                        closeMobileNav();
+                    }
+                });
+
+                // Close on resize to desktop
+                let resizeTimer;
+                window.addEventListener('resize', function() {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(function() {
+                        if (window.innerWidth > 768 && isOpen) {
+                            console.log('📏 Window resized to desktop, closing menu');
+                            closeMobileNav();
+                        }
+                    }, 250);
+                });
+
+                console.log('✅ Mobile navigation initialized successfully!');
+            }
+
+            // Multiple initialization methods for maximum compatibility
+            if (document.readyState === 'loading') {
+                console.log('⏳ DOM loading, waiting for DOMContentLoaded...');
+                document.addEventListener('DOMContentLoaded', initMobileNav);
+            } else if (document.readyState === 'interactive' || document.readyState === 'complete') {
+                console.log('✅ DOM already loaded, initializing immediately');
+                initMobileNav();
+            }
+
+            // Fallback: also try on window load
+            window.addEventListener('load', function() {
+                console.log('🔄 Window load event fired');
+                // Check if already initialized
+                const toggle = document.querySelector('.mobile-menu-toggle');
+                if (toggle && !toggle.hasAttribute('data-initialized')) {
+                    console.log('🔄 Reinitializing mobile nav on window load');
+                    toggle.setAttribute('data-initialized', 'true');
+                    initMobileNav();
+                }
+            });
+        })();
+
+        } // End of initializeWebsite()
+
+        // ============================================
+        // Initialize when DOM is ready
+        // ============================================
+        if (document.readyState === 'loading') {
+            console.log('⏳ Waiting for DOM to load...');
+            document.addEventListener('DOMContentLoaded', initializeWebsite);
+        } else {
+            console.log('✅ DOM already loaded, initializing immediately');
+            initializeWebsite();
+        }
+
+        /**
+         * ==============================================
+         * ACCESSIBILITY ENHANCEMENTS
+         * ==============================================
+         *
+         * This implementation includes:
+         *
+         * 1. Semantic HTML5 (header, nav, main, section, article, footer)
+         * 2. ARIA labels and roles for screen readers
+         * 3. Keyboard navigation for all interactive elements
+         * 4. Focus management (visible focus indicators, focus trap in modal AND mobile nav)
+         * 5. WCAG-compliant color contrast (4.5:1 minimum)
+         * 6. Respect for prefers-reduced-motion
+         * 7. Form validation with accessible error messages
+         * 8. Skip links and landmark regions
+         * 9. Alt text for all images
+         * 10. Mobile-first responsive design for all screen sizes
+         * 11. Accessible hamburger menu with proper ARIA attributes
+         * 12. Minimum 44px tap targets for touch interfaces
+         * 13. ESC key closes mobile menu and modal
+         * 14. Focus returns to trigger element on menu/modal close
+         *
+         * ==============================================
+         * PERFORMANCE CONSIDERATIONS
+         * ==============================================
+         *
+         * - Intersection Observer for efficient scroll animations
+         * - CSS transforms for smooth animations (GPU-accelerated)
+         * - Lazy loading ready (add to images when implemented)
+         * - Minimal JavaScript - only where necessary
+         * - No external dependencies
+         * - Disabled background-attachment: fixed on mobile (prevents scrolling jank)
+         * - Debounced resize handler (prevents excessive reflows)
+         * - CSS-only animations (no JavaScript animation loops)
+         * - Focus trap uses efficient querySelector (not NodeList iteration)
+         * - 16px input font-size on mobile (prevents iOS zoom)
+         *
+         * ==============================================
+         * CUSTOMIZATION NOTES
+         * ==============================================
+         *
+         * To customize for production:
+         *
+         * 1. Replace SUBSCRIPTION_API_KEY and SUBSCRIPTION_API_URL
+         * 2. Add real background images to hero and sections
+         * 3. Replace board member placeholder initials with photos
+         * 4. Update color scheme in CSS variables if needed
+         * 5. Add actual board member bios and information
+         * 6. Implement actual privacy policy and contact pages
+         * 7. Add Google Analytics or privacy-friendly analytics
+         * 8. Consider adding a cookie consent banner if needed
+         * 9. Implement actual social media links in footer
+         * 10. Add structured data (Schema.org) for SEO
+         *
+         * ==============================================
+         */
+    </script>
+</body>
+</html>
