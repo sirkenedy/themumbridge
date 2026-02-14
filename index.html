@@ -1187,118 +1187,12 @@
             position: relative;
         }
 
-        /* Desktop carousel layout - Show 3 cards at once */
-        .board-carousel-wrapper {
-            position: relative;
-            margin-top: var(--space-xl);
-            overflow: visible; /* Changed from hidden to allow buttons to show */
-            padding: 0 20px; /* Reduced from 80px to minimize white space */
-            max-width: 1400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .board-carousel-container {
-            overflow: hidden; /* Moved overflow hidden here */
-            position: relative;
-        }
-
+        /* Board Grid: 2 rows x 3 columns */
         .board-grid {
-            display: flex;
-            gap: var(--space-md);
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            will-change: transform;
-        }
-
-        /* Carousel navigation buttons - Modern design */
-        .carousel-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: white;
-            color: var(--color-primary);
-            border: 2px solid var(--color-primary);
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 10;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .carousel-nav:hover {
-            background: var(--color-primary);
-            color: white;
-            transform: translateY(-50%) scale(1.1);
-            box-shadow: 0 6px 20px rgba(123, 94, 123, 0.3);
-        }
-
-        .carousel-nav:active {
-            transform: translateY(-50%) scale(0.95);
-        }
-
-        .carousel-nav.prev {
-            left: -20px; /* Position outside container for better visibility */
-        }
-
-        .carousel-nav.next {
-            right: -20px; /* Position outside container for better visibility */
-        }
-
-        /* Carousel indicators - Progress dots with animation */
-        .carousel-indicators {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-lg);
             margin-top: var(--space-xl);
-            padding: var(--space-md) 0;
-        }
-
-        .carousel-indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--color-border);
-            border: 2px solid transparent;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .carousel-indicator:hover {
-            background: var(--color-primary-light);
-            transform: scale(1.2);
-        }
-
-        .carousel-indicator.active {
-            background: var(--color-primary);
-            border-color: var(--color-primary);
-            width: 40px;
-            border-radius: 6px;
-            box-shadow: 0 2px 8px rgba(123, 94, 123, 0.4);
-        }
-
-        /* Animated progress bar inside active indicator */
-        .carousel-indicator.active::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 0%;
-            background: rgba(255, 255, 255, 0.5);
-            animation: progress 4s linear;
-        }
-
-        @keyframes progress {
-            from { width: 0%; }
-            to { width: 100%; }
         }
 
         .board-member {
@@ -1308,12 +1202,8 @@
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
             border: 1px solid var(--color-border);
-            flex: 0 0 calc(33.333% - 20px);
-            max-width: calc(33.333% - 20px);
-            min-width: calc(33.333% - 20px);
             display: flex;
             flex-direction: column;
-            min-height: 690px; /* Adjusted for increased image height */
         }
 
         .board-member:hover {
@@ -1321,39 +1211,18 @@
             box-shadow: 0 8px 24px rgba(123, 94, 123, 0.2);
         }
 
-        /* Make all cards the same height in the carousel */
-        .board-grid {
-            align-items: stretch;
-        }
-
-        /* Responsive: Single column stack on mobile */
+        /* Responsive: Stack on mobile */
         @media (max-width: 768px) {
-            .board-carousel-wrapper {
-                padding: 0;
-            }
-
             .board-grid {
-                flex-direction: column;
+                grid-template-columns: 1fr;
                 gap: var(--space-md);
             }
-
-            .board-member {
-                flex: 0 0 100%;
-                max-width: 100%;
-            }
-
-            .carousel-nav,
-            .carousel-indicators {
-                display: none;
-            }
         }
 
-        /* Tablet view - Show 2 cards */
+        /* Tablet view: 2 columns */
         @media (min-width: 769px) and (max-width: 1024px) {
-            .board-member {
-                flex: 0 0 calc(50% - 16px);
-                max-width: calc(50% - 16px);
-                min-width: calc(50% - 16px);
+            .board-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -1391,7 +1260,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center 30%; /* Focus on upper portion where faces are */
+            object-position: center top; /* Anchor to top - ensures head is never cut off */
             transition: transform 0.5s ease;
         }
 
@@ -3102,15 +2971,8 @@
                 <p>Guided by experienced leaders with proven expertise in operations, business consulting, communications, and technology—all committed to building an inclusive world for mothers with disabilities.</p>
             </div>
 
-            <div class="board-carousel-wrapper">
-                <button class="carousel-nav prev" aria-label="Previous board member" id="boardPrevBtn">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
-                </button>
-
-                <div class="board-carousel-container">
-                    <div class="board-grid" id="boardCarousel">
+            <!-- Board Grid: 2 rows x 3 columns -->
+            <div class="board-grid">
                 <!-- Board Member 1: Solace Olabode - Founder -->
                 <article class="board-member" data-member="solace">
                     <div class="board-member-image">
@@ -3280,7 +3142,7 @@
                 <!-- Board Member 6: Oluwademilade -->
                 <article class="board-member">
                     <div class="board-member-image">
-                        <img src="assets/directors/ayomide-aboyade.jpeg" alt="Portrait of Oluwademilade">
+                        <img src="assets/directors/oluwademilade.jpg" alt="Portrait of Oluwademilade">
                     </div>
                     <div class="board-member-info">
                         <h3 class="board-member-name">Oluwademilade</h3>
@@ -3310,22 +3172,8 @@
                         </button>
                     </div>
                 </article>
-                    </div>
-                </div>
-
-                <button class="carousel-nav next" aria-label="Next board member" id="boardNextBtn">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="9 18 15 12 9 6"></polyline>
-                    </svg>
-                </button>
-
-                <div class="carousel-indicators" id="boardIndicators">
-                    <button class="carousel-indicator active" aria-label="View 1"></button>
-                    <button class="carousel-indicator" aria-label="View 2"></button>
-                    <button class="carousel-indicator" aria-label="View 3"></button>
-                    <button class="carousel-indicator" aria-label="View 4"></button>
-                </div>
             </div>
+            <!-- End Board Grid -->
         </div>
     </section>
 
@@ -4461,144 +4309,14 @@
         });
 
         // ============================================
-        // BOARD CAROUSEL - Show 3 cards, auto-slide
-        // Displays 3 cards at once, smoothly transitions
-        // Auto-advances every 3 seconds (better UX than 1s)
+        // BOARD CAROUSEL - DISABLED (Now using static grid)
+        // Board members are displayed in a 2x3 grid layout
         // ============================================
+        /*
         (function initBoardCarousel() {
-            const carousel = document.getElementById('boardCarousel');
-            const prevBtn = document.getElementById('boardPrevBtn');
-            const nextBtn = document.getElementById('boardNextBtn');
-            const indicators = document.querySelectorAll('#boardIndicators .carousel-indicator');
-            const boardMembers = document.querySelectorAll('.board-member');
-
-            if (!carousel || boardMembers.length === 0) return;
-
-            let currentIndex = 0;
-            let autoPlayInterval;
-            const isMobile = window.innerWidth <= 768;
-            const isTablet = window.innerWidth > 768 && window.innerWidth <= 1024;
-
-            // Skip carousel on mobile
-            if (isMobile) return;
-
-            // Calculate how many cards to show at once
-            const cardsToShow = isTablet ? 2 : 3;
-            const maxIndex = boardMembers.length - cardsToShow;
-
-            function updateCarousel(index, smooth = true) {
-                // Ensure index is within bounds
-                currentIndex = Math.max(0, Math.min(index, maxIndex));
-
-                const cardWidth = boardMembers[0].offsetWidth;
-                const gap = parseFloat(getComputedStyle(carousel).gap) || 24;
-                const offset = -(currentIndex * (cardWidth + gap));
-
-                carousel.style.transform = `translateX(${offset}px)`;
-                carousel.style.transition = smooth ? 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)' : 'none';
-
-                // Update indicators - show which "page" we're on
-                indicators.forEach((indicator, i) => {
-                    const isActive = i === currentIndex;
-                    indicator.classList.toggle('active', isActive);
-
-                    // Restart animation on active indicator
-                    if (isActive) {
-                        // Remove and re-add to restart animation
-                        indicator.style.animation = 'none';
-                        setTimeout(() => {
-                            indicator.style.animation = '';
-                        }, 10);
-                    }
-                });
-
-                // Update navigation buttons visibility
-                prevBtn.style.opacity = currentIndex === 0 ? '0.3' : '1';
-                prevBtn.style.pointerEvents = currentIndex === 0 ? 'none' : 'auto';
-                nextBtn.style.opacity = currentIndex >= maxIndex ? '0.3' : '1';
-                nextBtn.style.pointerEvents = currentIndex >= maxIndex ? 'none' : 'auto';
-            }
-
-            function nextSlide() {
-                if (currentIndex < maxIndex) {
-                    updateCarousel(currentIndex + 1);
-                } else {
-                    // Loop back to start smoothly
-                    updateCarousel(0);
-                }
-            }
-
-            function prevSlide() {
-                if (currentIndex > 0) {
-                    updateCarousel(currentIndex - 1);
-                }
-            }
-
-            function startAutoPlay() {
-                stopAutoPlay(); // Clear any existing interval
-                autoPlayInterval = setInterval(() => {
-                    nextSlide();
-                }, 4000); // Auto-advance every 4 seconds for optimal readability
-            }
-
-            function stopAutoPlay() {
-                if (autoPlayInterval) {
-                    clearInterval(autoPlayInterval);
-                }
-            }
-
-            // Event listeners
-            prevBtn.addEventListener('click', () => {
-                prevSlide();
-                stopAutoPlay();
-                startAutoPlay(); // Restart auto-play after manual interaction
-            });
-
-            nextBtn.addEventListener('click', () => {
-                nextSlide();
-                stopAutoPlay();
-                startAutoPlay();
-            });
-
-            indicators.forEach((indicator, index) => {
-                indicator.addEventListener('click', () => {
-                    updateCarousel(index);
-                    stopAutoPlay();
-                    startAutoPlay();
-                });
-            });
-
-            // Pause on hover for better UX
-            const wrapper = carousel.closest('.board-carousel-wrapper');
-            if (wrapper) {
-                wrapper.addEventListener('mouseenter', stopAutoPlay);
-                wrapper.addEventListener('mouseleave', startAutoPlay);
-            }
-
-            // Handle window resize
-            let resizeTimer;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(() => {
-                    const newIsMobile = window.innerWidth <= 768;
-                    if (newIsMobile !== isMobile) {
-                        location.reload(); // Reload if switching between mobile/desktop
-                    } else {
-                        updateCarousel(currentIndex, false);
-                    }
-                }, 250);
-            });
-
-            // Initialize
-            updateCarousel(0);
-
-            // Start auto-play after a short delay to ensure DOM is ready
-            setTimeout(() => {
-                startAutoPlay();
-                console.log('✓ Board carousel initialized:', boardMembers.length, 'members, showing', cardsToShow, 'at once');
-                console.log('✓ Auto-play started - advancing every 4 seconds');
-            }, 100);
+            // Carousel functionality disabled - using static grid layout
         })();
+        */
 
         // ============================================
         // BOARD MEMBER EXPANDABLE DETAILS
