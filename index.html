@@ -475,16 +475,15 @@
             transform: translateY(0);
         }
 
-        /* Donate Now button - Eye-catching accent style */
+        /* Donate Now button - High-contrast CTA */
         .btn-donate {
-            background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
-            color: var(--color-text-primary);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+            color: var(--color-text-light);
             font-weight: 700;
-            padding: var(--space-sm) var(--space-lg);
-            box-shadow: 0 4px 12px rgba(212, 165, 116, 0.4);
+            padding: var(--space-md) var(--space-xl);
+            box-shadow: 0 4px 16px rgba(90, 68, 90, 0.45);
             position: relative;
             overflow: hidden;
-            animation: heroFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.7s backwards;
         }
 
         .btn-donate::before {
@@ -494,7 +493,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.5s ease;
         }
 
@@ -504,7 +503,7 @@
 
         .btn-donate:hover, .btn-donate:focus {
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 6px 20px rgba(212, 165, 116, 0.5);
+            box-shadow: 0 8px 24px rgba(90, 68, 90, 0.55);
         }
 
         .btn-donate:active {
@@ -1794,6 +1793,14 @@
             margin-top: var(--space-xl);
         }
 
+        .support-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+        }
+
         .support-email {
             display: inline-block;
             padding: var(--space-md) var(--space-xl);
@@ -2730,9 +2737,6 @@
                 <a href="https://forms.gle/oCtCgwcdmKPBs2t97" target="_blank" rel="noopener noreferrer" class="btn btn-primary" aria-label="Join our support circle (opens in new tab)">
                     Join Our Community
                 </a>
-                <button class="btn btn-donate" id="heroDonateBtn" aria-label="Donate Now">
-                    ❤️ Donate Now
-                </button>
             </div>
         </div>
     </section>
@@ -3343,10 +3347,15 @@
             </ul>
 
             <div class="support-contact">
-                <p style="margin-bottom: var(--space-md); font-size: var(--text-lg); font-weight: 600;">To support The Mum Bridge & Care Foundation, email us:</p>
-                <a href="mailto:info@themumbridge.org" class="support-email" aria-label="Email The Mum Bridge & Care Foundation">
-                    info@themumbridge.org
-                </a>
+                <p style="margin-bottom: var(--space-md); font-size: var(--text-lg); font-weight: 600;">To support The Mum Bridge & Care Foundation, email us or donate:</p>
+                <div class="support-actions">
+                    <a href="mailto:info@themumbridge.org" class="support-email" aria-label="Email The Mum Bridge & Care Foundation">
+                        info@themumbridge.org
+                    </a>
+                    <button class="btn btn-donate" id="heroDonateBtn" aria-label="Donate Now">
+                        ❤️ Donate Now
+                    </button>
+                </div>
             </div>
         </div>
     </section>
