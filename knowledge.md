@@ -1,7 +1,7 @@
 # The Mum Bridge & Care Foundation - Website Knowledge Base
 
 ## Overview
-This document captures the comprehensive UI structure, design system, and user experience of The Mum Bridge & Care Foundation website (themumbridge.org). Created: February 25, 2026 | Last Updated: April 14, 2026
+This document captures the comprehensive UI structure, design system, and user experience of The Mum Bridge & Care Foundation website (themumbridge.org). Created: February 25, 2026 | Last Updated: April 14, 2026 (Oluwademilade Adejoorin profile updated)
 
 ## Website Purpose
 Supporting mothers with disabilities through community, resources, and empowerment.
