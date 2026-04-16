@@ -1,7 +1,7 @@
 # The Mum Bridge & Care Foundation - Website Knowledge Base
 
 ## Overview
-This document captures the comprehensive UI structure, design system, and user experience of The Mum Bridge & Care Foundation website (themumbridge.org). Created: February 25, 2026 | Last Updated: April 14, 2026 (Oluwademilade Adejoorin profile updated)
+This document captures the comprehensive UI structure, design system, and user experience of The Mum Bridge & Care Foundation website (themumbridge.org). Created: February 25, 2026 | Last Updated: April 16, 2026
 
 ## Website Purpose
 Supporting mothers with disabilities through community, resources, and empowerment.
@@ -124,7 +124,7 @@ The website uses a warm, accessible, and dignified color scheme:
 
 ### 8. Board of Trustees Section
 - **Background**: Alternate background
-- **Layout**: 3-column grid (2 rows)
+- **Layout**: 3-column grid (6 visible members as of April 16, 2026; 7th member Adeoye Yetunde Adeyita commented out pending photo)
 - **Responsive**: 1 column mobile, 2 columns tablet
 - **Components**:
   - Member cards with image (340px height)
@@ -137,7 +137,8 @@ The website uses a warm, accessible, and dignified color scheme:
 ### 9. Partners Section
 - **Background**: Main background
 - **Purpose**: Showcase partner organizations
-- **Components**: Logo grid or list
+- **Partners (3 as of April 16, 2026)**: MatchBox, LASODA, NNGO
+- **Components**: Logo grid with partner-card articles — logo image, name, description, badge
 
 ### 10. SDG (Sustainable Development Goals) Section
 - **Background**: Alternate background
@@ -356,12 +357,13 @@ Both pages share a consistent design system with the main site while being optim
 ### Asset Versioning (Cache Busting)
 - All local asset `src`/`href` attributes carry a `?v=YYYYMMDD` query string (e.g. `?v=20260413`)
 - A `<meta name="asset-version" content="YYYYMMDD">` tag in each page's `<head>` records the current version
-- **Scope**: favicon, logo images, board member photos, partner logo — across all 3 HTML files
+- **Scope**: favicon, logo images, board member photos, partner logos — across all 3 HTML files
 - **On every deployment**: find-and-replace the old date string with the new one across all files:
   ```bash
   sed -i '' 's/v=OLD_DATE/v=NEW_DATE/g' index.html privacy-policy.html terms-of-use.html
+  sed -i '' 's/content="OLD_DATE"/content="NEW_DATE"/g' index.html privacy-policy.html terms-of-use.html
   ```
-- Current version: `20260414`
+- Current version: `20260416`
 
 ### JavaScript
 - Vanilla JS (no framework overhead)
@@ -553,6 +555,6 @@ This document MUST be updated whenever changes are made to the codebase. Before 
 
 ---
 
-**Last Updated**: April 14, 2026
+**Last Updated**: April 16, 2026
 **Document Maintainer**: Development Team
 **Purpose**: Onboarding, reference, and continuity across development sessions
