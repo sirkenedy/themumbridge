@@ -805,6 +805,59 @@
             background: var(--color-success);
         }
 
+        .donation-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: var(--space-sm) 0 var(--space-xs);
+            gap: var(--space-sm);
+        }
+
+        .donation-divider::before,
+        .donation-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--color-border, #e0d8d0);
+        }
+
+        .donation-divider span {
+            font-size: var(--text-xs);
+            color: var(--color-text-secondary);
+            white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .flutterwave-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 14px var(--space-sm);
+            background: linear-gradient(135deg, #f5a623, #e8821a);
+            color: #fff;
+            font-size: var(--text-sm);
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+            box-shadow: 0 2px 8px rgba(232, 130, 26, 0.35);
+            margin-bottom: var(--space-xs);
+        }
+
+        .flutterwave-btn:hover,
+        .flutterwave-btn:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(232, 130, 26, 0.45);
+            opacity: 0.93;
+        }
+
+        .flutterwave-btn:active {
+            transform: translateY(0);
+        }
+
         .donation-note {
             background: linear-gradient(135deg, rgba(123, 94, 123, 0.08), rgba(212, 165, 116, 0.08));
             padding: var(--space-xs) var(--space-sm);
@@ -3771,6 +3824,23 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Online Payment Option -->
+                <div class="donation-divider">
+                    <span>or pay online</span>
+                </div>
+
+                <a
+                    href="https://flutterwave.com/donate/0dbi6mww4nxu"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flutterwave-btn"
+                    aria-label="Donate with Flutterwave - opens in a new tab">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0;">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
+                    </svg>
+                    Donate with Flutterwave
+                </a>
 
                 <div class="donation-note">
                     <p>

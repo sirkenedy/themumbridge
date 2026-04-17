@@ -274,12 +274,14 @@ Both pages share a consistent design system with the main site while being optim
   - Header with gradient background
   - Close button (X) with rotation animation
   - Bank details in elegant field layout
-  - Multi-currency accounts with copy buttons
+  - Multi-currency accounts with copy buttons (USD, NGN, EUR, GBP)
   - Currency badges with gradient
   - Hover states on all interactive elements
+  - "Or pay online" divider
+  - **Flutterwave button** (added April 17, 2026) — orange gradient button linking to https://flutterwave.com/donate/0dbi6mww4nxu, opens in new tab
   - Thank you note at bottom
 - **Responsive**: Adjusts padding and font sizes for mobile
-- **Accessibility**: Focus trap, ESC to close, ARIA labels
+- **Accessibility**: Focus trap, ESC to close, ARIA labels, rel="noopener noreferrer" on external link
 
 ### Mobile Menu
 - **Trigger**: Hamburger button (visible < 768px)
