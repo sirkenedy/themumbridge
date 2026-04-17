@@ -1,7 +1,7 @@
 # The Mum Bridge & Care Foundation - Website Knowledge Base
 
 ## Overview
-This document captures the comprehensive UI structure, design system, and user experience of The Mum Bridge & Care Foundation website (themumbridge.org). Created: February 25, 2026 | Last Updated: April 16, 2026
+This document captures the comprehensive UI structure, design system, and user experience of The Mum Bridge & Care Foundation website (themumbridge.org). Created: February 25, 2026 | Last Updated: April 17, 2026
 
 ## Website Purpose
 Supporting mothers with disabilities through community, resources, and empowerment.
@@ -55,11 +55,11 @@ The website uses a warm, accessible, and dignified color scheme:
 
 ### 1. Fixed Header & Navigation
 - **Position**: Fixed at top with solid warm off-white background
-- **Height**: 82px (body has padding-top to account for this)
+- **Height**: 82px desktop / 70px mobile (body has padding-top to account for this)
 - **Components**:
   - Logo (50px height) with icon and text variants
   - Desktop navigation links with elegant underline animation on hover
-  - "Donate Now" button (accent gold gradient, prominent CTA)
+  - "Donate Now" button (accent gold gradient, prominent CTA) — in nav on desktop
   - Mobile hamburger menu (white lines on mobile, transforms to X when open)
 - **Mobile Behavior**: Hamburger menu, body scroll lock when open
 - **Accessibility**: ARIA labels, keyboard navigation, focus indicators
@@ -73,7 +73,9 @@ The website uses a warm, accessible, and dignified color scheme:
 - **Content**:
   - Hero title with responsive font sizing (clamp function)
   - Hero subtitle with opacity for depth
-  - CTA button (primary gradient)
+  - `.hero-buttons` flex container with two CTAs:
+    1. "Join Our Community" link (primary gradient)
+    2. "❤️ Donate Now" button (`#heroTopDonateBtn`, class `hero-donate-btn btn-donate`) — opens donation modal; stacks below "Join Our Community" on mobile
 - **Animation**: Smooth fade-in with translateY entrance
 - **Typography**: White text with layered text-shadow for contrast and readability
 
@@ -137,7 +139,11 @@ The website uses a warm, accessible, and dignified color scheme:
 ### 9. Partners Section
 - **Background**: Main background
 - **Purpose**: Showcase partner organizations
-- **Partners (3 as of April 16, 2026)**: MatchBox, LASODA, NNGO
+- **Partners (3 as of April 17, 2026)**: MatchBox, LASODA, NNGO
+- **Partner descriptions**:
+  - MatchBox: "Supporting our mission to create accessible and inclusive opportunities for mothers with disabilities."
+  - LASODA: "The Mum Bridge is a registered member of the Lagos State Office for Disability Affairs (LASODA), working to strengthen access, visibility, and support for mothers with disabilities within Lagos State."
+  - NNGO: "The Mum Bridge is a member of the Nigeria Network of NGOs, part of a national community committed to strengthening civil society and advancing inclusive, impact-driven work."
 - **Components**: Logo grid with partner-card articles — logo image, name, description, badge
 
 ### 10. SDG (Sustainable Development Goals) Section
@@ -363,7 +369,7 @@ Both pages share a consistent design system with the main site while being optim
   sed -i '' 's/v=OLD_DATE/v=NEW_DATE/g' index.html privacy-policy.html terms-of-use.html
   sed -i '' 's/content="OLD_DATE"/content="NEW_DATE"/g' index.html privacy-policy.html terms-of-use.html
   ```
-- Current version: `20260416`
+- Current version: `20260417`
 
 ### JavaScript
 - Vanilla JS (no framework overhead)
@@ -555,6 +561,6 @@ This document MUST be updated whenever changes are made to the codebase. Before 
 
 ---
 
-**Last Updated**: April 16, 2026
+**Last Updated**: April 17, 2026
 **Document Maintainer**: Development Team
 **Purpose**: Onboarding, reference, and continuity across development sessions
