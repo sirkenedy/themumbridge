@@ -112,7 +112,15 @@ The website uses a warm, accessible, and dignified color scheme:
 - **Components**:
   - Body text with generous line-height (1.9)
   - Highlight box with gradient background and left accent border
-  - YouTube video embed (responsive 16:9, ID: gxrBAENtICA) — added April 13, 2026
+  - **3-video gallery** (`.videos-section` > `.videos-grid`) — added May 4, 2026
+    - Desktop: 3-column CSS Grid; Tablet: 3-column; Mobile: 1-column stacked
+    - Video 1 (`gxrBAENtICA`) — label "Our Story"
+    - Video 2 (`EGRzyEBu5Hk`) — label "Our Impact"
+    - Video 3 (`za7F0wHYMPc`) — label "Our Community"
+    - Each card: YouTube thumbnail image, white play button overlay, gradient label bar
+    - Hover/focus: lift (translateY -3px), accent outline, thumbnail dim, play button scale
+    - Accessibility: `aria-label` on each link, `aria-hidden` on decorative elements, `prefers-reduced-motion` respected
+    - Previously: single `.about-video` card (replaced)
 
 ### 7. Core Values Section
 - **Background**: Main background
@@ -471,7 +479,7 @@ Both pages share a consistent design system with the main site while being optim
 5. Add structured data (Schema.org) for SEO
 6. ✅ COMPLETED (Feb 25, 2026) — Privacy Policy page added
 7. ✅ COMPLETED (Feb 25, 2026) — Terms of Use page added
-8. Consider meta tags for social sharing (Open Graph)
+8. ✅ COMPLETED (May 4, 2026) — Open Graph + Twitter Card meta tags added to index.html (og:image uses YouTube thumbnail of gxrBAENtICA)
 9. Add loading states for forms
 10. Consider A/B testing for CTAs
 
@@ -511,7 +519,7 @@ Both pages share a consistent design system with the main site while being optim
 - ✅ Terms of Use page — Added (Feb 25, 2026)
 - ⏳ Sitemap.xml
 - ⏳ Robots.txt
-- ⏳ Open Graph tags
+- ✅ Open Graph tags — Added May 4, 2026
 - ⏳ Schema.org structured data
 
 ---
@@ -563,6 +571,6 @@ This document MUST be updated whenever changes are made to the codebase. Before 
 
 ---
 
-**Last Updated**: April 17, 2026
+**Last Updated**: May 4, 2026
 **Document Maintainer**: Development Team
 **Purpose**: Onboarding, reference, and continuity across development sessions

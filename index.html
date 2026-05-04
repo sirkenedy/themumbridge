@@ -6,8 +6,25 @@
     <meta name="description" content="Supporting mothers with disabilities through community, resources, and empowerment">
     <title>The Mum Bridge & Care Foundation - Empowering Mothers with Disabilities</title>
     <!-- ASSET VERSION — bump this value on every deployment to invalidate browser caches -->
-    <meta name="asset-version" content="20260417">
-    <link rel="icon" type="image/png" href="assets/logo/the-mum-bridge-icon.png?v=20260417">
+    <meta name="asset-version" content="20260504">
+    <link rel="icon" type="image/png" href="assets/logo/the-mum-bridge-icon.png?v=20260504">
+
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://themumbridge.org/">
+    <meta property="og:title" content="The Mum Bridge & Care Foundation - Empowering Mothers with Disabilities">
+    <meta property="og:description" content="Supporting mothers with disabilities through community, resources, and empowerment.">
+    <meta property="og:image" content="https://img.youtube.com/vi/gxrBAENtICA/maxresdefault.jpg">
+    <meta property="og:image:width" content="1280">
+    <meta property="og:image:height" content="720">
+    <meta property="og:image:alt" content="The Mum Bridge & Care Foundation">
+    <meta property="og:site_name" content="The Mum Bridge & Care Foundation">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@themumbridge">
+    <meta name="twitter:title" content="The Mum Bridge & Care Foundation - Empowering Mothers with Disabilities">
+    <meta name="twitter:description" content="Supporting mothers with disabilities through community, resources, and empowerment.">
+    <meta name="twitter:image" content="https://img.youtube.com/vi/gxrBAENtICA/maxresdefault.jpg">
+    <meta name="twitter:image:alt" content="The Mum Bridge & Care Foundation">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RT75M8FH5G"></script>
@@ -1140,19 +1157,60 @@
             margin: var(--space-lg) 0;
         }
 
-        .about-video {
+        /* Video gallery — 3-column grid */
+        .videos-section {
             margin-top: var(--space-xl);
+        }
+
+        .videos-section-heading {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 1.25rem;
+            color: var(--color-primary);
+            text-align: center;
+            margin-bottom: var(--space-md);
+            letter-spacing: 0.02em;
+        }
+
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+        }
+
+        @media (max-width: 768px) {
+            .videos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .videos-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: var(--space-sm);
+            }
+        }
+
+        .video-card {
             border-radius: var(--radius-md);
             overflow: hidden;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-md);
             position: relative;
             padding-bottom: 56.25%; /* 16:9 */
             height: 0;
             display: block;
             background: #000;
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
         }
 
-        .about-video img {
+        .video-card:hover,
+        .video-card:focus-visible {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
+            outline: 3px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
+        .video-card img {
             position: absolute;
             top: 0;
             left: 0;
@@ -1162,17 +1220,18 @@
             transition: opacity 0.3s ease;
         }
 
-        .about-video:hover img {
+        .video-card:hover img,
+        .video-card:focus-visible img {
             opacity: 0.75;
         }
 
-        .about-video-play {
+        .video-card-play {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 72px;
-            height: 72px;
+            width: 60px;
+            height: 60px;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 50%;
             display: flex;
@@ -1182,16 +1241,38 @@
             pointer-events: none;
         }
 
-        .about-video:hover .about-video-play {
-            transform: translate(-50%, -50%) scale(1.1);
+        .video-card:hover .video-card-play,
+        .video-card:focus-visible .video-card-play {
+            transform: translate(-50%, -50%) scale(1.12);
             background: #fff;
         }
 
-        .about-video-play svg {
-            width: 28px;
-            height: 28px;
+        .video-card-play svg {
+            width: 24px;
+            height: 24px;
             margin-left: 4px;
             fill: var(--color-primary);
+        }
+
+        .video-card-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(44, 44, 44, 0.82));
+            color: #fff;
+            font-size: 0.8rem;
+            padding: var(--space-sm) var(--space-xs) var(--space-xs);
+            text-align: center;
+            letter-spacing: 0.03em;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .video-card,
+            .video-card img,
+            .video-card-play {
+                transition: none;
+            }
         }
 
         /* ============================================
@@ -3027,16 +3108,60 @@
                     Backed by this combination of lived experience, professional expertise, and governance strength, The Mum Bridge & Care Foundation is positioned to build strong partnerships and deliver measurable change for mothers with disabilities and their families. By intentionally supporting mothers with disabilities to access health services, economic opportunities, and community belonging, we create ripple effects that improve outcomes for children, families, and society at large.
                 </p>
 
-                <a class="about-video" href="https://youtu.be/gxrBAENtICA" target="_blank" rel="noopener noreferrer" aria-label="Watch our video on YouTube">
-                    <img
-                        src="https://img.youtube.com/vi/gxrBAENtICA/maxresdefault.jpg"
-                        alt="The Mum Bridge & Care Foundation — watch on YouTube"
-                        loading="lazy"
-                    >
-                    <span class="about-video-play" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
-                    </span>
-                </a>
+                <div class="videos-section" role="region" aria-label="Our videos">
+                    <h3 class="videos-section-heading">Watch Our Stories</h3>
+                    <div class="videos-grid">
+
+                        <a class="video-card"
+                           href="https://youtu.be/gxrBAENtICA"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           aria-label="Watch our story on YouTube (opens in new tab)">
+                            <img
+                                src="https://img.youtube.com/vi/gxrBAENtICA/maxresdefault.jpg"
+                                alt="The Mum Bridge & Care Foundation — our story"
+                                loading="lazy"
+                            >
+                            <span class="video-card-play" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+                            </span>
+                            <span class="video-card-label" aria-hidden="true">Our Story</span>
+                        </a>
+
+                        <a class="video-card"
+                           href="https://youtu.be/EGRzyEBu5Hk"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           aria-label="Watch our second video on YouTube (opens in new tab)">
+                            <img
+                                src="https://img.youtube.com/vi/EGRzyEBu5Hk/maxresdefault.jpg"
+                                alt="The Mum Bridge & Care Foundation — watch on YouTube"
+                                loading="lazy"
+                            >
+                            <span class="video-card-play" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+                            </span>
+                            <span class="video-card-label" aria-hidden="true">Our Impact</span>
+                        </a>
+
+                        <a class="video-card"
+                           href="https://youtu.be/za7F0wHYMPc"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           aria-label="Watch our third video on YouTube (opens in new tab)">
+                            <img
+                                src="https://img.youtube.com/vi/za7F0wHYMPc/maxresdefault.jpg"
+                                alt="The Mum Bridge & Care Foundation — watch on YouTube"
+                                loading="lazy"
+                            >
+                            <span class="video-card-play" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+                            </span>
+                            <span class="video-card-label" aria-hidden="true">Our Community</span>
+                        </a>
+
+                    </div>
+                </div>
             </div>
         </div>
     </section>
