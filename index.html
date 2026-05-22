@@ -5341,7 +5341,7 @@
             const galleryGrid = document.getElementById('gallery-grid');
             if (!galleryGrid) return;
 
-            const hiddenItems = galleryGrid.querySelectorAll('.gallery-item--hidden');
+            const hiddenItems = Array.from(galleryGrid.querySelectorAll('.gallery-item--hidden'));
             const toggleBtn   = document.getElementById('gallery-toggle');
             const lightbox    = document.getElementById('gallery-lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
@@ -5352,18 +5352,20 @@
 
             if (!lightbox) return;
 
-            const FOCUSABLE = 'button, [href], input, [tabindex]:not([tabindex="-1"])';
+            const FOCUSABLE  = 'button, [href], input, [tabindex]:not([tabindex="-1"])';
+            const totalPhotos = galleryGrid.querySelectorAll('.gallery-thumb-btn').length;
             let currentIndex = 0;
             let lastFocused  = null;
             let allExpanded  = false;
 
-            // Build ordered photo list from thumbnail buttons
-            const photos = Array.from(
-                galleryGrid.querySelectorAll('.gallery-thumb-btn')
-            ).map(btn => ({
-                src: btn.querySelector('img').getAttribute('src'),
-                alt: btn.querySelector('img').getAttribute('alt')
-            }));
+            // Look up photo data live from the DOM using the resolved .src property
+            // (absolute URL — avoids relative-path ambiguity when set on lightbox img)
+            function getPhoto(index) {
+                const btn = galleryGrid.querySelector('[data-index="' + index + '"]');
+                if (!btn) return null;
+                const img = btn.querySelector('img');
+                return { src: img.src, alt: img.alt };
+            }
 
             // ---- Show More / Show Fewer ----
             if (toggleBtn && hiddenItems.length > 0) {
@@ -5371,8 +5373,22 @@
                     allExpanded = !allExpanded;
 
                     hiddenItems.forEach(item => {
-                        item.style.display = allExpanded ? '' : 'none';
-                        item.classList.toggle('gallery-item--hidden', !allExpanded);
+                        if (allExpanded) {
+                            item.style.display = '';
+                            item.classList.remove('gallery-item--hidden');
+                            // Browsers skip fetching lazy images inside display:none parents.
+                            // Force-load by switching to eager and reassigning the src.
+                            const img = item.querySelector('img');
+                            if (img) {
+                                img.loading = 'eager';
+                                const src = img.getAttribute('src');
+                                img.removeAttribute('src');
+                                img.setAttribute('src', src);
+                            }
+                        } else {
+                            item.style.display = 'none';
+                            item.classList.add('gallery-item--hidden');
+                        }
                     });
 
                     toggleBtn.textContent = allExpanded
@@ -5407,16 +5423,23 @@
 
             // ---- Update image + counter ----
             function renderLightbox() {
-                const photo = photos[currentIndex];
-                lightboxImg.setAttribute('src', photo.src);
-                lightboxImg.setAttribute('alt', photo.alt);
-                lightboxCounter.textContent = (currentIndex + 1) + ' of ' + photos.length;
+                const photo = getPhoto(currentIndex);
+                if (!photo) return;
+                // Assign via property (not setAttribute) for reliable load trigger
+                lightboxImg.src = photo.src;
+                lightboxImg.alt = photo.alt;
+                lightboxCounter.textContent = (currentIndex + 1) + ' of ' + totalPhotos;
                 lightboxPrev.disabled = currentIndex === 0;
-                lightboxNext.disabled = currentIndex === photos.length - 1;
+                lightboxNext.disabled = currentIndex === totalPhotos - 1;
             }
 
-            function showPrev() { if (currentIndex > 0) { currentIndex--; renderLightbox(); } }
-            function showNext() { if (currentIndex < photos.length - 1) { currentIndex++; renderLightbox(); } }
+            function showPrev() {
+                if (currentIndex > 0) { currentIndex--; renderLightbox(); }
+            }
+
+            function showNext() {
+                if (currentIndex < totalPhotos - 1) { currentIndex++; renderLightbox(); }
+            }
 
             // ---- Thumbnail click (event delegation) ----
             galleryGrid.addEventListener('click', (e) => {
@@ -5439,11 +5462,9 @@
             // ---- Keyboard: arrows, ESC, focus trap ----
             document.addEventListener('keydown', (e) => {
                 if (!lightbox.classList.contains('active')) return;
-
-                if (e.key === 'Escape')      { closeLightbox(); return; }
-                if (e.key === 'ArrowLeft')   { e.preventDefault(); showPrev(); return; }
-                if (e.key === 'ArrowRight')  { e.preventDefault(); showNext(); return; }
-
+                if (e.key === 'Escape')     { closeLightbox(); return; }
+                if (e.key === 'ArrowLeft')  { e.preventDefault(); showPrev(); return; }
+                if (e.key === 'ArrowRight') { e.preventDefault(); showNext(); return; }
                 if (e.key === 'Tab') {
                     const focusable = Array.from(lightbox.querySelectorAll(FOCUSABLE));
                     const first = focusable[0];
@@ -5469,7 +5490,7 @@
                 }
             }, { passive: true });
 
-            console.log('✓ Gallery initialized with', photos.length, 'photos');
+            console.log('✓ Gallery initialized with', totalPhotos, 'photos');
         })();
 
         } // End of initializeWebsite()
