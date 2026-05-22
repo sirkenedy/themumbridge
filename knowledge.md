@@ -154,7 +154,27 @@ The website uses a warm, accessible, and dignified color scheme:
   - NNGO: "The Mum Bridge is a member of the Nigeria Network of NGOs, part of a national community committed to strengthening civil society and advancing inclusive, impact-driven work."
 - **Components**: Logo grid with partner-card articles — logo image, name, description, badge
 
-### 10. SDG (Sustainable Development Goals) Section
+### 10. Community Gallery Section
+- **Background**: Main warm off-white (`--color-background`)
+- **Placement**: Between Board of Trustees and Partners sections
+- **Added**: May 22, 2026
+- **Layout**: 3-column CSS Grid on desktop, 2-column tablet, 1-column mobile
+- **Initial state**: First 9 photos visible; remaining 11 hidden with `gallery-item--hidden` class
+- **"Show more" toggle**: `#gallery-toggle` button reveals/hides hidden items; text updates dynamically
+- **Photo source**: `assets/impact/may-2026/` — 20 JPG files (TMB-16, TMB-21, TMB-35, TMB-49, TMB-57, TMB-73, TMB-74, TMB-76, TMB-90, TMB-126, TMB-129, TMB-131, TMB-135, TMB-137, TMB-147, TMB-199, TMB-201, TMB-212, TMB-215, TMB-217)
+- **Asset version**: `?v=20260522`
+- **Lightbox**: `#gallery-lightbox` — `role="dialog" aria-modal="true"`, triggered by any `.gallery-thumb-btn` click
+  - Prev/next buttons + keyboard arrow navigation
+  - Touch swipe left/right on mobile
+  - ESC key or backdrop click to close
+  - Focus trap (Tab stays inside lightbox)
+  - Focus restoration to triggering thumbnail on close
+  - `aria-live="polite"` counter announces "X of 20" on each change
+- **Adding new photos**: Add `<figure class="gallery-item gallery-item--hidden">` block with `data-index` incremented; update total in button text
+- **Each thumbnail**: `<button class="gallery-thumb-btn">` (keyboard-accessible), `loading="lazy"`, descriptive `alt` text, expand icon overlay on hover/focus
+- **Accessibility**: `prefers-reduced-motion` respected (transitions disabled), min 44px tap targets, all interactive elements are native buttons
+
+### 11. SDG (Sustainable Development Goals) Section
 - **Background**: Alternate background
 - **Layout**: 2-column grid (max-width 1000px)
 - **Responsive**: 1 column mobile
@@ -379,7 +399,7 @@ Both pages share a consistent design system with the main site while being optim
   sed -i '' 's/v=OLD_DATE/v=NEW_DATE/g' index.html privacy-policy.html terms-of-use.html
   sed -i '' 's/content="OLD_DATE"/content="NEW_DATE"/g' index.html privacy-policy.html terms-of-use.html
   ```
-- Current version: `20260417`
+- Current version: `20260522` (bumped May 22, 2026 for gallery launch)
 
 ### JavaScript
 - Vanilla JS (no framework overhead)
@@ -571,6 +591,6 @@ This document MUST be updated whenever changes are made to the codebase. Before 
 
 ---
 
-**Last Updated**: May 4, 2026
+**Last Updated**: May 22, 2026
 **Document Maintainer**: Development Team
 **Purpose**: Onboarding, reference, and continuity across development sessions

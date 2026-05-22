@@ -2874,6 +2874,295 @@
         .mb-0 {
             margin-bottom: 0;
         }
+
+        /* ============================================
+           GALLERY SECTION
+           Impact photo grid with lightbox viewer
+           ============================================ */
+        .gallery-section {
+            background: var(--color-background);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-sm);
+        }
+
+        .gallery-item {
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-md);
+            background: var(--color-background-alt);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow var(--transition-base), transform var(--transition-base);
+        }
+
+        .gallery-item:hover,
+        .gallery-item:focus-within {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+        }
+
+        .gallery-item--hidden {
+            display: none;
+        }
+
+        .gallery-thumb-btn {
+            display: block;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-thumb-btn:focus-visible {
+            outline: 3px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
+        .gallery-thumb-btn img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .gallery-thumb-btn:hover img,
+        .gallery-thumb-btn:focus img {
+            transform: scale(1.05);
+        }
+
+        .gallery-thumb-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(92, 68, 92, 0.5) 0%, transparent 55%);
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+
+        .gallery-thumb-btn:hover::after,
+        .gallery-thumb-btn:focus::after {
+            opacity: 1;
+        }
+
+        .gallery-thumb-icon {
+            position: absolute;
+            bottom: var(--space-sm);
+            right: var(--space-sm);
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity var(--transition-base), transform var(--transition-base);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .gallery-thumb-btn:hover .gallery-thumb-icon,
+        .gallery-thumb-btn:focus .gallery-thumb-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .gallery-thumb-icon svg {
+            width: 16px;
+            height: 16px;
+            color: var(--color-primary);
+        }
+
+        .gallery-footer {
+            text-align: center;
+            margin-top: var(--space-lg);
+        }
+
+        .btn-gallery-toggle {
+            background: transparent;
+            border: 2px solid var(--color-primary);
+            color: var(--color-primary);
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: var(--radius-sm);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            font-family: var(--font-primary);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            min-height: 44px;
+        }
+
+        .btn-gallery-toggle:hover,
+        .btn-gallery-toggle:focus-visible {
+            background: var(--color-primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            outline: none;
+        }
+
+        /* ============================================
+           GALLERY LIGHTBOX
+           Full-screen accessible photo viewer
+           ============================================ */
+        .gallery-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 3000;
+            background: rgba(0, 0, 0, 0.93);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--transition-base), visibility var(--transition-base);
+            padding: var(--space-xl) var(--space-md);
+        }
+
+        .gallery-lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        .lightbox-img-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 100%;
+        }
+
+        .lightbox-img {
+            display: block;
+            max-width: 100%;
+            max-height: 78vh;
+            object-fit: contain;
+            border-radius: var(--radius-md);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .lightbox-close {
+            position: fixed;
+            top: var(--space-md);
+            right: var(--space-md);
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            font-size: 1.75rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background var(--transition-fast), transform var(--transition-fast);
+            z-index: 3001;
+        }
+
+        .lightbox-close:hover,
+        .lightbox-close:focus-visible {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
+        .lightbox-nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.12);
+            border: none;
+            color: white;
+            font-size: 2.25rem;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background var(--transition-fast);
+            z-index: 3001;
+            line-height: 1;
+        }
+
+        .lightbox-nav:hover,
+        .lightbox-nav:focus-visible {
+            background: rgba(255, 255, 255, 0.28);
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
+        .lightbox-nav:disabled {
+            opacity: 0.25;
+            cursor: not-allowed;
+        }
+
+        .lightbox-prev { left: var(--space-sm); }
+        .lightbox-next { right: var(--space-sm); }
+
+        .lightbox-counter {
+            margin-top: var(--space-sm);
+            color: rgba(255, 255, 255, 0.65);
+            font-size: var(--text-xs);
+            letter-spacing: 1px;
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--space-xs);
+            }
+
+            .lightbox-nav {
+                width: 44px;
+                height: 44px;
+                font-size: 1.75rem;
+            }
+
+            .lightbox-prev { left: var(--space-xs); }
+            .lightbox-next { right: var(--space-xs); }
+
+            .lightbox-img {
+                max-height: 70vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .gallery-thumb-btn img,
+            .gallery-thumb-icon,
+            .gallery-thumb-btn::after,
+            .gallery-item {
+                transition: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -3475,6 +3764,189 @@
     </section>
 
     <!-- ============================================
+         COMMUNITY GALLERY SECTION
+         Impact photos showing our work in action
+         ============================================ -->
+    <section class="section gallery-section" role="region" aria-labelledby="gallery-title">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" id="gallery-title">Our Community in Action</h2>
+                <p>Real moments from our programmes, events, and gatherings — showing the warmth, strength, and joy of our community.</p>
+            </div>
+
+            <div class="gallery-grid" id="gallery-grid">
+
+                <!-- Photo 1 -->
+                <figure class="gallery-item">
+                    <button class="gallery-thumb-btn" data-index="0" aria-label="View photo 1 of 20: A wide view of The Mum Bridge community gathering">
+                        <img src="assets/impact/may-2026/TMB-215.jpg?v=20260522" alt="A wide view of The Mum Bridge community gathering, showing a full room of mothers including wheelchair users in attendance" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 2 -->
+                <figure class="gallery-item">
+                    <button class="gallery-thumb-btn" data-index="1" aria-label="View photo 2 of 20: Mothers seated together during a community session including a wheelchair user">
+                        <img src="assets/impact/may-2026/TMB-74.jpg?v=20260522" alt="Mothers with disabilities seated together during a Mum Bridge community session, including a participant using a wheelchair" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 3 -->
+                <figure class="gallery-item">
+                    <button class="gallery-thumb-btn" data-index="2" aria-label="View photo 3 of 20: Participants seated attentively during a Mum Bridge programme">
+                        <img src="assets/impact/may-2026/TMB-147.jpg?v=20260522" alt="Mothers seated attentively with hands on their chests during a Mum Bridge programme" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 4 -->
+                <figure class="gallery-item">
+                    <button class="gallery-thumb-btn" data-index="3" aria-label="View photo 4 of 20: Two facilitators addressing the community with a microphone">
+                        <img src="assets/impact/may-2026/TMB-76.jpg?v=20260522" alt="Two Mum Bridge facilitators at the front of the room, one speaking into a microphone with the foundation banner visible behind them" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 5 -->
+                <figure class="gallery-item">
+                    <button class="gallery-thumb-btn" data-index="4" aria-label="View photo 5 of 20: Facilitator with sign language interpreter on stage">
+                        <img src="assets/impact/may-2026/TMB-73.jpg?v=20260522" alt="A Mum Bridge facilitator speaks into a microphone while a sign language interpreter communicates alongside her" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 6 -->
+                <figure class="gallery-item">
+                    <button class="gallery-thumb-btn" data-index="5" aria-label="View photo 6 of 20: Team member and sign language interpreter ensuring an accessible session">
+                        <img src="assets/impact/may-2026/TMB-137.jpg?v=20260522" alt="A Mum Bridge team member addresses the community with a sign language interpreter beside her, ensuring the session is accessible for deaf participants" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 7 -->
+                <figure class="gallery-item">
+                    <button class="gallery-thumb-btn" data-index="6" aria-label="View photo 7 of 20: Community member standing to share her experience">
+                        <img src="assets/impact/may-2026/TMB-90.jpg?v=20260522" alt="A community member stands to share her experience during an interactive Mum Bridge session, with the audience listening" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 8 -->
+                <figure class="gallery-item">
+                    <button class="gallery-thumb-btn" data-index="7" aria-label="View photo 8 of 20: Mother confidently contributing her voice during community dialogue">
+                        <img src="assets/impact/may-2026/TMB-126.jpg?v=20260522" alt="A mother stands confidently to contribute her voice during a Mum Bridge community dialogue" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 9 -->
+                <figure class="gallery-item">
+                    <button class="gallery-thumb-btn" data-index="8" aria-label="View photo 9 of 20: Participant sharing her story with a microphone">
+                        <img src="assets/impact/may-2026/TMB-129.jpg?v=20260522" alt="A participant in an orange dress shares her story as a Mum Bridge facilitator holds a microphone toward her" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 10 (hidden initially) -->
+                <figure class="gallery-item gallery-item--hidden">
+                    <button class="gallery-thumb-btn" data-index="9" aria-label="View photo 10 of 20: Mother celebrating joyfully during a session">
+                        <img src="assets/impact/may-2026/TMB-131.jpg?v=20260522" alt="A mother celebrates joyfully with clasped hands as her community cheers around her during a Mum Bridge session" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 11 (hidden initially) -->
+                <figure class="gallery-item gallery-item--hidden">
+                    <button class="gallery-thumb-btn" data-index="10" aria-label="View photo 11 of 20: Community member contributing to the group dialogue">
+                        <img src="assets/impact/may-2026/TMB-135.jpg?v=20260522" alt="A community member speaks into a microphone, contributing to the Mum Bridge group dialogue" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 12 (hidden initially) -->
+                <figure class="gallery-item gallery-item--hidden">
+                    <button class="gallery-thumb-btn" data-index="11" aria-label="View photo 12 of 20: Facilitator guiding a small group breakout discussion">
+                        <img src="assets/impact/may-2026/TMB-199.jpg?v=20260522" alt="A Mum Bridge team member facilitates a small group discussion, guiding participants in a breakout activity" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 13 (hidden initially) -->
+                <figure class="gallery-item gallery-item--hidden">
+                    <button class="gallery-thumb-btn" data-index="12" aria-label="View photo 13 of 20: Peer support circle showing the diverse community The Mum Bridge serves">
+                        <img src="assets/impact/may-2026/TMB-201.jpg?v=20260522" alt="A small peer support circle in conversation, showing the diverse community of mothers The Mum Bridge serves" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 14 (hidden initially) -->
+                <figure class="gallery-item gallery-item--hidden">
+                    <button class="gallery-thumb-btn" data-index="13" aria-label="View photo 14 of 20: Community members sharing laughter and joy together">
+                        <img src="assets/impact/may-2026/TMB-212.jpg?v=20260522" alt="Community members sharing laughter and joy together during a Mum Bridge group activity" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 15 (hidden initially) -->
+                <figure class="gallery-item gallery-item--hidden">
+                    <button class="gallery-thumb-btn" data-index="14" aria-label="View photo 15 of 20: Three women presenting workshop findings with a sign language interpreter">
+                        <img src="assets/impact/may-2026/TMB-217.jpg?v=20260522" alt="Three women present workshop findings on a flip chart in front of the Mum Bridge banner, with a sign language interpreter alongside" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 16 (hidden initially) -->
+                <figure class="gallery-item gallery-item--hidden">
+                    <button class="gallery-thumb-btn" data-index="15" aria-label="View photo 16 of 20: Team member distributing materials to participants">
+                        <img src="assets/impact/may-2026/TMB-57.jpg?v=20260522" alt="A Mum Bridge team member distributes materials to participants seated during the community programme" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 17 (hidden initially) -->
+                <figure class="gallery-item gallery-item--hidden">
+                    <button class="gallery-thumb-btn" data-index="16" aria-label="View photo 17 of 20: Three community members smiling warmly in front of the foundation banner">
+                        <img src="assets/impact/may-2026/TMB-21.jpg?v=20260522" alt="Three community members smile warmly together in front of The Mum Bridge &amp; Care Foundation banner" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 18 (hidden initially) -->
+                <figure class="gallery-item gallery-item--hidden">
+                    <button class="gallery-thumb-btn" data-index="17" aria-label="View photo 18 of 20: Three women posing together at a Mum Bridge event">
+                        <img src="assets/impact/may-2026/TMB-49.jpg?v=20260522" alt="Three women pose together at a Mum Bridge event, with the foundation banner visible behind them" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 19 (hidden initially) -->
+                <figure class="gallery-item gallery-item--hidden">
+                    <button class="gallery-thumb-btn" data-index="18" aria-label="View photo 19 of 20: Two attendees sharing a warm embrace">
+                        <img src="assets/impact/may-2026/TMB-35.jpg?v=20260522" alt="Two attendees share a warm embrace in front of The Mum Bridge &amp; Care Foundation banner" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 20 (hidden initially) -->
+                <figure class="gallery-item gallery-item--hidden">
+                    <button class="gallery-thumb-btn" data-index="19" aria-label="View photo 20 of 20: Three women smiling together at a community event">
+                        <img src="assets/impact/may-2026/TMB-16.jpg?v=20260522" alt="Three women smile together at a Mum Bridge community event in front of the foundation banner" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+            </div>
+
+            <div class="gallery-footer">
+                <button class="btn-gallery-toggle" id="gallery-toggle" aria-controls="gallery-grid">
+                    See all 11 more photos
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
          PARTNERS SECTION
          Showcasing our valued partners who support our mission
          ============================================ -->
@@ -3973,6 +4445,26 @@
                         Every contribution helps us build inclusive communities and empower mothers with disabilities to thrive.
                     </p>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         GALLERY LIGHTBOX
+         Full-screen accessible photo viewer
+         - role="dialog" + aria-modal for screen readers
+         - Focus trap keeps keyboard users inside
+         - ESC, click-outside, and close button to dismiss
+         - Arrow keys and swipe to navigate
+         ============================================ -->
+    <div class="gallery-lightbox" id="gallery-lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Close photo viewer">&times;</button>
+        <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Previous photo">&#8249;</button>
+        <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Next photo">&#8250;</button>
+        <div class="lightbox-inner">
+            <div class="lightbox-img-wrap">
+                <img class="lightbox-img" id="lightbox-img" src="" alt="">
+                <p class="lightbox-counter" id="lightbox-counter" aria-live="polite" aria-atomic="true"></p>
             </div>
         </div>
     </div>
@@ -4839,6 +5331,145 @@
                     initMobileNav();
                 }
             });
+        })();
+
+        // ============================================
+        // GALLERY — SHOW MORE / LIGHTBOX
+        // Accessible photo grid with full-screen viewer
+        // ============================================
+        (function initGallery() {
+            const galleryGrid = document.getElementById('gallery-grid');
+            if (!galleryGrid) return;
+
+            const hiddenItems = galleryGrid.querySelectorAll('.gallery-item--hidden');
+            const toggleBtn   = document.getElementById('gallery-toggle');
+            const lightbox    = document.getElementById('gallery-lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCounter = document.getElementById('lightbox-counter');
+            const lightboxClose   = document.getElementById('lightbox-close');
+            const lightboxPrev    = document.getElementById('lightbox-prev');
+            const lightboxNext    = document.getElementById('lightbox-next');
+
+            if (!lightbox) return;
+
+            const FOCUSABLE = 'button, [href], input, [tabindex]:not([tabindex="-1"])';
+            let currentIndex = 0;
+            let lastFocused  = null;
+            let allExpanded  = false;
+
+            // Build ordered photo list from thumbnail buttons
+            const photos = Array.from(
+                galleryGrid.querySelectorAll('.gallery-thumb-btn')
+            ).map(btn => ({
+                src: btn.querySelector('img').getAttribute('src'),
+                alt: btn.querySelector('img').getAttribute('alt')
+            }));
+
+            // ---- Show More / Show Fewer ----
+            if (toggleBtn && hiddenItems.length > 0) {
+                toggleBtn.addEventListener('click', () => {
+                    allExpanded = !allExpanded;
+
+                    hiddenItems.forEach(item => {
+                        item.style.display = allExpanded ? '' : 'none';
+                        item.classList.toggle('gallery-item--hidden', !allExpanded);
+                    });
+
+                    toggleBtn.textContent = allExpanded
+                        ? 'Show fewer photos'
+                        : 'See all ' + hiddenItems.length + ' more photos';
+
+                    if (!allExpanded) {
+                        const section = galleryGrid.closest('.gallery-section');
+                        if (section) {
+                            const top = section.getBoundingClientRect().top + window.pageYOffset - 100;
+                            window.scrollTo({ top, behavior: 'smooth' });
+                        }
+                    }
+                });
+            }
+
+            // ---- Open lightbox ----
+            function openLightbox(index) {
+                currentIndex = index;
+                renderLightbox();
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => lightboxClose.focus(), 80);
+            }
+
+            // ---- Close lightbox ----
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+                if (lastFocused) lastFocused.focus();
+            }
+
+            // ---- Update image + counter ----
+            function renderLightbox() {
+                const photo = photos[currentIndex];
+                lightboxImg.setAttribute('src', photo.src);
+                lightboxImg.setAttribute('alt', photo.alt);
+                lightboxCounter.textContent = (currentIndex + 1) + ' of ' + photos.length;
+                lightboxPrev.disabled = currentIndex === 0;
+                lightboxNext.disabled = currentIndex === photos.length - 1;
+            }
+
+            function showPrev() { if (currentIndex > 0) { currentIndex--; renderLightbox(); } }
+            function showNext() { if (currentIndex < photos.length - 1) { currentIndex++; renderLightbox(); } }
+
+            // ---- Thumbnail click (event delegation) ----
+            galleryGrid.addEventListener('click', (e) => {
+                const btn = e.target.closest('.gallery-thumb-btn');
+                if (!btn) return;
+                lastFocused = btn;
+                openLightbox(parseInt(btn.dataset.index, 10));
+            });
+
+            // ---- Lightbox controls ----
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightboxPrev.addEventListener('click', showPrev);
+            lightboxNext.addEventListener('click', showNext);
+
+            // Close on backdrop click
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) closeLightbox();
+            });
+
+            // ---- Keyboard: arrows, ESC, focus trap ----
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+
+                if (e.key === 'Escape')      { closeLightbox(); return; }
+                if (e.key === 'ArrowLeft')   { e.preventDefault(); showPrev(); return; }
+                if (e.key === 'ArrowRight')  { e.preventDefault(); showNext(); return; }
+
+                if (e.key === 'Tab') {
+                    const focusable = Array.from(lightbox.querySelectorAll(FOCUSABLE));
+                    const first = focusable[0];
+                    const last  = focusable[focusable.length - 1];
+                    if (e.shiftKey && document.activeElement === first) {
+                        e.preventDefault(); last.focus();
+                    } else if (!e.shiftKey && document.activeElement === last) {
+                        e.preventDefault(); first.focus();
+                    }
+                }
+            });
+
+            // ---- Touch swipe ----
+            let touchStartX = 0;
+            lightbox.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].clientX;
+            }, { passive: true });
+
+            lightbox.addEventListener('touchend', (e) => {
+                const delta = touchStartX - e.changedTouches[0].clientX;
+                if (Math.abs(delta) > 50) {
+                    delta > 0 ? showNext() : showPrev();
+                }
+            }, { passive: true });
+
+            console.log('✓ Gallery initialized with', photos.length, 'photos');
         })();
 
         } // End of initializeWebsite()
