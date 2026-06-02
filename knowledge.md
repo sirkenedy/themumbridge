@@ -39,7 +39,12 @@ The homepage was restructured per the May 2026 "Website Restructure Brief + Copy
 - **Hero background image** changed from the Unsplash hands stock photo to an authentic TMB community photo: `assets/hero/community-hero.jpg` (sourced from `assets/impact/may-2026/TMB-215.jpg`, resized to 2400×1600, quality 82, ~400KB). Chosen for wide composition, visible wheelchair user, TMB foundation banner in-frame, and B&W tonality that supports text legibility. Overlay updated to a deep-plum→warm-brown diagonal gradient (#4A2545 78% → 62% → warm brown 65%) plus a soft radial vignette.
 - **Open Graph / Twitter Card images** updated to point at the new hero image (was YouTube thumbnail of gxrBAENtICA).
 - **Mobile hero**: `background-attachment` switches from `fixed` to `scroll` below 768px (iOS perf + visual quality).
-- **Video order rotated** (request June 2, 2026): previously Our Story → Our Impact → Our Community. Now: Our Community (za7F0wHYMPc) → Our Story (gxrBAENtICA) → Our Impact (EGRzyEBu5Hk). Hook lines move with their videos.
+- **Video order + label remap** (request June 2, 2026): cards now display, in order:
+  1. `za7F0wHYMPc` — label "Our Story" — hook "How The Mum Bridge began, and why it had to."
+  2. `gxrBAENtICA` — label "Our Community" — hook "Meet the mothers we exist for."
+  3. `EGRzyEBu5Hk` — label "Our Impact" — hook "What changes when a mother with a disability finds her community."
+
+  Note: labels/hooks no longer follow the YouTube IDs they originally rode with — they were remapped to align with the new card positions on June 2, 2026.
 
 ### Polish (June 2, 2026)
 - Transition curves upgraded to `cubic-bezier(0.25, 1, 0.5, 1)` (ease-out-quart)
