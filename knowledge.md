@@ -1,7 +1,46 @@
 # The Mum Bridge & Care Foundation - Website Knowledge Base
 
 ## Overview
-This document captures the comprehensive UI structure, design system, and user experience of The Mum Bridge & Care Foundation website (themumbridge.org). Created: February 25, 2026 | Last Updated: April 17, 2026
+This document captures the comprehensive UI structure, design system, and user experience of The Mum Bridge & Care Foundation website (themumbridge.org). Created: February 25, 2026 | Last Updated: June 2, 2026
+
+## June 2, 2026 — Major Restructure (Developer Brief, May 2026)
+The homepage was restructured per the May 2026 "Website Restructure Brief + Copy" with ~40% copy reduction and a new scroll order. Key changes:
+
+### New scroll order (replaces previous)
+1. Hero — new headline + Donate as primary CTA (deep plum #4A2545)
+2. The Problem — "The Weight She Carries Alone" — dark plum bg, image on right
+3. Impact So Far (NEW) — 6 stat cards (70+, 100+, 5–6, Mum Bridge Circle, 3, 100%)
+4. What We Do — reduced from 6 cards to 5; removed all emoji icons; bottom row centered
+5. Community Photos Gallery — moved up (was between Board and Partners)
+6. Who We Are — About section cut by ~60%; 3 videos retained with per-card hook lines
+7. Our Partners
+8. Our Team — board bios cut to one sentence each; View More expandables removed
+9. Donate (NEW structure) — intro copy + 4 donation tiers BEFORE Flutterwave/bank details
+10. Join / Volunteer — combined into a single two-card section
+11. Contact + Footer — newsletter signup now consolidated into footer only
+
+### Sections removed entirely
+- Vision & Mission (Our Purpose)
+- Core Values
+- SDG Alignment
+- Mid-page CTA section
+- Standalone Join Community / newsletter section (consolidated to footer)
+
+### New / changed brand colour usage
+- `#4A2545` (deep plum) introduced for: Problem section background, primary Donate button, donate-tier titles, donate-pay border, modal "feature" tier
+- `#C9A84C` (warm gold) used for Impact So Far stat numbers and card top borders
+- Existing `--color-primary` (#7B5E7B) retained as global primary for nav/headings
+
+### Donation modal (existing modal updated)
+- Added intro copy and a 4-tier summary block BEFORE the Flutterwave button + bank details
+- Tier summary uses `.donation-tiers-summary` with `role="list"`; feature tier (Gathering 2026) is full-width with deep-plum left border
+
+### Polish (June 2, 2026)
+- Transition curves upgraded to `cubic-bezier(0.25, 1, 0.5, 1)` (ease-out-quart)
+- Staggered card reveals (impact, services, donate tiers, jv-cards, partners, board) — 80ms increments
+- Impact card hover: gold gradient sweep on top border
+- Donate tier hover: lifted shadow + 1px plum ring
+- All staggered animations are disabled under `prefers-reduced-motion`
 
 ## Website Purpose
 Supporting mothers with disabilities through community, resources, and empowerment.
@@ -399,7 +438,7 @@ Both pages share a consistent design system with the main site while being optim
   sed -i '' 's/v=OLD_DATE/v=NEW_DATE/g' index.html privacy-policy.html terms-of-use.html
   sed -i '' 's/content="OLD_DATE"/content="NEW_DATE"/g' index.html privacy-policy.html terms-of-use.html
   ```
-- Current version: `20260522` (bumped May 22, 2026 for gallery launch)
+- Current version: `20260602` (bumped June 2, 2026 for May 2026 restructure)
 
 ### JavaScript
 - Vanilla JS (no framework overhead)
@@ -591,6 +630,6 @@ This document MUST be updated whenever changes are made to the codebase. Before 
 
 ---
 
-**Last Updated**: May 22, 2026
+**Last Updated**: June 2, 2026
 **Document Maintainer**: Development Team
 **Purpose**: Onboarding, reference, and continuity across development sessions

@@ -6,8 +6,8 @@
     <meta name="description" content="Supporting mothers with disabilities through community, resources, and empowerment">
     <title>The Mum Bridge & Care Foundation - Empowering Mothers with Disabilities</title>
     <!-- ASSET VERSION — bump this value on every deployment to invalidate browser caches -->
-    <meta name="asset-version" content="20260504">
-    <link rel="icon" type="image/png" href="assets/logo/the-mum-bridge-icon.png?v=20260504">
+    <meta name="asset-version" content="20260602">
+    <link rel="icon" type="image/png" href="assets/logo/the-mum-bridge-icon.png?v=20260602">
 
     <!-- Open Graph / Social Sharing -->
     <meta property="og:type" content="website">
@@ -86,10 +86,12 @@
             --radius-lg: 1.25rem;
 
             /* Animation Timing */
-            --transition-fast: 200ms ease;
-            --transition-base: 300ms ease;
-            --transition-slow: 500ms ease;
-            --transition-entrance: 800ms cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-fast: 200ms var(--ease-out-quart);
+            --transition-base: 320ms var(--ease-out-quart);
+            --transition-slow: 520ms var(--ease-out-quart);
+            --transition-entrance: 900ms var(--ease-out-expo);
         }
 
         /* ============================================
@@ -179,17 +181,86 @@
             padding: 0 var(--space-md);
         }
 
-        .section {
+        .section,
+        .problem-section,
+        .impact-so-far {
             padding: var(--space-2xl) 0;
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(28px);
             transition: opacity var(--transition-entrance), transform var(--transition-entrance);
         }
 
         /* Intersection Observer trigger class */
-        .section.visible {
+        .section.visible,
+        .problem-section.visible,
+        .impact-so-far.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Stagger children in revealed grids — subtle, premium */
+        .impact-so-far.visible .impact-card,
+        .what-we-do.visible .service-card,
+        .donate-section.visible .donate-tier,
+        .join-volunteer-section.visible .jv-card,
+        .partners-section.visible .partner-card,
+        .board.visible .board-member,
+        .videos-section .video-card-wrap {
+            animation: cardStagger 700ms var(--ease-out-expo) backwards;
+        }
+
+        .impact-so-far.visible .impact-card:nth-child(1),
+        .what-we-do.visible .service-card:nth-child(1),
+        .donate-section.visible .donate-tier:nth-child(1),
+        .join-volunteer-section.visible .jv-card:nth-child(1),
+        .partners-section.visible .partner-card:nth-child(1),
+        .board.visible .board-member:nth-child(1) { animation-delay: 80ms; }
+
+        .impact-so-far.visible .impact-card:nth-child(2),
+        .what-we-do.visible .service-card:nth-child(2),
+        .donate-section.visible .donate-tier:nth-child(2),
+        .join-volunteer-section.visible .jv-card:nth-child(2),
+        .partners-section.visible .partner-card:nth-child(2),
+        .board.visible .board-member:nth-child(2) { animation-delay: 160ms; }
+
+        .impact-so-far.visible .impact-card:nth-child(3),
+        .what-we-do.visible .service-card:nth-child(3),
+        .donate-section.visible .donate-tier:nth-child(3),
+        .partners-section.visible .partner-card:nth-child(3),
+        .board.visible .board-member:nth-child(3) { animation-delay: 240ms; }
+
+        .impact-so-far.visible .impact-card:nth-child(4),
+        .what-we-do.visible .service-card:nth-child(4),
+        .donate-section.visible .donate-tier:nth-child(4),
+        .board.visible .board-member:nth-child(4) { animation-delay: 320ms; }
+
+        .impact-so-far.visible .impact-card:nth-child(5),
+        .what-we-do.visible .service-card:nth-child(5),
+        .board.visible .board-member:nth-child(5) { animation-delay: 400ms; }
+
+        .impact-so-far.visible .impact-card:nth-child(6),
+        .board.visible .board-member:nth-child(6) { animation-delay: 480ms; }
+
+        @keyframes cardStagger {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .impact-so-far.visible .impact-card,
+            .what-we-do.visible .service-card,
+            .donate-section.visible .donate-tier,
+            .join-volunteer-section.visible .jv-card,
+            .partners-section.visible .partner-card,
+            .board.visible .board-member {
+                animation: none !important;
+            }
         }
 
         .section-header {
@@ -504,13 +575,14 @@
             transform: translateY(0);
         }
 
-        /* Donate Now button - High-contrast CTA */
+        /* Donate Now button - High-contrast CTA in deep plum */
         .btn-donate {
-            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+            background: #4A2545;
             color: var(--color-text-light);
             font-weight: 700;
             padding: var(--space-md) var(--space-xl);
-            box-shadow: 0 4px 16px rgba(90, 68, 90, 0.45);
+            font-size: var(--text-base);
+            box-shadow: 0 6px 20px rgba(74, 37, 69, 0.45);
             position: relative;
             overflow: hidden;
         }
@@ -522,7 +594,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
             transition: left 0.5s ease;
         }
 
@@ -531,12 +603,41 @@
         }
 
         .btn-donate:hover, .btn-donate:focus {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 24px rgba(90, 68, 90, 0.55);
+            background: #3A1B36;
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 10px 28px rgba(74, 37, 69, 0.6);
         }
 
         .btn-donate:active {
             transform: translateY(-1px) scale(1.02);
+        }
+
+        .hero .btn-donate {
+            padding: var(--space-md) calc(var(--space-xl) + 8px);
+            font-size: var(--text-lg);
+        }
+
+        /* Hero secondary CTA - outlined */
+        .btn-hero-outline {
+            background: transparent;
+            color: var(--color-text-light);
+            border: 2px solid rgba(255, 255, 255, 0.85);
+            padding: calc(var(--space-md) - 2px) var(--space-xl);
+            font-size: var(--text-base);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-base);
+            animation: heroFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.7s backwards;
+        }
+
+        .btn-hero-outline:hover,
+        .btn-hero-outline:focus {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
         }
 
         /* Donate button in navigation */
@@ -667,6 +768,69 @@
             padding: var(--space-sm) var(--space-md) var(--space-md);
             overflow-y: auto; /* Allow scrolling if content is too long */
             max-height: calc(90vh - 100px); /* Account for header height */
+        }
+
+        /* Modal tier summary — shown before payment options */
+        .donation-tiers-summary {
+            display: grid;
+            gap: 10px;
+            margin-bottom: var(--space-md);
+        }
+
+        .donation-tier-item {
+            background: #ffffff;
+            border: 1px solid var(--color-border);
+            border-left: 4px solid var(--color-accent);
+            border-radius: var(--radius-sm);
+            padding: 12px 14px;
+            display: grid;
+            gap: 4px;
+        }
+
+        .donation-tier-item--feature {
+            border-left-color: #4A2545;
+            background: linear-gradient(135deg, #ffffff, #FAF4ED);
+        }
+
+        .donation-tier-pill {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: var(--text-sm);
+            color: #4A2545;
+            line-height: 1.3;
+        }
+
+        .donation-tier-meta {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .donation-tier-meta-alt {
+            font-weight: 500;
+            color: var(--color-text-secondary);
+        }
+
+        .donation-tier-line {
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        .donation-tier-line a {
+            color: #4A2545;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        .donation-modal-give-line {
+            text-align: center;
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin: var(--space-sm) 0 var(--space-sm);
+            padding-top: var(--space-sm);
+            border-top: 1px dashed var(--color-border);
         }
 
         .donation-info {
@@ -971,57 +1135,187 @@
         }
 
         /* ============================================
-           IMPACT & STATISTICS SECTION
+           SECTION 2 — THE PROBLEM
+           Dark plum, image on right
            ============================================ */
-        .impact-stats {
-            background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+        .problem-section {
+            background: #4A2545;
             color: var(--color-text-light);
+            padding: var(--space-2xl) 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .problem-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 0% 100%, rgba(212, 165, 116, 0.10), transparent 50%),
+                radial-gradient(circle at 100% 0%, rgba(157, 126, 157, 0.10), transparent 55%);
+            pointer-events: none;
+        }
+
+        .problem-container {
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: var(--space-2xl);
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .problem-title {
+            font-family: var(--font-display);
+            font-size: clamp(var(--text-xl), 3.6vw, var(--text-3xl));
+            line-height: 1.2;
+            margin-bottom: var(--space-lg);
+            color: #ffffff;
+        }
+
+        .problem-text {
+            font-size: var(--text-base);
+            line-height: 1.85;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: var(--space-md);
+        }
+
+        .problem-text--close {
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0;
+        }
+
+        .problem-image {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+            aspect-ratio: 4/5;
+            position: relative;
+        }
+
+        .problem-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 800ms ease;
+        }
+
+        .problem-section:hover .problem-image img {
+            transform: scale(1.03);
+        }
+
+        @media (max-width: 860px) {
+            .problem-container {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+            }
+            .problem-image {
+                aspect-ratio: 16/10;
+                max-width: 520px;
+                margin: 0 auto;
+            }
+        }
+
+        /* ============================================
+           SECTION 3 — IMPACT SO FAR
+           Light background, gold numbers, plum labels
+           ============================================ */
+        .impact-so-far {
+            background: var(--color-background-alt);
             padding: var(--space-2xl) 0;
         }
 
-        .stats-grid {
+        .impact-subheading {
+            font-size: var(--text-base);
+            color: var(--color-text-secondary);
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .impact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: var(--space-xl);
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--space-lg);
             margin-top: var(--space-xl);
         }
 
-        .stat-card {
-            text-align: center;
-            padding: var(--space-lg);
-            background: rgba(255, 255, 255, 0.1);
+        .impact-card {
+            background: #ffffff;
             border-radius: var(--radius-md);
-            backdrop-filter: blur(10px);
-            transition: all var(--transition-base);
-        }
-
-        .stat-card:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-4px);
-        }
-
-        .stat-number {
-            font-size: var(--text-3xl);
-            font-weight: 700;
-            font-family: var(--font-display);
-            color: var(--color-accent-light);
-            margin-bottom: var(--space-sm);
-            display: block;
-        }
-
-        .stat-label {
-            font-size: var(--text-sm);
-            opacity: 0.95;
-            line-height: 1.5;
-        }
-
-        .impact-statement {
-            max-width: 900px;
-            margin: 0 auto var(--space-xl);
+            padding: var(--space-lg);
             text-align: center;
-            font-size: var(--text-lg);
-            line-height: 1.8;
-            opacity: 0.98;
+            box-shadow: var(--shadow-sm);
+            border-top: 4px solid #C9A84C;
+            transition: transform var(--transition-base), box-shadow var(--transition-base), border-top-color var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .impact-card::before {
+            content: '';
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 4px;
+            background: linear-gradient(90deg, #C9A84C, #E8C9A0, #C9A84C);
+            background-size: 200% 100%;
+            transform: translateX(-101%);
+            transition: transform 700ms var(--ease-out-quart);
+        }
+
+        .impact-card:hover, .impact-card:focus-within {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 38px rgba(74, 37, 69, 0.14);
+        }
+
+        .impact-card:hover::before,
+        .impact-card:focus-within::before {
+            transform: translateX(0);
+        }
+
+        .impact-number {
+            display: block;
+            font-family: var(--font-display);
+            font-size: clamp(2.4rem, 5vw, 3.25rem);
+            font-weight: 700;
+            color: #C9A84C;
+            line-height: 1.1;
+            margin-bottom: var(--space-sm);
+        }
+
+        .impact-number--small {
+            font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+            line-height: 1.3;
+            color: #4A2545;
+        }
+
+        .impact-card--text {
+            background: linear-gradient(135deg, #ffffff, #FDF6EC);
+        }
+
+        .impact-label {
+            font-size: var(--text-sm);
+            color: var(--color-text-primary);
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        .impact-label em {
+            color: #4A2545;
+            font-style: italic;
+        }
+
+        .impact-tagline {
+            text-align: center;
+            margin-top: var(--space-xl);
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: clamp(var(--text-base), 2.4vw, var(--text-lg));
+            color: #4A2545;
+            max-width: 780px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* ============================================
@@ -1033,9 +1327,45 @@
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(6, 1fr);
             gap: var(--space-lg);
             margin-top: var(--space-xl);
+        }
+
+        .service-card {
+            grid-column: span 2;
+        }
+
+        /* Center the bottom row when there are exactly 5 cards:
+           4th card starts at col 2, 5th naturally follows in col 4-5. */
+        .services-grid > .service-card:nth-child(4) {
+            grid-column: 2 / span 2;
+        }
+
+        @media (max-width: 1023px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .service-card,
+            .services-grid > .service-card:nth-child(4) {
+                grid-column: span 1;
+            }
+            /* Center final card on 2-col layout if odd-numbered */
+            .services-grid > .service-card:nth-child(5):last-child {
+                grid-column: 1 / span 2;
+                max-width: 50%;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .services-grid > .service-card:nth-child(5):last-child {
+                grid-column: span 1;
+                max-width: none;
+            }
         }
 
         .service-card {
@@ -1045,33 +1375,61 @@
             box-shadow: var(--shadow-sm);
             transition: all var(--transition-base);
             border: 1px solid var(--color-border);
+            border-top: 4px solid var(--color-primary);
+            position: relative;
         }
 
         .service-card:hover, .service-card:focus-within {
             transform: translateY(-4px);
             box-shadow: var(--shadow-md);
-        }
-
-        .service-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent-light));
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: var(--space-md);
-            font-size: var(--text-xl);
+            border-top-color: var(--color-accent);
         }
 
         .service-title {
             font-size: var(--text-lg);
             margin-bottom: var(--space-sm);
+            color: var(--color-primary-dark);
         }
 
         .service-description {
             color: var(--color-text-secondary);
             margin-bottom: 0;
+            line-height: 1.7;
+        }
+
+        .service-description em {
+            color: #4A2545;
+            font-style: italic;
+        }
+
+        .where-we-are-heading {
+            margin-top: var(--space-xl);
+            padding: var(--space-lg) var(--space-xl);
+            background: linear-gradient(135deg, rgba(123, 94, 123, 0.06), rgba(212, 165, 116, 0.10));
+            border-left: 4px solid var(--color-accent);
+            border-radius: var(--radius-md);
+            max-width: 880px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .where-heading-title {
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            color: var(--color-primary-dark);
+            margin-bottom: var(--space-sm);
+        }
+
+        .where-heading-text {
+            color: var(--color-text-secondary);
+            line-height: 1.75;
+            margin: 0;
+        }
+
+        @media (max-width: 600px) {
+            .where-we-are-heading {
+                padding: var(--space-md);
+            }
         }
 
         /* ============================================
@@ -1175,6 +1533,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: var(--space-md);
+            align-items: start;
         }
 
         @media (max-width: 768px) {
@@ -1188,6 +1547,21 @@
                 grid-template-columns: repeat(3, 1fr);
                 gap: var(--space-sm);
             }
+        }
+
+        .video-card-wrap {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-hook {
+            margin: var(--space-sm) 0 0;
+            font-size: var(--text-sm);
+            font-style: italic;
+            line-height: 1.5;
+            color: var(--color-text-secondary);
+            text-align: center;
+            padding: 0 6px;
         }
 
         .video-card {
@@ -1894,107 +2268,322 @@
         }
 
         /* ============================================
-           VOLUNTEER SECTION
+           SECTION 10 — JOIN / VOLUNTEER
            ============================================ */
-        .volunteer-section {
+        .join-volunteer-section {
             background-color: var(--color-background);
             padding: var(--space-2xl) 0;
         }
 
-        .volunteer-intro {
-            max-width: 800px;
-            margin: 0 auto var(--space-xl);
-            text-align: center;
-            font-size: var(--text-base);
-            line-height: 1.8;
-            color: var(--color-text-secondary);
-        }
-
-        .volunteer-list {
-            max-width: 900px;
-            margin: 0 auto var(--space-xl);
+        .join-volunteer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-md);
-            list-style: none;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-lg);
+            max-width: 980px;
+            margin: 0 auto;
         }
 
-        .volunteer-list li {
-            padding: var(--space-md);
-            background: white;
+        @media (max-width: 760px) {
+            .join-volunteer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .jv-card {
+            background: #ffffff;
             border-radius: var(--radius-md);
+            padding: var(--space-xl) var(--space-lg);
             box-shadow: var(--shadow-sm);
-            border-left: 4px solid var(--color-accent);
+            border-top: 4px solid var(--color-primary);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
             transition: all var(--transition-base);
         }
 
-        .volunteer-list li:hover {
-            transform: translateX(4px);
+        .jv-card--alt {
+            border-top-color: var(--color-accent);
+        }
+
+        .jv-card:hover {
+            transform: translateY(-4px);
             box-shadow: var(--shadow-md);
         }
 
-        .volunteer-cta {
-            text-align: center;
-            margin-top: var(--space-xl);
+        .jv-card-title {
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            color: var(--color-primary-dark);
+            margin-bottom: var(--space-md);
         }
 
-        .volunteer-subtitle {
-            font-size: var(--text-lg);
-            font-weight: 600;
-            margin-bottom: var(--space-md);
-            color: var(--color-primary);
+        .jv-card--alt .jv-card-title {
+            color: #4A2545;
+        }
+
+        .jv-card-text {
+            color: var(--color-text-secondary);
+            line-height: 1.75;
+            margin-bottom: var(--space-lg);
+            flex: 1;
+        }
+
+        .jv-card-btn {
+            align-self: center;
+            text-decoration: none;
         }
 
         /* ============================================
-           SUPPORT SECTION
+           SECTION 9 — DONATE
+           Tiers + intro precede payment options
            ============================================ */
-        .support-section {
-            background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent-light));
+        .donate-section {
+            background: linear-gradient(180deg, #FDFBF9 0%, #F5F1ED 100%);
             color: var(--color-text-primary);
             padding: var(--space-2xl) 0;
         }
 
-        .support-intro {
-            max-width: 800px;
-            margin: 0 auto var(--space-xl);
-            text-align: center;
+        .donate-intro {
+            max-width: 760px;
+            margin: var(--space-md) auto 0;
             font-size: var(--text-base);
-            line-height: 1.8;
+            line-height: 1.75;
+            color: var(--color-text-secondary);
         }
 
-        .support-list {
-            max-width: 900px;
+        .donate-tiers-intro {
+            max-width: 820px;
             margin: 0 auto var(--space-xl);
-            list-style: none;
-            display: grid;
-            gap: var(--space-md);
-        }
-
-        .support-list li {
-            padding: var(--space-md) var(--space-md) var(--space-md) var(--space-xl);
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: var(--radius-md);
-            position: relative;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .support-list li::before {
-            content: '✓';
-            position: absolute;
-            left: var(--space-md);
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--color-primary);
-            font-weight: 700;
-            font-size: var(--text-lg);
-        }
-
-        .support-contact {
             text-align: center;
-            margin-top: var(--space-xl);
         }
 
-        .support-actions {
+        .donate-tiers-heading {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            color: #4A2545;
+            margin-bottom: var(--space-sm);
+        }
+
+        .donate-tiers-lede {
+            color: var(--color-text-secondary);
+            line-height: 1.75;
+            margin: 0;
+        }
+
+        .donate-tiers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: 1fr;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+            align-items: stretch;
+        }
+
+        /* Below 1024px, stack tiers vertically to avoid lonely card next to the
+           full-width feature tier. */
+        @media (max-width: 1024px) {
+            .donate-tiers {
+                grid-template-columns: 1fr;
+                grid-auto-rows: auto;
+                max-width: 640px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        .donate-tier {
+            background: #ffffff;
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--color-accent);
+            display: flex;
+            flex-direction: column;
+            transition: transform var(--transition-base), box-shadow var(--transition-base), border-left-color var(--transition-base);
+            position: relative;
+        }
+
+        .donate-tier::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius-md);
+            box-shadow: 0 0 0 1px rgba(74, 37, 69, 0);
+            transition: box-shadow var(--transition-base);
+            pointer-events: none;
+        }
+
+        .donate-tier:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 38px rgba(74, 37, 69, 0.12);
+        }
+
+        .donate-tier:hover::after {
+            box-shadow: 0 0 0 1px rgba(74, 37, 69, 0.10);
+        }
+
+        .donate-tier--feature {
+            border-left-color: #4A2545;
+            background: linear-gradient(135deg, #ffffff, #FAF4ED);
+            grid-column: 1 / -1;
+            position: relative;
+            padding: var(--space-xl) var(--space-lg);
+        }
+
+        .donate-tier--feature::before {
+            content: 'Featured Opportunity';
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-weight: 700;
+            color: #4A2545;
+            background: rgba(74, 37, 69, 0.08);
+            padding: 4px 10px;
+            border-radius: 999px;
+        }
+
+        .donate-tier--feature .donate-tier-title {
+            font-size: var(--text-xl);
+            max-width: calc(100% - 160px);
+        }
+
+        @media (max-width: 600px) {
+            .donate-tier--feature::before {
+                position: static;
+                display: inline-block;
+                margin-bottom: var(--space-sm);
+            }
+            .donate-tier--feature .donate-tier-title {
+                max-width: 100%;
+            }
+        }
+
+        .donate-tier-header {
+            margin-bottom: var(--space-sm);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .donate-tier-title {
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            color: #4A2545;
+            margin: 0;
+            line-height: 1.25;
+        }
+
+        .donate-tier-amount {
+            display: inline-block;
+            font-weight: 700;
+            color: #4A2545;
+            font-size: var(--text-sm);
+            background: rgba(201, 168, 76, 0.12);
+            border: 1px solid rgba(201, 168, 76, 0.30);
+            border-radius: 999px;
+            padding: 4px 12px;
+            margin-top: 2px;
+            align-self: flex-start;
+        }
+
+        .donate-tier-amount-alt {
+            color: var(--color-text-secondary);
+            font-weight: 500;
+            font-size: 0.85rem;
+            margin-left: 4px;
+        }
+
+        .donate-tier-desc {
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            margin: 0 0 var(--space-sm);
+        }
+
+        .donate-tier-desc:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .donate-tier-emphasis {
+            color: #4A2545;
+            font-style: italic;
+            font-family: var(--font-display);
+            font-size: var(--text-base);
+            line-height: 1.5;
+            padding-top: var(--space-xs);
+            border-top: 1px solid rgba(74, 37, 69, 0.08);
+            margin-top: auto !important;
+        }
+
+        .donate-tier-cta-line a {
+            color: #4A2545;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        .donate-pay {
+            text-align: center;
+            background: linear-gradient(135deg, #4A2545 0%, #5A2D55 100%);
+            color: #ffffff;
+            border-radius: var(--radius-md);
+            padding: var(--space-xl) var(--space-lg);
+            box-shadow: 0 16px 36px rgba(74, 37, 69, 0.22);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .donate-pay::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 0% 0%, rgba(212, 165, 116, 0.18), transparent 45%),
+                radial-gradient(circle at 100% 100%, rgba(212, 165, 116, 0.10), transparent 50%);
+            pointer-events: none;
+        }
+
+        .donate-pay > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .donate-pay-line {
+            font-size: var(--text-base);
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.92);
+            margin-bottom: var(--space-md);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .donate-pay .btn-donate {
+            background: var(--color-accent);
+            color: var(--color-text-primary);
+            box-shadow: 0 6px 20px rgba(212, 165, 116, 0.45);
+        }
+
+        .donate-pay .btn-donate:hover,
+        .donate-pay .btn-donate:focus {
+            background: var(--color-accent-light);
+            box-shadow: 0 10px 28px rgba(212, 165, 116, 0.6);
+        }
+
+        .donate-pay .donate-email-link {
+            color: rgba(255, 255, 255, 0.92);
+            text-decoration-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .donate-pay .donate-email-link:hover,
+        .donate-pay .donate-email-link:focus {
+            color: #ffffff;
+            text-decoration-color: #ffffff;
+        }
+
+        .donate-pay-actions {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -2002,22 +2591,15 @@
             flex-wrap: wrap;
         }
 
-        .support-email {
-            display: inline-block;
-            padding: var(--space-md) var(--space-xl);
-            background: white;
-            color: var(--color-primary);
-            border-radius: var(--radius-md);
+        .donate-email-link {
+            color: #4A2545;
             font-weight: 600;
-            text-decoration: none;
-            box-shadow: var(--shadow-md);
-            transition: all var(--transition-base);
+            text-decoration: underline;
+            transition: opacity var(--transition-base);
         }
 
-        .support-email:hover, .support-email:focus {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-            color: var(--color-primary-dark);
+        .donate-email-link:hover, .donate-email-link:focus {
+            opacity: 0.75;
         }
 
         /* ============================================
@@ -2417,6 +2999,121 @@
             max-width: 600px;
         }
 
+        /* Footer newsletter signup */
+        .footer-newsletter {
+            text-align: center;
+            margin-top: var(--space-xl);
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-newsletter h3 {
+            color: #ffffff;
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            margin-bottom: var(--space-xs);
+        }
+
+        .footer-newsletter-text {
+            color: rgba(255, 255, 255, 0.78);
+            font-size: var(--text-sm);
+            margin-bottom: var(--space-md);
+        }
+
+        .footer-newsletter-form {
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: var(--radius-md);
+            padding: 6px;
+            transition: border-color var(--transition-base);
+        }
+
+        .footer-newsletter-form:focus-within {
+            border-color: var(--color-accent);
+        }
+
+        .footer-newsletter-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #ffffff;
+            font-size: var(--text-sm);
+            padding: 10px 12px;
+            font-family: var(--font-primary);
+            min-width: 0;
+        }
+
+        .footer-newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-newsletter-input:focus {
+            outline: none;
+        }
+
+        .footer-newsletter-btn {
+            background: var(--color-accent);
+            color: var(--color-text-primary);
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: 10px 18px;
+            font-weight: 700;
+            font-size: var(--text-sm);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            font-family: var(--font-primary);
+            white-space: nowrap;
+        }
+
+        .footer-newsletter-btn:hover,
+        .footer-newsletter-btn:focus {
+            background: var(--color-accent-light);
+            transform: translateY(-1px);
+        }
+
+        .footer-newsletter-status {
+            min-height: 1.2em;
+            margin-top: 10px;
+            font-size: var(--text-xs);
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .footer-newsletter-status.success {
+            color: #C9F0D2;
+        }
+
+        .footer-newsletter-status.error {
+            color: #F5C2C7;
+        }
+
+        @media (max-width: 480px) {
+            .footer-newsletter-form {
+                flex-direction: column;
+                padding: 8px;
+            }
+            .footer-newsletter-btn {
+                width: 100%;
+                padding: 12px;
+            }
+        }
+
+        /* Screen-reader-only utility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
         .footer-content {
             font-size: var(--text-sm);
             color: rgba(255, 255, 255, 0.7);
@@ -2637,8 +3334,8 @@
                 grid-template-columns: 1fr;
             }
 
-            /* Ensure stat cards stack nicely */
-            .stats-grid {
+            /* Impact So Far cards stack nicely */
+            .impact-grid {
                 grid-template-columns: 1fr;
                 gap: var(--space-md);
             }
@@ -2729,12 +3426,12 @@
                 padding: var(--space-md) var(--space-lg);
             }
 
-            /* Optimize stat cards for small screens */
-            .stat-card {
+            /* Optimize impact cards for small screens */
+            .impact-card {
                 padding: var(--space-md);
             }
 
-            .stat-number {
+            .impact-number {
                 font-size: var(--text-2xl);
             }
 
@@ -3178,9 +3875,9 @@
             <div class="header-content">
                 <a href="#hero" class="logo" aria-label="The Mum Bridge & Care Foundation Home">
                     <!-- Full logo for desktop -->
-                    <img src="assets/logo/the-mum-bridge-logo.png?v=20260417" alt="The Mum Bridge & Care Foundation Logo" class="logo-img logo-full">
+                    <img src="assets/logo/the-mum-bridge-logo.png?v=20260602" alt="The Mum Bridge & Care Foundation Logo" class="logo-img logo-full">
                     <!-- Icon logo for mobile -->
-                    <img src="assets/logo/the-mum-bridge-icon.png?v=20260417" alt="The Mum Bridge & Care Foundation" class="logo-img logo-icon">
+                    <img src="assets/logo/the-mum-bridge-icon.png?v=20260602" alt="The Mum Bridge & Care Foundation" class="logo-img logo-icon">
                 </a>
 
                 <!-- Mobile menu toggle button -->
@@ -3198,12 +3895,11 @@
     <nav id="main-nav" class="main-nav" role="navigation" aria-label="Main navigation">
         <ul class="nav">
             <li><a href="#what-we-do" class="nav-link">What We Do</a></li>
-            <li><a href="#vision-mission" class="nav-link">Vision & Mission</a></li>
-            <li><a href="#about" class="nav-link">About Us</a></li>
+            <li><a href="#about" class="nav-link">Who We Are</a></li>
             <li><a href="#board" class="nav-link">Our Team</a></li>
-            <li><a href="#join-title" class="nav-link">Join</a></li>
-            <li><a href="#volunteer-title" class="nav-link">Volunteer</a></li>
-            <li><a href="#contact-title" class="nav-link">Contact</a></li>
+            <li><a href="#donate" class="nav-link">Donate</a></li>
+            <li><a href="#join-volunteer" class="nav-link">Join</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
             <li><a href="#" class="nav-link nav-donate-btn" id="navDonateBtn" aria-label="Donate Now">Donate Now</a></li>
         </ul>
     </nav>
@@ -3219,51 +3915,85 @@
     <section id="hero" class="hero" role="region" aria-label="Welcome">
         <div class="hero-content">
             <h1 class="hero-title">
-                Building Bridges to Motherhood, Belonging, and Opportunity
+                Building support, dignity, and inclusive systems for mothers with disabilities.
             </h1>
             <p class="hero-subtitle">
-                A world where every mother with disability has equal access, opportunity, and support to thrive in motherhood and society.
+                Mothers with disabilities in Nigeria face barriers at every turn, in healthcare, in their communities, and in the systems meant to support them. The Mum Bridge exists to change that.
             </p>
             <div class="hero-buttons">
-                <a href="https://forms.gle/oCtCgwcdmKPBs2t97" target="_blank" rel="noopener noreferrer" class="btn btn-primary" aria-label="Join our support circle (opens in new tab)">
+                <button class="btn btn-donate hero-donate-btn" id="heroTopDonateBtn" aria-label="Donate Now">❤️ Donate Now</button>
+                <a href="https://forms.gle/oCtCgwcdmKPBs2t97" target="_blank" rel="noopener noreferrer" class="btn btn-hero-outline" aria-label="Join our community (opens in new tab)">
                     Join Our Community
                 </a>
-                <button class="btn btn-donate hero-donate-btn" id="heroTopDonateBtn" aria-label="Donate Now">❤️ Donate Now</button>
             </div>
         </div>
     </section>
 
     <!-- ============================================
-         IMPACT & STATISTICS SECTION
-         Powerful data showcasing the problem and our reach
+         SECTION 2 — THE PROBLEM
+         Dark plum background, image on right
          ============================================ -->
-    <section class="impact-stats" role="region" aria-label="Impact and Statistics">
-        <div class="container">
-            <p class="impact-statement">
-                Globally, around 20% of women live with a disability. In Nigeria, 7.5% of women aged 15 and older live with some functional difficulty. These mothers face barriers at every turn, but together, we're building a world where they can thrive.
-            </p>
-
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <span class="stat-number">20%</span>
-                    <p class="stat-label">Of women globally live with a disability</p>
-                </div>
-
-                <div class="stat-card">
-                    <span class="stat-number">7.5%</span>
-                    <p class="stat-label">Of Nigerian women aged 15+ live with functional difficulty</p>
-                </div>
-
-                <div class="stat-card">
-                    <span class="stat-number">29M</span>
-                    <p class="stat-label">Nigerians live with disabilities across all age groups</p>
-                </div>
-
-                <div class="stat-card">
-                    <span class="stat-number">51M+</span>
-                    <p class="stat-label">Active WhatsApp users in Nigeria enable our digital reach</p>
-                </div>
+    <section class="problem-section" role="region" aria-labelledby="problem-title">
+        <div class="container problem-container">
+            <div class="problem-copy">
+                <h2 class="problem-title" id="problem-title">The Weight She Carries Alone</h2>
+                <p class="problem-text">
+                    A mother cannot fully communicate with healthcare workers because accessible support does not exist. A qualified mother is passed over for work because her disability is seen before her capability. A mother attends school meetings for her child and is treated like an observer instead of the parent — and yet, across Nigeria, mothers are still building families, communities, businesses, and futures often without the support they deserve.
+                </p>
+                <p class="problem-text problem-text--close">
+                    These are not edge cases. They are the everyday reality of mothers with disabilities across Nigeria, and they are the reason The Mum Bridge exists.
+                </p>
             </div>
+            <div class="problem-image" aria-hidden="true">
+                <img src="assets/impact/may-2026/TMB-126.jpg?v=20260602" alt="" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SECTION 3 — IMPACT SO FAR (NEW)
+         Six stat cards: what we've built since April 2026
+         ============================================ -->
+    <section class="impact-so-far" role="region" aria-labelledby="impact-so-far-title">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" id="impact-so-far-title">What We Have Built So Far</h2>
+                <p class="impact-subheading">We launched in April 2026. Here is what is already happening.</p>
+            </div>
+
+            <div class="impact-grid">
+                <article class="impact-card">
+                    <span class="impact-number" data-count-to="70" data-suffix="+">70+</span>
+                    <p class="impact-label">Mothers with disabilities in our active community</p>
+                </article>
+
+                <article class="impact-card">
+                    <span class="impact-number" data-count-to="100" data-suffix="+">100+</span>
+                    <p class="impact-label">Mothers reached through <em>The Mums You Don&rsquo;t See</em> advocacy series and social media</p>
+                </article>
+
+                <article class="impact-card">
+                    <span class="impact-number">5&ndash;6</span>
+                    <p class="impact-label">Lagos LGAs where we have engaged communities</p>
+                </article>
+
+                <article class="impact-card impact-card--text">
+                    <span class="impact-number impact-number--small">The Mum Bridge Circle</span>
+                    <p class="impact-label">First flagship physical community gathering successfully held</p>
+                </article>
+
+                <article class="impact-card">
+                    <span class="impact-number" data-count-to="3">3</span>
+                    <p class="impact-label">Institutional partnerships formed (LASODA, NNGO, DSVA)</p>
+                </article>
+
+                <article class="impact-card">
+                    <span class="impact-number" data-count-to="100" data-suffix="%">100%</span>
+                    <p class="impact-label">Of our events have included sign language interpretation and accessible venues</p>
+                </article>
+            </div>
+
+            <p class="impact-tagline">Every number above represents a mother who now knows she is not alone.</p>
         </div>
     </section>
 
@@ -3277,92 +4007,237 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title" id="what-we-do-title">What We Do</h2>
-                <p>We create pathways to connection, access, and opportunity for mothers with disabilities through community-driven support and practical resources.</p>
+                <p>We create pathways to connection, access, and opportunity for mothers with disabilities.</p>
             </div>
 
             <div class="services-grid">
                 <article class="service-card">
-                    <div class="service-icon" aria-hidden="true">🤝</div>
-                    <h3 class="service-title">Peer Support Networks</h3>
+                    <h3 class="service-title">Immediate Support &amp; Community</h3>
                     <p class="service-description">
-                        Reduce isolation and build belonging through WhatsApp groups, peer circles, and virtual hangouts that create increased social connection and emotional wellbeing.
+                        Peer support circles, safe spaces, mentorship, and real-time connection.
                     </p>
                 </article>
 
                 <article class="service-card">
-                    <div class="service-icon" aria-hidden="true">📚</div>
-                    <h3 class="service-title">Resource Access</h3>
+                    <h3 class="service-title">Assistive Support</h3>
                     <p class="service-description">
-                        Provide practical, accessible parenting tools through co-created guides, audio and video resources that improve parenting confidence and access to information.
+                        Referrals to disability-friendly healthcare, legal support, assistive devices and accessible resources.
                     </p>
                 </article>
 
                 <article class="service-card">
-                    <div class="service-icon" aria-hidden="true">📖</div>
-                    <h3 class="service-title">Storytelling & Advocacy</h3>
+                    <h3 class="service-title">Systems Change &amp; Advocacy</h3>
                     <p class="service-description">
-                        Shift public perception and increase visibility through story campaigns, external features, and partnerships that ensure mothers with disabilities are represented in public narratives.
+                        Advocacy that shifts policy, institutions, and the standard of care. <em>The Mums You Don&rsquo;t See</em> &mdash; a storytelling series that shifts public perception and puts mothers with disabilities at the centre of their own narrative.
                     </p>
                 </article>
 
                 <article class="service-card">
-                    <div class="service-icon" aria-hidden="true">♿</div>
-                    <h3 class="service-title">Accessibility Consulting</h3>
+                    <h3 class="service-title">Economic Empowerment</h3>
                     <p class="service-description">
-                        Test earned revenue model through event audits, planning support, and training that creates more inclusive spaces for everyone.
+                        Skills pathways, entrepreneurship, storytelling and opportunities for growth.
                     </p>
                 </article>
 
                 <article class="service-card">
-                    <div class="service-icon" aria-hidden="true">🛠️</div>
-                    <h3 class="service-title">Assistive Access (Future)</h3>
+                    <h3 class="service-title">Accessibility Training &amp; Advocacy</h3>
                     <p class="service-description">
-                        Improve daily mobility and participation through device partnerships and distribution that will be developed based on Year 2 partnerships.
+                        Training, accessibility reviews, and practical guidance that helps organisations, businesses, and institutions move from good intentions to genuine inclusion.
                     </p>
                 </article>
+            </div>
 
-                <article class="service-card">
-                    <div class="service-icon" aria-hidden="true">💼</div>
-                    <h3 class="service-title">Livelihoods Support (Future)</h3>
-                    <p class="service-description">
-                        Boost financial independence through skills training, mentorship, and microbusiness support to be developed in Year 2 based on capacity.
-                    </p>
-                </article>
+            <div class="where-we-are-heading">
+                <h3 class="where-heading-title">Where We Are Heading</h3>
+                <p class="where-heading-text">
+                    As we grow, we are building toward assistive device access partnerships and livelihood support pathways for mothers with disabilities. These are deliberate next steps, not afterthoughts.
+                </p>
             </div>
         </div>
     </section>
 
     <!-- ============================================
-         VISION & MISSION SECTION
-         Side-by-side cards with clear differentiation
-         Scroll-based animation triggers on visibility
+         COMMUNITY GALLERY SECTION
+         Impact photos showing our work in action
          ============================================ -->
-    <section id="vision-mission" class="section vision-mission" role="region" aria-labelledby="vision-mission-title">
+    <section class="section gallery-section" role="region" aria-labelledby="gallery-title">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title" id="vision-mission-title">Our Purpose</h2>
+                <h2 class="section-title" id="gallery-title">Our Community in Action</h2>
+                <p>Real moments from our programmes, events, and gatherings — showing the warmth, strength, and joy of our community.</p>
             </div>
 
-            <div class="vision-mission-grid">
-                <article class="vm-card">
-                    <span class="vm-label">Our Vision</span>
-                    <h3 class="vm-title">A World Where Every Mother Thrives</h3>
-                    <p class="vm-description">
-                        A world where every mother with disability has equal access, opportunity, and support to thrive in motherhood and society.
-                    </p>
-                </article>
+            <div class="gallery-grid" id="gallery-grid">
 
-                <article class="vm-card">
-                    <span class="vm-label">Our Mission</span>
-                    <h3 class="vm-title">Building an Inclusive Global Community</h3>
-                    <p class="vm-description">
-                        We exist to build an inclusive global community where mothers with disabilities can connect with one another through peer support networks, access practical resources for parenting and everyday life, share lived experiences to shift harmful narratives, build emotional resilience that reduces isolation, and advocate for inclusion in healthcare, parenting systems, workplaces, and social protection.
-                    </p>
-                </article>
+                <!-- Photo 1 -->
+                <figure class="gallery-item">
+                    <button class="gallery-thumb-btn" data-index="0" aria-label="View photo 1 of 20: A wide view of The Mum Bridge community gathering">
+                        <img src="assets/impact/may-2026/TMB-215.jpg?v=20260602" alt="A wide view of The Mum Bridge community gathering, showing a full room of mothers including wheelchair users in attendance" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 2 -->
+                <figure class="gallery-item">
+                    <button class="gallery-thumb-btn" data-index="1" aria-label="View photo 2 of 20: Mothers seated together during a community session including a wheelchair user">
+                        <img src="assets/impact/may-2026/TMB-74.jpg?v=20260602" alt="Mothers with disabilities seated together during a Mum Bridge community session, including a participant using a wheelchair" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 3 -->
+                <figure class="gallery-item">
+                    <button class="gallery-thumb-btn" data-index="2" aria-label="View photo 3 of 20: Participants seated attentively during a Mum Bridge programme">
+                        <img src="assets/impact/may-2026/TMB-147.jpg?v=20260602" alt="Mothers seated attentively with hands on their chests during a Mum Bridge programme" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 4 -->
+                <figure class="gallery-item">
+                    <button class="gallery-thumb-btn" data-index="3" aria-label="View photo 4 of 20: Two facilitators addressing the community with a microphone">
+                        <img src="assets/impact/may-2026/TMB-76.jpg?v=20260602" alt="Two Mum Bridge facilitators at the front of the room, one speaking into a microphone with the foundation banner visible behind them" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 5 -->
+                <figure class="gallery-item">
+                    <button class="gallery-thumb-btn" data-index="4" aria-label="View photo 5 of 20: Facilitator with sign language interpreter on stage">
+                        <img src="assets/impact/may-2026/TMB-73.jpg?v=20260602" alt="A Mum Bridge facilitator speaks into a microphone while a sign language interpreter communicates alongside her" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 6 -->
+                <figure class="gallery-item">
+                    <button class="gallery-thumb-btn" data-index="5" aria-label="View photo 6 of 20: Team member and sign language interpreter ensuring an accessible session">
+                        <img src="assets/impact/may-2026/TMB-137.jpg?v=20260602" alt="A Mum Bridge team member addresses the community with a sign language interpreter beside her, ensuring the session is accessible for deaf participants" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 7 -->
+                <figure class="gallery-item">
+                    <button class="gallery-thumb-btn" data-index="6" aria-label="View photo 7 of 20: Community member standing to share her experience">
+                        <img src="assets/impact/may-2026/TMB-90.jpg?v=20260602" alt="A community member stands to share her experience during an interactive Mum Bridge session, with the audience listening" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 8 -->
+                <figure class="gallery-item">
+                    <button class="gallery-thumb-btn" data-index="7" aria-label="View photo 8 of 20: Mother confidently contributing her voice during community dialogue">
+                        <img src="assets/impact/may-2026/TMB-126.jpg?v=20260602" alt="A mother stands confidently to contribute her voice during a Mum Bridge community dialogue" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 9 -->
+                <figure class="gallery-item">
+                    <button class="gallery-thumb-btn" data-index="8" aria-label="View photo 9 of 20: Participant sharing her story with a microphone">
+                        <img src="assets/impact/may-2026/TMB-129.jpg?v=20260602" alt="A participant in an orange dress shares her story as a Mum Bridge facilitator holds a microphone toward her" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 10 (hidden initially) -->
+                <figure class="gallery-item gallery-item--hidden">
+                    <button class="gallery-thumb-btn" data-index="9" aria-label="View photo 10 of 20: Mother celebrating joyfully during a session">
+                        <img src="assets/impact/may-2026/TMB-131.jpg?v=20260602" alt="A mother celebrates joyfully with clasped hands as her community cheers around her during a Mum Bridge session" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 11 (hidden initially) -->
+                <figure class="gallery-item gallery-item--hidden">
+                    <button class="gallery-thumb-btn" data-index="10" aria-label="View photo 11 of 20: Community member contributing to the group dialogue">
+                        <img src="assets/impact/may-2026/TMB-135.jpg?v=20260602" alt="A community member speaks into a microphone, contributing to the Mum Bridge group dialogue" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 12 (hidden initially) -->
+                <figure class="gallery-item gallery-item--hidden">
+                    <button class="gallery-thumb-btn" data-index="11" aria-label="View photo 12 of 20: Facilitator guiding a small group breakout discussion">
+                        <img src="assets/impact/may-2026/TMB-199.jpg?v=20260602" alt="A Mum Bridge team member facilitates a small group discussion, guiding participants in a breakout activity" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 13 (hidden initially) -->
+                <figure class="gallery-item gallery-item--hidden">
+                    <button class="gallery-thumb-btn" data-index="12" aria-label="View photo 13 of 20: Peer support circle showing the diverse community The Mum Bridge serves">
+                        <img src="assets/impact/may-2026/TMB-201.jpg?v=20260602" alt="A small peer support circle in conversation, showing the diverse community of mothers The Mum Bridge serves" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 14 (hidden initially) -->
+                <figure class="gallery-item gallery-item--hidden">
+                    <button class="gallery-thumb-btn" data-index="13" aria-label="View photo 14 of 20: Community members sharing laughter and joy together">
+                        <img src="assets/impact/may-2026/TMB-212.jpg?v=20260602" alt="Community members sharing laughter and joy together during a Mum Bridge group activity" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 15 (hidden initially) -->
+                <figure class="gallery-item gallery-item--hidden">
+                    <button class="gallery-thumb-btn" data-index="14" aria-label="View photo 15 of 20: Three women presenting workshop findings with a sign language interpreter">
+                        <img src="assets/impact/may-2026/TMB-217.jpg?v=20260602" alt="Three women present workshop findings on a flip chart in front of the Mum Bridge banner, with a sign language interpreter alongside" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 16 (hidden initially) -->
+                <figure class="gallery-item gallery-item--hidden">
+                    <button class="gallery-thumb-btn" data-index="15" aria-label="View photo 16 of 20: Team member distributing materials to participants">
+                        <img src="assets/impact/may-2026/TMB-57.jpg?v=20260602" alt="A Mum Bridge team member distributes materials to participants seated during the community programme" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 17 (hidden initially) -->
+                <figure class="gallery-item gallery-item--hidden">
+                    <button class="gallery-thumb-btn" data-index="16" aria-label="View photo 17 of 20: Three community members smiling warmly in front of the foundation banner">
+                        <img src="assets/impact/may-2026/TMB-21.jpg?v=20260602" alt="Three community members smile warmly together in front of The Mum Bridge &amp; Care Foundation banner" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 18 (hidden initially) -->
+                <figure class="gallery-item gallery-item--hidden">
+                    <button class="gallery-thumb-btn" data-index="17" aria-label="View photo 18 of 20: Three women posing together at a Mum Bridge event">
+                        <img src="assets/impact/may-2026/TMB-49.jpg?v=20260602" alt="Three women pose together at a Mum Bridge event, with the foundation banner visible behind them" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 19 (hidden initially) -->
+                <figure class="gallery-item gallery-item--hidden">
+                    <button class="gallery-thumb-btn" data-index="18" aria-label="View photo 19 of 20: Two attendees sharing a warm embrace">
+                        <img src="assets/impact/may-2026/TMB-35.jpg?v=20260602" alt="Two attendees share a warm embrace in front of The Mum Bridge &amp; Care Foundation banner" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+                <!-- Photo 20 (hidden initially) -->
+                <figure class="gallery-item gallery-item--hidden">
+                    <button class="gallery-thumb-btn" data-index="19" aria-label="View photo 20 of 20: Three women smiling together at a community event">
+                        <img src="assets/impact/may-2026/TMB-16.jpg?v=20260602" alt="Three women smile together at a Mum Bridge community event in front of the foundation banner" loading="lazy">
+                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                    </button>
+                </figure>
+
+            </div>
+
+            <div class="gallery-footer">
+                <button class="btn-gallery-toggle" id="gallery-toggle" aria-controls="gallery-grid">
+                    See all 11 more photos
+                </button>
             </div>
         </div>
     </section>
-
     <!-- ============================================
          ABOUT SECTION
          Story-driven, human-centered narrative
@@ -3376,78 +4251,73 @@
 
             <div class="about-content">
                 <p class="about-text">
-                    Globally, around 20% of women live with a disability. In Nigeria, about 7.5% of women aged 15 and older live with some functional difficulty. Mothers with disabilities face barriers at every turn: inaccessible healthcare facilities, social isolation from stigma, and economic exclusion from inflexible work environments.
-                </p>
-
-                <div class="about-highlight">
-                    <p class="mb-0">
-                        <strong>"We see mothers not through their limitations, but through their strength."</strong>
-                    </p>
-                </div>
-
-                <p class="about-text">
-                    The Mum Bridge & Care Foundation is founded and led by a mother with disability who understands the realities and barriers mothers with disabilities face. This lived experience ensures authenticity and meaningful community trust. Mothers with disabilities may face examination tables they cannot access, prenatal classes without sign language interpreters, or playgrounds their children attend but they cannot enter.
-                </p>
-
-                <p class="about-text">
-                    The NGO is governed by a diverse Board of Trustees with proven expertise in operations, business consulting, communications, and technology. Our board chair is herself a mother who leads a community for women, adding valuable perspective on community-building and women's empowerment to our strategic direction.
+                    The Mum Bridge &amp; Care Foundation is a Nigerian community founded and led by a mother with a disability. We exist because the systems meant to support mothers &mdash; healthcare, the corporate world, business, parenting resources, and community &mdash; were not designed with mothers with disabilities in mind.
                 </p>
 
                 <p class="about-text mb-0">
-                    Backed by this combination of lived experience, professional expertise, and governance strength, The Mum Bridge & Care Foundation is positioned to build strong partnerships and deliver measurable change for mothers with disabilities and their families. By intentionally supporting mothers with disabilities to access health services, economic opportunities, and community belonging, we create ripple effects that improve outcomes for children, families, and society at large.
+                    We understand this not from research, but from lived experience &mdash; and it is the foundation of everything we build. We are building what should have existed all along.
                 </p>
 
                 <div class="videos-section" role="region" aria-label="Our videos">
                     <h3 class="videos-section-heading">Watch Our Stories</h3>
                     <div class="videos-grid">
 
-                        <a class="video-card"
-                           href="https://youtu.be/gxrBAENtICA"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           aria-label="Watch our story on YouTube (opens in new tab)">
-                            <img
-                                src="https://img.youtube.com/vi/gxrBAENtICA/maxresdefault.jpg"
-                                alt="The Mum Bridge & Care Foundation — our story"
-                                loading="lazy"
-                            >
-                            <span class="video-card-play" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
-                            </span>
-                            <span class="video-card-label" aria-hidden="true">Our Story</span>
-                        </a>
+                        <div class="video-card-wrap">
+                            <a class="video-card"
+                               href="https://youtu.be/gxrBAENtICA"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               aria-label="Watch Our Story on YouTube — how The Mum Bridge began, and why it had to (opens in new tab)">
+                                <img
+                                    src="https://img.youtube.com/vi/gxrBAENtICA/maxresdefault.jpg"
+                                    alt="The Mum Bridge & Care Foundation — our story"
+                                    loading="lazy"
+                                >
+                                <span class="video-card-play" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+                                </span>
+                                <span class="video-card-label" aria-hidden="true">Our Story</span>
+                            </a>
+                            <p class="video-hook">How The Mum Bridge began, and why it had to.</p>
+                        </div>
 
-                        <a class="video-card"
-                           href="https://youtu.be/EGRzyEBu5Hk"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           aria-label="Watch our second video on YouTube (opens in new tab)">
-                            <img
-                                src="https://img.youtube.com/vi/EGRzyEBu5Hk/maxresdefault.jpg"
-                                alt="The Mum Bridge & Care Foundation — watch on YouTube"
-                                loading="lazy"
-                            >
-                            <span class="video-card-play" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
-                            </span>
-                            <span class="video-card-label" aria-hidden="true">Our Impact</span>
-                        </a>
+                        <div class="video-card-wrap">
+                            <a class="video-card"
+                               href="https://youtu.be/EGRzyEBu5Hk"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               aria-label="Watch Our Impact on YouTube — what changes when a mother with a disability finds her community (opens in new tab)">
+                                <img
+                                    src="https://img.youtube.com/vi/EGRzyEBu5Hk/maxresdefault.jpg"
+                                    alt="The Mum Bridge & Care Foundation — our impact"
+                                    loading="lazy"
+                                >
+                                <span class="video-card-play" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+                                </span>
+                                <span class="video-card-label" aria-hidden="true">Our Impact</span>
+                            </a>
+                            <p class="video-hook">What changes when a mother with a disability finds her community.</p>
+                        </div>
 
-                        <a class="video-card"
-                           href="https://youtu.be/za7F0wHYMPc"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           aria-label="Watch our third video on YouTube (opens in new tab)">
-                            <img
-                                src="https://img.youtube.com/vi/za7F0wHYMPc/maxresdefault.jpg"
-                                alt="The Mum Bridge & Care Foundation — watch on YouTube"
-                                loading="lazy"
-                            >
-                            <span class="video-card-play" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
-                            </span>
-                            <span class="video-card-label" aria-hidden="true">Our Community</span>
-                        </a>
+                        <div class="video-card-wrap">
+                            <a class="video-card"
+                               href="https://youtu.be/za7F0wHYMPc"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               aria-label="Watch Our Community on YouTube — meet the mothers we exist for (opens in new tab)">
+                                <img
+                                    src="https://img.youtube.com/vi/za7F0wHYMPc/maxresdefault.jpg"
+                                    alt="The Mum Bridge & Care Foundation — our community"
+                                    loading="lazy"
+                                >
+                                <span class="video-card-play" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+                                </span>
+                                <span class="video-card-label" aria-hidden="true">Our Community</span>
+                            </a>
+                            <p class="video-hook">Meet the mothers we exist for.</p>
+                        </div>
 
                     </div>
                 </div>
@@ -3456,60 +4326,54 @@
     </section>
 
     <!-- ============================================
-         CORE VALUES SECTION
-         Our guiding principles and commitment
+         PARTNERS SECTION
+         Showcasing our valued partners who support our mission
          ============================================ -->
-    <section class="section core-values" role="region" aria-labelledby="values-title">
+    <section class="section partners-section" role="region" aria-labelledby="partners-title">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title" id="values-title">Our Core Values</h2>
-                <p>The principles that guide every decision we make and every mother we support.</p>
+                <h2 class="section-title" id="partners-title">Our Partners</h2>
+                <p class="partners-intro">
+                    We are grateful to work alongside partners who share our commitment to building inclusive communities and empowering mothers with disabilities.
+                </p>
             </div>
 
-            <div class="values-grid">
-                <div class="value-card">
-                    <div class="value-icon" aria-hidden="true">🤝</div>
-                    <h3 class="value-title">Inclusion</h3>
-                    <p class="value-description">
-                        Every mother with disability belongs, no matter her background, story, or ability. We create spaces where all mothers are welcomed and valued.
+            <div class="partners-grid">
+                <article class="partner-card">
+                    <div class="partner-logo-container">
+                        <img src="assets/partners/matchbox.png?v=20260602" alt="MatchBox Logo" class="partner-logo">
+                    </div>
+                    <h3 class="partner-name">MatchBox</h3>
+                    <p class="partner-description">
+                        Supporting our mission to create accessible and inclusive opportunities for mothers with disabilities.
                     </p>
-                </div>
+                    <span class="partner-badge">Strategic Partner</span>
+                </article>
 
-                <div class="value-card">
-                    <div class="value-icon" aria-hidden="true">❤️</div>
-                    <h3 class="value-title">Empathy</h3>
-                    <p class="value-description">
-                        Support rooted in understanding and shared humanity. We listen with compassion and respond with care that honors each mother's experience.
+                <article class="partner-card">
+                    <div class="partner-logo-container">
+                        <img src="assets/partners/lasoda-logo.png?v=20260602" alt="LASODA Logo" class="partner-logo">
+                    </div>
+                    <h3 class="partner-name">LASODA</h3>
+                    <p class="partner-description">
+                        The Mum Bridge is a registered member of the Lagos State Office for Disability Affairs (LASODA), working to strengthen access, visibility, and support for mothers with disabilities within Lagos State.
                     </p>
-                </div>
+                    <span class="partner-badge">Strategic Partner</span>
+                </article>
 
-                <div class="value-card">
-                    <div class="value-icon" aria-hidden="true">🎯</div>
-                    <h3 class="value-title">Lived Experience Leadership</h3>
-                    <p class="value-description">
-                        Guidance shaped by lived experience, not assumptions. Mothers with disabilities lead and inform everything we do.
+                <article class="partner-card">
+                    <div class="partner-logo-container">
+                        <img src="assets/partners/nngo.png?v=20260602" alt="NNGO Logo" class="partner-logo">
+                    </div>
+                    <h3 class="partner-name">NNGO</h3>
+                    <p class="partner-description">
+                        The Mum Bridge is a member of the Nigeria Network of NGOs, part of a national community committed to strengthening civil society and advancing inclusive, impact-driven work.
                     </p>
-                </div>
-
-                <div class="value-card">
-                    <div class="value-icon" aria-hidden="true">💪</div>
-                    <h3 class="value-title">Empowerment</h3>
-                    <p class="value-description">
-                        Helping mothers find their voice, confidence, and independence. We build capacity, not dependency.
-                    </p>
-                </div>
-
-                <div class="value-card">
-                    <div class="value-icon" aria-hidden="true">📖</div>
-                    <h3 class="value-title">Storytelling</h3>
-                    <p class="value-description">
-                        Sharing real stories to connect hearts and inspire change. Every mother's story has the power to transform perspectives.
-                    </p>
-                </div>
+                    <span class="partner-badge">Strategic Partner</span>
+                </article>
             </div>
         </div>
     </section>
-
     <!-- ============================================
          BOARD OF DIRECTORS & TRUSTEES
          Professional card grid with hover effects
@@ -3527,13 +4391,13 @@
                 <!-- Board Member 1: Solace Olabode - Founder -->
                 <article class="board-member" data-member="solace">
                     <div class="board-member-image">
-                        <img src="assets/directors/solace-olabode.jpg?v=20260417" alt="Portrait of Solace Olabode">
+                        <img src="assets/directors/solace-olabode.jpg?v=20260602" alt="Portrait of Solace Olabode">
                     </div>
                     <div class="board-member-info">
                         <h3 class="board-member-name">Solace Olabode</h3>
                         <p class="board-member-role">Founder & Trustee</p>
                         <p class="board-member-bio">
-                            Solace Olabode is a hard of hearing mother and the Founder of The Mum Bridge & Care Foundation, where she leads the vision to build inclusive, community-centered support for mothers living with disabilities.
+                            A hard of hearing mother and People Systems Consultant, Solace founded The Mum Bridge from lived experience and leads its vision for inclusive, community-centered support.
                         </p>
 
                         <!-- Social Media Links -->
@@ -3542,131 +4406,79 @@
                                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                             </a>
                         </div>
-
-                        <!-- Expandable Details -->
-                        <div class="board-member-details">
-                            <div class="board-member-full-bio">
-                                <p><strong>Background:</strong> Grounded in lived experience and a background in Human Resource Management, Solace brings expertise in designing people-centered systems that promote inclusion, dignity, and sustainable growth. As a People Systems Consultant, she works with organizations to build structures where everyone can thrive, and brings that same commitment to The Mum Bridge.</p>
-                                <p><strong>Vision:</strong> Through the Foundation, Solace provides strategic direction, champions the mission, and connects mothers with disabilities to peer support, accessible resources, and economic opportunities. Her work is guided by a simple belief: when mothers with disabilities are supported, they thrive, and so do their families.</p>
-                            </div>
-                        </div>
-
-                        <button class="btn-view-more" aria-expanded="false">
-                            <span>View More</span>
-                            <span class="icon" aria-hidden="true">▼</span>
-                        </button>
                     </div>
                 </article>
 
                 <!-- Board Member 2: Adedotun Soyemi -->
                 <article class="board-member" data-member="adedotun">
                     <div class="board-member-image">
-                        <img src="assets/directors/adedotun-soyemi.jpg?v=20260417" alt="Portrait of Adedotun Soyemi">
+                        <img src="assets/directors/adedotun-soyemi.jpg?v=20260602" alt="Portrait of Adedotun Soyemi">
                     </div>
                     <div class="board-member-info">
                         <h3 class="board-member-name">Adedotun Soyemi</h3>
                         <p class="board-member-role">Chairperson</p>
                         <p class="board-member-bio">
-                            Strategic Communications Professional, Co-founder of Thirty32 Media, and Convener of the ROAR Conference empowering women to step into their full power.
+                            Strategic communications professional, co-founder of Thirty32 Media, and convener of the ROAR Conference empowering women to step into their full power.
                         </p>
 
                         <div class="board-member-social">
                             <a href="https://www.linkedin.com/in/adedotunsoyemi" class="social-link" aria-label="Adedotun Soyemi LinkedIn" target="_blank" rel="noopener noreferrer">
                                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                             </a>
-                            </div>
-
-                        <div class="board-member-details">
-                            <div class="board-member-full-bio">
-                                <p><strong>Background:</strong> To the people who love her most, Dotun is a wife, mother, sister, and friend. She is on an assignment to help people reinvent themselves and empower women and mothers to step into their full power, thrive, and build legacies their generations will be proud of.</p>
-                                <p><strong>Leadership:</strong> As Co-founder of Thirty32 Media and Communications, she helps leaders and founders launch projects that matter, craft communications that truly connect, and execute campaigns that grow influence, impact, and income. She has executed projects for The W Community, Leading Ladies Africa, Supply Chain Africa, and Bono Energy.</p>
-                                <p><strong>Impact:</strong> Dotun is the Convener of the ROAR Conference, helping women heal, gain clarity, and step confidently into leadership. She is also a Grow With Renny Mentor and hosts The Audacity Series podcast, spotlighting believers whose lives shine brighter for the gospel.</p>
-                            </div>
                         </div>
-
-                        <button class="btn-view-more" aria-expanded="false">
-                            <span>View More</span>
-                            <span class="icon" aria-hidden="true">▼</span>
-                        </button>
                     </div>
                 </article>
 
                 <!-- Board Member 3: Sarah George-Ashiru -->
                 <article class="board-member">
                     <div class="board-member-image">
-                        <img src="assets/directors/sarah-george-ashiru.jpg?v=20260417" alt="Portrait of Sarah George-Ashiru">
+                        <img src="assets/directors/sarah-george-ashiru.jpg?v=20260602" alt="Portrait of Sarah George-Ashiru">
                     </div>
                     <div class="board-member-info">
                         <h3 class="board-member-name">Sarah George-Ashiru</h3>
                         <p class="board-member-role">Deputy Chairperson</p>
                         <p class="board-member-bio">
-                            CEO of Deah Solutions LLC, specializing in operations design, talent pipelines, and high-performance team development for small businesses and social-impact organisations.
+                            CEO of Deah Solutions LLC, with nearly a decade of experience building operational systems that help mission-driven organisations scale with clarity.
                         </p>
 
                         <div class="board-member-social">
                             <a href="https://www.linkedin.com/in/sarahgeorgeashiru" class="social-link" aria-label="Sarah George-Ashiru LinkedIn" target="_blank" rel="noopener noreferrer">
                                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                             </a>
-                            </div>
-
-                        <div class="board-member-details">
-                            <div class="board-member-full-bio">
-                                <p><strong>Background:</strong> With nearly a decade of experience building systems that help organisations scale, Sarah believes that the greatest threat to any mission-driven institution is not a lack of vision, but a lack of structure. Her career has centred on helping founders and growth-stage teams replace overwhelm with clarity by transforming fragmented workflows into automated, measurable, and sustainable operational systems.</p>
-                                <p><strong>Leadership:</strong> As CEO of Deah Solutions LLC, her expertise spans operational excellence, leadership coaching, marketing discipline, and culture-building, helping teams accelerate results and achieve milestones ahead of schedule.</p>
-                                <p><strong>Commitment:</strong> Within The Mum Bridge & Care Foundation, she ensures that the organisation's programmes, partnerships, and community initiatives operate with precision, accountability, and measurable impact. Sarah's leadership reflects a deep commitment to building inclusive ecosystems where women, especially mothers with disabilities, can thrive with dignity, support, and opportunity.</p>
-                            </div>
                         </div>
-
-                        <button class="btn-view-more" aria-expanded="false">
-                            <span>View More</span>
-                            <span class="icon" aria-hidden="true">▼</span>
-                        </button>
                     </div>
                 </article>
 
                 <!-- Board Member 4: Kehinde Owoputi -->
                 <article class="board-member">
                     <div class="board-member-image">
-                        <img src="assets/directors/kehinde-owoputi.jpg?v=20260417" alt="Portrait of Kehinde Owoputi">
+                        <img src="assets/directors/kehinde-owoputi.jpg?v=20260602" alt="Portrait of Kehinde Owoputi">
                     </div>
                     <div class="board-member-info">
                         <h3 class="board-member-name">Kehinde Owoputi</h3>
                         <p class="board-member-role">Trustee</p>
                         <p class="board-member-bio">
-                            Engineering Manager at Sabi with over eight years of experience creating innovative software solutions that enhance business productivity and digital accessibility.
+                            Engineering Manager at Sabi with over eight years of experience in software development and digital accessibility.
                         </p>
 
                         <div class="board-member-social">
                             <a href="https://www.linkedin.com/in/kehindeowoputi" class="social-link" aria-label="Kehinde Owoputi LinkedIn" target="_blank" rel="noopener noreferrer">
                                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                             </a>
-                            </div>
-
-                        <div class="board-member-details">
-                            <div class="board-member-full-bio">
-                                <p><strong>Background:</strong> With over eight years of experience as a software engineer and engineering leader, Kehinde is seasoned in creating and innovating software solutions that enhance business productivity. He is experienced in all aspects of the software development lifecycle and end-to-end project management, from the ideation stage through development to delivery.</p>
-                                <p><strong>Leadership:</strong> Currently serving as an Engineering Manager at Sabi, Kehinde is consistently recognized as a hands-on and competent leader, skilled at coordinating cross-functional teams and organizing events in fast-paced and deadline-driven environments. His technical background ensures that projects are delivered on time, within budget, and with measurable impact.</p>
-                                <p><strong>Commitment:</strong> Within The Mum Bridge & Care Foundation, he ensures that the organisation operates efficiently, leverages technology effectively, and maintains high standards of digital accessibility and system performance. Kehinde's leadership reflects his commitment to using technology as a tool for inclusion and ensuring that mothers living with disabilities have access to reliable, user-friendly digital systems.</p>
-                            </div>
                         </div>
-
-                        <button class="btn-view-more" aria-expanded="false">
-                            <span>View More</span>
-                            <span class="icon" aria-hidden="true">▼</span>
-                        </button>
                     </div>
                 </article>
 
                 <!-- Board Member 5: Ayomide Aboyade -->
                 <article class="board-member">
                     <div class="board-member-image">
-                        <img src="assets/directors/ayomide-aboyade.jpeg?v=20260417" alt="Portrait of Ayomide Aboyade">
+                        <img src="assets/directors/ayomide-aboyade.jpeg?v=20260602" alt="Portrait of Ayomide Aboyade">
                     </div>
                     <div class="board-member-info">
                         <h3 class="board-member-name">Ayomide Aboyade</h3>
                         <p class="board-member-role">Program & Operations Manager</p>
                         <p class="board-member-bio">
-                            Program & Operations Manager at The Mum Bridge and Care Foundation, leading the design and implementation of programs that support mothers with disabilities through access, connection, and dignity.
+                            Leads the design and implementation of programs that support mothers with disabilities through access, connection, and dignity.
                         </p>
 
                         <div class="board-member-social">
@@ -3674,32 +4486,19 @@
                                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                             </a>
                         </div>
-
-                        <div class="board-member-details">
-                            <div class="board-member-full-bio">
-                                <p><strong>Background:</strong> Ayomide Aboyade is the Program & Operations Manager at The Mum Bridge and Care Foundation, where she leads the design and implementation of programs that support mothers with disabilities through access, connection, and dignity.</p>
-                                <p><strong>Experience:</strong> She brings strong experience in program management, health advocacy, and development, with a background in building inclusive, community-centered initiatives across Nigeria.</p>
-                                <p><strong>Commitment:</strong> Through The Mum Bridge, she is committed to creating safe, accessible, and affirming spaces where mothers can be seen, supported, and empowered.</p>
-                            </div>
-                        </div>
-
-                        <button class="btn-view-more" aria-expanded="false">
-                            <span>View More</span>
-                            <span class="icon" aria-hidden="true">▼</span>
-                        </button>
                     </div>
                 </article>
 
                 <!-- Board Member 6: Oluwademilade -->
                 <article class="board-member">
                     <div class="board-member-image">
-                        <img src="assets/directors/oluwademilade.jpg?v=20260417" alt="Portrait of Oluwademilade Adejoorin">
+                        <img src="assets/directors/oluwademilade.jpg?v=20260602" alt="Portrait of Oluwademilade Adejoorin">
                     </div>
                     <div class="board-member-info">
                         <h3 class="board-member-name">Oluwademilade Adejoorin</h3>
                         <p class="board-member-role">Chief Finance Officer</p>
                         <p class="board-member-bio">
-                            Chartered Accountant and Investment Banking professional with over 7 years of experience, responsible for building the organisation's financial strategy and funding structure to enable scale and mission-aligned impact.
+                            Chartered Accountant and Investment Banking professional responsible for building TMB&rsquo;s financial strategy and funding structure.
                         </p>
 
                         <div class="board-member-social">
@@ -3707,20 +4506,6 @@
                                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                             </a>
                         </div>
-
-                        <div class="board-member-details">
-                            <div class="board-member-full-bio">
-                                <p><strong>Background:</strong> Oluwademilade Adejoorin is a Chartered Accountant and Investment Banking professional with over 7 years of experience spanning financial reporting, investment banking, and advisory across healthcare, manufacturing, infrastructure, and consumer sectors, among others.</p>
-                                <p><strong>Leadership:</strong> She currently leads the Investment Banking and Advisory team at one of Nigeria's fast-rising financial services firms, where she advises emerging corporates and institutional clients on capital raises, business transformation, and complex transactions across multiple regions. Her work focuses on aligning capital with long-term value creation and sustainable impact.</p>
-                                <p><strong>Community Impact:</strong> Beyond advisory, Oluwademilade serves as the Dean of the School of Growth Africa, an initiative committed to Building Africa, One Business at a Time by providing access to knowledge, resources and networks that support African businesses to build for global impact and sustainability. Since inception, the School has trained about 1000 entrepreneurs across multiple cohorts, enabling measurable outcomes in revenue growth, job creation, and impact-led enterprise development.</p>
-                                <p><strong>Qualifications & Role:</strong> She holds a Bachelor's Degree in Accounting and is a member of the Institute of Chartered Accountants of Nigeria (ICAN). In her role at The Mum Bridge & Care, she is responsible for building the organisation's financial strategy and funding structure to enable scale and mission-aligned impact.</p>
-                            </div>
-                        </div>
-
-                        <button class="btn-view-more" aria-expanded="false">
-                            <span>View More</span>
-                            <span class="icon" aria-hidden="true">▼</span>
-                        </button>
                     </div>
                 </article>
 
@@ -3728,7 +4513,7 @@
                 <!--
                 <article class="board-member">
                     <div class="board-member-image">
-                        <img src="assets/directors/adeoye-yetunde.jpg?v=20260417" alt="Portrait of Adeoye Yetunde Adeyita">
+                        <img src="assets/directors/adeoye-yetunde.jpg?v=20260602" alt="Portrait of Adeoye Yetunde Adeyita">
                     </div>
                     <div class="board-member-info">
                         <h3 class="board-member-name">Adeoye Yetunde Adeyita</h3>
@@ -3763,394 +4548,139 @@
         </div>
     </section>
 
-    <!-- ============================================
-         COMMUNITY GALLERY SECTION
-         Impact photos showing our work in action
-         ============================================ -->
-    <section class="section gallery-section" role="region" aria-labelledby="gallery-title">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" id="gallery-title">Our Community in Action</h2>
-                <p>Real moments from our programmes, events, and gatherings — showing the warmth, strength, and joy of our community.</p>
-            </div>
 
-            <div class="gallery-grid" id="gallery-grid">
-
-                <!-- Photo 1 -->
-                <figure class="gallery-item">
-                    <button class="gallery-thumb-btn" data-index="0" aria-label="View photo 1 of 20: A wide view of The Mum Bridge community gathering">
-                        <img src="assets/impact/may-2026/TMB-215.jpg?v=20260522" alt="A wide view of The Mum Bridge community gathering, showing a full room of mothers including wheelchair users in attendance" loading="lazy">
-                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                    </button>
-                </figure>
-
-                <!-- Photo 2 -->
-                <figure class="gallery-item">
-                    <button class="gallery-thumb-btn" data-index="1" aria-label="View photo 2 of 20: Mothers seated together during a community session including a wheelchair user">
-                        <img src="assets/impact/may-2026/TMB-74.jpg?v=20260522" alt="Mothers with disabilities seated together during a Mum Bridge community session, including a participant using a wheelchair" loading="lazy">
-                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                    </button>
-                </figure>
-
-                <!-- Photo 3 -->
-                <figure class="gallery-item">
-                    <button class="gallery-thumb-btn" data-index="2" aria-label="View photo 3 of 20: Participants seated attentively during a Mum Bridge programme">
-                        <img src="assets/impact/may-2026/TMB-147.jpg?v=20260522" alt="Mothers seated attentively with hands on their chests during a Mum Bridge programme" loading="lazy">
-                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                    </button>
-                </figure>
-
-                <!-- Photo 4 -->
-                <figure class="gallery-item">
-                    <button class="gallery-thumb-btn" data-index="3" aria-label="View photo 4 of 20: Two facilitators addressing the community with a microphone">
-                        <img src="assets/impact/may-2026/TMB-76.jpg?v=20260522" alt="Two Mum Bridge facilitators at the front of the room, one speaking into a microphone with the foundation banner visible behind them" loading="lazy">
-                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                    </button>
-                </figure>
-
-                <!-- Photo 5 -->
-                <figure class="gallery-item">
-                    <button class="gallery-thumb-btn" data-index="4" aria-label="View photo 5 of 20: Facilitator with sign language interpreter on stage">
-                        <img src="assets/impact/may-2026/TMB-73.jpg?v=20260522" alt="A Mum Bridge facilitator speaks into a microphone while a sign language interpreter communicates alongside her" loading="lazy">
-                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                    </button>
-                </figure>
-
-                <!-- Photo 6 -->
-                <figure class="gallery-item">
-                    <button class="gallery-thumb-btn" data-index="5" aria-label="View photo 6 of 20: Team member and sign language interpreter ensuring an accessible session">
-                        <img src="assets/impact/may-2026/TMB-137.jpg?v=20260522" alt="A Mum Bridge team member addresses the community with a sign language interpreter beside her, ensuring the session is accessible for deaf participants" loading="lazy">
-                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                    </button>
-                </figure>
-
-                <!-- Photo 7 -->
-                <figure class="gallery-item">
-                    <button class="gallery-thumb-btn" data-index="6" aria-label="View photo 7 of 20: Community member standing to share her experience">
-                        <img src="assets/impact/may-2026/TMB-90.jpg?v=20260522" alt="A community member stands to share her experience during an interactive Mum Bridge session, with the audience listening" loading="lazy">
-                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                    </button>
-                </figure>
-
-                <!-- Photo 8 -->
-                <figure class="gallery-item">
-                    <button class="gallery-thumb-btn" data-index="7" aria-label="View photo 8 of 20: Mother confidently contributing her voice during community dialogue">
-                        <img src="assets/impact/may-2026/TMB-126.jpg?v=20260522" alt="A mother stands confidently to contribute her voice during a Mum Bridge community dialogue" loading="lazy">
-                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                    </button>
-                </figure>
-
-                <!-- Photo 9 -->
-                <figure class="gallery-item">
-                    <button class="gallery-thumb-btn" data-index="8" aria-label="View photo 9 of 20: Participant sharing her story with a microphone">
-                        <img src="assets/impact/may-2026/TMB-129.jpg?v=20260522" alt="A participant in an orange dress shares her story as a Mum Bridge facilitator holds a microphone toward her" loading="lazy">
-                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                    </button>
-                </figure>
-
-                <!-- Photo 10 (hidden initially) -->
-                <figure class="gallery-item gallery-item--hidden">
-                    <button class="gallery-thumb-btn" data-index="9" aria-label="View photo 10 of 20: Mother celebrating joyfully during a session">
-                        <img src="assets/impact/may-2026/TMB-131.jpg?v=20260522" alt="A mother celebrates joyfully with clasped hands as her community cheers around her during a Mum Bridge session" loading="lazy">
-                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                    </button>
-                </figure>
-
-                <!-- Photo 11 (hidden initially) -->
-                <figure class="gallery-item gallery-item--hidden">
-                    <button class="gallery-thumb-btn" data-index="10" aria-label="View photo 11 of 20: Community member contributing to the group dialogue">
-                        <img src="assets/impact/may-2026/TMB-135.jpg?v=20260522" alt="A community member speaks into a microphone, contributing to the Mum Bridge group dialogue" loading="lazy">
-                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                    </button>
-                </figure>
-
-                <!-- Photo 12 (hidden initially) -->
-                <figure class="gallery-item gallery-item--hidden">
-                    <button class="gallery-thumb-btn" data-index="11" aria-label="View photo 12 of 20: Facilitator guiding a small group breakout discussion">
-                        <img src="assets/impact/may-2026/TMB-199.jpg?v=20260522" alt="A Mum Bridge team member facilitates a small group discussion, guiding participants in a breakout activity" loading="lazy">
-                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                    </button>
-                </figure>
-
-                <!-- Photo 13 (hidden initially) -->
-                <figure class="gallery-item gallery-item--hidden">
-                    <button class="gallery-thumb-btn" data-index="12" aria-label="View photo 13 of 20: Peer support circle showing the diverse community The Mum Bridge serves">
-                        <img src="assets/impact/may-2026/TMB-201.jpg?v=20260522" alt="A small peer support circle in conversation, showing the diverse community of mothers The Mum Bridge serves" loading="lazy">
-                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                    </button>
-                </figure>
-
-                <!-- Photo 14 (hidden initially) -->
-                <figure class="gallery-item gallery-item--hidden">
-                    <button class="gallery-thumb-btn" data-index="13" aria-label="View photo 14 of 20: Community members sharing laughter and joy together">
-                        <img src="assets/impact/may-2026/TMB-212.jpg?v=20260522" alt="Community members sharing laughter and joy together during a Mum Bridge group activity" loading="lazy">
-                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                    </button>
-                </figure>
-
-                <!-- Photo 15 (hidden initially) -->
-                <figure class="gallery-item gallery-item--hidden">
-                    <button class="gallery-thumb-btn" data-index="14" aria-label="View photo 15 of 20: Three women presenting workshop findings with a sign language interpreter">
-                        <img src="assets/impact/may-2026/TMB-217.jpg?v=20260522" alt="Three women present workshop findings on a flip chart in front of the Mum Bridge banner, with a sign language interpreter alongside" loading="lazy">
-                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                    </button>
-                </figure>
-
-                <!-- Photo 16 (hidden initially) -->
-                <figure class="gallery-item gallery-item--hidden">
-                    <button class="gallery-thumb-btn" data-index="15" aria-label="View photo 16 of 20: Team member distributing materials to participants">
-                        <img src="assets/impact/may-2026/TMB-57.jpg?v=20260522" alt="A Mum Bridge team member distributes materials to participants seated during the community programme" loading="lazy">
-                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                    </button>
-                </figure>
-
-                <!-- Photo 17 (hidden initially) -->
-                <figure class="gallery-item gallery-item--hidden">
-                    <button class="gallery-thumb-btn" data-index="16" aria-label="View photo 17 of 20: Three community members smiling warmly in front of the foundation banner">
-                        <img src="assets/impact/may-2026/TMB-21.jpg?v=20260522" alt="Three community members smile warmly together in front of The Mum Bridge &amp; Care Foundation banner" loading="lazy">
-                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                    </button>
-                </figure>
-
-                <!-- Photo 18 (hidden initially) -->
-                <figure class="gallery-item gallery-item--hidden">
-                    <button class="gallery-thumb-btn" data-index="17" aria-label="View photo 18 of 20: Three women posing together at a Mum Bridge event">
-                        <img src="assets/impact/may-2026/TMB-49.jpg?v=20260522" alt="Three women pose together at a Mum Bridge event, with the foundation banner visible behind them" loading="lazy">
-                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                    </button>
-                </figure>
-
-                <!-- Photo 19 (hidden initially) -->
-                <figure class="gallery-item gallery-item--hidden">
-                    <button class="gallery-thumb-btn" data-index="18" aria-label="View photo 19 of 20: Two attendees sharing a warm embrace">
-                        <img src="assets/impact/may-2026/TMB-35.jpg?v=20260522" alt="Two attendees share a warm embrace in front of The Mum Bridge &amp; Care Foundation banner" loading="lazy">
-                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                    </button>
-                </figure>
-
-                <!-- Photo 20 (hidden initially) -->
-                <figure class="gallery-item gallery-item--hidden">
-                    <button class="gallery-thumb-btn" data-index="19" aria-label="View photo 20 of 20: Three women smiling together at a community event">
-                        <img src="assets/impact/may-2026/TMB-16.jpg?v=20260522" alt="Three women smile together at a Mum Bridge community event in front of the foundation banner" loading="lazy">
-                        <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                    </button>
-                </figure>
-
-            </div>
-
-            <div class="gallery-footer">
-                <button class="btn-gallery-toggle" id="gallery-toggle" aria-controls="gallery-grid">
-                    See all 11 more photos
-                </button>
-            </div>
-        </div>
-    </section>
 
     <!-- ============================================
-         PARTNERS SECTION
-         Showcasing our valued partners who support our mission
+         SECTION 9 — DONATE
+         Tiers + intro precede payment options
          ============================================ -->
-    <section class="section partners-section" role="region" aria-labelledby="partners-title">
+    <section id="donate" class="section donate-section" role="region" aria-labelledby="donate-title">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title" id="partners-title">Our Partners</h2>
-                <p class="partners-intro">
-                    We are grateful to work alongside partners who share our commitment to building inclusive communities and empowering mothers with disabilities.
+                <h2 class="section-title" id="donate-title">Support The Mum Bridge &amp; Care Foundation</h2>
+                <p class="donate-intro">
+                    Every contribution helps a mother with a disability find her community, access the resources she needs, and know that she is not invisible. Here is what your support makes possible.
                 </p>
             </div>
 
-            <div class="partners-grid">
-                <article class="partner-card">
-                    <div class="partner-logo-container">
-                        <img src="assets/partners/matchbox.png?v=20260417" alt="MatchBox Logo" class="partner-logo">
-                    </div>
-                    <h3 class="partner-name">MatchBox</h3>
-                    <p class="partner-description">
-                        Supporting our mission to create accessible and inclusive opportunities for mothers with disabilities.
+            <div class="donate-tiers-intro">
+                <h3 class="donate-tiers-heading">Support Our Work</h3>
+                <p class="donate-tiers-lede">
+                    From peer support and accessible parenting resources to advocacy, referrals, and inclusive community spaces &mdash; your contribution helps mothers with disabilities access the support systems they deserve.
+                </p>
+            </div>
+
+            <div class="donate-tiers">
+                <article class="donate-tier">
+                    <header class="donate-tier-header">
+                        <h4 class="donate-tier-title">The Mum Bridge Support</h4>
+                        <span class="donate-tier-amount">&#8358;5,000 &ndash; &#8358;150,000 <span class="donate-tier-amount-alt">(~$4 &ndash; $107)</span></span>
+                    </header>
+                    <p class="donate-tier-desc">
+                        Every contribution helps sustain community support, advocacy, accessible resources, and ongoing outreach for mothers with disabilities across Nigeria.
                     </p>
-                    <span class="partner-badge">Strategic Partner</span>
                 </article>
 
-                <article class="partner-card">
-                    <div class="partner-logo-container">
-                        <img src="assets/partners/lasoda-logo.png?v=20260417" alt="LASODA Logo" class="partner-logo">
-                    </div>
-                    <h3 class="partner-name">LASODA</h3>
-                    <p class="partner-description">
-                        The Mum Bridge is a registered member of the Lagos State Office for Disability Affairs (LASODA), working to strengthen access, visibility, and support for mothers with disabilities within Lagos State.
+                <article class="donate-tier">
+                    <header class="donate-tier-header">
+                        <h4 class="donate-tier-title">Assistive Fund</h4>
+                        <span class="donate-tier-amount">&#8358;75,000 <span class="donate-tier-amount-alt">(~$54)</span></span>
+                    </header>
+                    <p class="donate-tier-desc">
+                        Supports assistive devices, support pathways, referrals, and essential resources for mothers with disabilities.
                     </p>
-                    <span class="partner-badge">Strategic Partner</span>
                 </article>
 
-                <article class="partner-card">
-                    <div class="partner-logo-container">
-                        <img src="assets/partners/nngo.png?v=20260417" alt="NNGO Logo" class="partner-logo">
-                    </div>
-                    <h3 class="partner-name">NNGO</h3>
-                    <p class="partner-description">
-                        The Mum Bridge is a member of the Nigeria Network of NGOs, part of a national community committed to strengthening civil society and advancing inclusive, impact-driven work.
+                <article class="donate-tier">
+                    <header class="donate-tier-header">
+                        <h4 class="donate-tier-title">Sponsor A Mum Bridge Circle</h4>
+                        <span class="donate-tier-amount">&#8358;25,000 &ndash; &#8358;500,000 <span class="donate-tier-amount-alt">(~$18 &ndash; $357)</span></span>
+                    </header>
+                    <p class="donate-tier-desc">
+                        Your sponsorship covers an accessible community gathering &mdash; venue, materials, transport support, meals, sign language interpretation, and safe space. At the higher end, it expands future Circles across Nigeria.
                     </p>
-                    <span class="partner-badge">Strategic Partner</span>
+                    <p class="donate-tier-desc donate-tier-emphasis">
+                        Every Circle reminds a mother that she belongs.
+                    </p>
+                </article>
+
+                <article class="donate-tier donate-tier--feature">
+                    <header class="donate-tier-header">
+                        <h4 class="donate-tier-title">Sponsor The Mum Bridge Gathering 2026</h4>
+                    </header>
+                    <p class="donate-tier-desc">
+                        The Mum Bridge Gathering is Nigeria&rsquo;s first large-scale gathering dedicated to mothers with disabilities, bringing together mothers, advocates, healthcare providers, policymakers, and partners across Lagos.
+                    </p>
+                    <p class="donate-tier-desc">
+                        We are seeking corporate sponsors, foundations, and institutional partners ready to help build a more inclusive future for mothers with disabilities in Nigeria.
+                    </p>
+                    <p class="donate-tier-desc donate-tier-cta-line">
+                        To discuss sponsorship and partnership opportunities, contact us at
+                        <a href="mailto:info@themumbridge.org">info@themumbridge.org</a>.
+                    </p>
                 </article>
             </div>
-        </div>
-    </section>
 
-    <!-- ============================================
-         SDG ALIGNMENT SECTION
-         Our contribution to global sustainable development goals
-         ============================================ -->
-    <section class="section sdg-section" role="region" aria-labelledby="sdg-title">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" id="sdg-title">Aligned with Global Goals</h2>
-                <p>The Mum Bridge & Care Foundation directly advances the United Nations Sustainable Development Goals by centering mothers with disabilities in health, work, and leadership.</p>
-            </div>
-
-            <div class="sdg-grid">
-                <div class="sdg-card">
-                    <span class="sdg-number">SDG 3</span>
-                    <h3 class="sdg-title">Good Health & Wellbeing</h3>
-                    <p class="sdg-focus">Maternal health access and emotional wellbeing</p>
-                    <p class="sdg-contribution">
-                        Peer support, mental health guidance, and improved access to assistive tools and services that strengthen maternal health outcomes.
-                    </p>
-                </div>
-
-                <div class="sdg-card">
-                    <span class="sdg-number">SDG 5</span>
-                    <h3 class="sdg-title">Gender Equality</h3>
-                    <p class="sdg-focus">Women's agency and protection from discrimination</p>
-                    <p class="sdg-contribution">
-                        Empowering mothers with disabilities as leaders in their families and communities, challenging gender-based barriers.
-                    </p>
-                </div>
-
-                <div class="sdg-card">
-                    <span class="sdg-number">SDG 8</span>
-                    <h3 class="sdg-title">Decent Work & Economic Growth</h3>
-                    <p class="sdg-focus">Skill-building and income inclusion</p>
-                    <p class="sdg-contribution">
-                        Pathways to home-based and digital livelihoods for mothers facing workplace barriers and economic exclusion.
-                    </p>
-                </div>
-
-                <div class="sdg-card">
-                    <span class="sdg-number">SDG 10</span>
-                    <h3 class="sdg-title">Reduced Inequalities</h3>
-                    <p class="sdg-focus">Disability inclusion and social participation</p>
-                    <p class="sdg-contribution">
-                        Challenging stigma, promoting accessibility, and strengthening disability rights engagement across all levels of society.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================
-         CALL TO ACTION SECTION
-         Emotionally resonant CTA with modal trigger
-         ============================================ -->
-    <section class="section cta-section" role="region" aria-labelledby="cta-title">
-        <div class="container">
-            <h2 class="cta-title" id="cta-title">Join the Movement</h2>
-            <p class="cta-description">
-                Be part of building a world where every mother with disability has equal access, opportunity, and support to thrive. Subscribe to stay connected with resources, stories, and opportunities to make a difference.
-            </p>
-            <button class="btn btn-secondary" id="cta-button" aria-label="Subscribe to our newsletter">
-                Subscribe to Our Newsletter
-            </button>
-        </div>
-    </section>
-
-    <!-- ============================================
-         JOIN OUR COMMUNITY SECTION
-         ============================================ -->
-    <section class="section join-community-section" role="region" aria-labelledby="join-title">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" id="join-title">Join Our Community</h2>
-            </div>
-            <p class="join-community-description">
-                Whether you are navigating pregnancy, raising young children, or parenting older children while managing a disability or chronic condition, there is a place for you here.
-            </p>
-            <a href="https://forms.gle/oCtCgwcdmKPBs2t97" target="_blank" rel="noopener noreferrer" class="btn btn-primary" aria-label="Join the community (opens in new tab)">
-                Join the Community
-            </a>
-        </div>
-    </section>
-
-    <!-- ============================================
-         VOLUNTEER SECTION
-         ============================================ -->
-    <section class="section volunteer-section" role="region" aria-labelledby="volunteer-title">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" id="volunteer-title">Volunteer With Us</h2>
-            </div>
-            <p class="volunteer-intro">
-                Help us build the bridge. Share your skills, time, and passion.
-            </p>
-            <p class="volunteer-intro">
-                We welcome volunteers who can contribute to storytelling, translation (Yoruba, Igbo, Hausa, Pidgin), community moderation, content design and social media, accessibility review and testing, or resource curation and research.
-            </p>
-
-            <div class="volunteer-cta">
-                <p class="volunteer-subtitle">Who can volunteer?</p>
-                <ul class="volunteer-list">
-                    <li>Mums with disabilities</li>
-                    <li>Anyone committed to inclusion</li>
-                </ul>
-            </div>
-
-            <div class="volunteer-cta">
-                <a href="https://forms.gle/jLUxeg6rG1fuPZa27" target="_blank" rel="noopener noreferrer" class="btn btn-primary" aria-label="Volunteer with us (opens in new tab)">
-                    Volunteer With Us
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================
-         SUPPORT SECTION
-         ============================================ -->
-    <section class="section support-section" role="region" aria-labelledby="support-title">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" id="support-title">Support The Mum Bridge & Care Foundation</h2>
-            </div>
-            <p class="support-intro">
-                Every mother deserves support, opportunity, and community, and you can help make that possible.
-            </p>
-            <p class="support-intro">
-                Your contribution, whether through financial support, resources, partnerships, or initiatives, helps us:
-            </p>
-
-            <ul class="support-list">
-                <li>Provide accessible resources and support for mums living with disabilities</li>
-                <li>Run skills programs that create pathways to financial independence</li>
-                <li>Amplify advocacy and storytelling to shift public perception</li>
-                <li>Expand our reach to more mothers living with disabilities</li>
-            </ul>
-
-            <div class="support-contact">
-                <p style="margin-bottom: var(--space-md); font-size: var(--text-lg); font-weight: 600;">To support The Mum Bridge & Care Foundation, email us or donate:</p>
-                <div class="support-actions">
-                    <a href="mailto:info@themumbridge.org" class="support-email" aria-label="Email The Mum Bridge & Care Foundation">
+            <div class="donate-pay">
+                <p class="donate-pay-line">To give at any amount, donate via Flutterwave or bank transfer below. Every amount matters.</p>
+                <div class="donate-pay-actions">
+                    <button class="btn btn-donate" id="heroDonateBtn" aria-label="Donate Now &mdash; opens donation options">
+                        &#10084;&#65039; Donate Now
+                    </button>
+                    <a href="mailto:info@themumbridge.org" class="donate-email-link" aria-label="Email The Mum Bridge &amp; Care Foundation">
                         info@themumbridge.org
                     </a>
-                    <button class="btn btn-donate" id="heroDonateBtn" aria-label="Donate Now">
-                        ❤️ Donate Now
-                    </button>
                 </div>
             </div>
         </div>
     </section>
+    <!-- ============================================
+         SECTION 10 — JOIN / VOLUNTEER
+         Two cards: join + volunteer
+         ============================================ -->
+    <section id="join-volunteer" class="section join-volunteer-section" role="region" aria-labelledby="join-volunteer-title">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" id="join-volunteer-title">Be Part of What We Are Building</h2>
+            </div>
+
+            <div class="join-volunteer-grid">
+                <article class="jv-card">
+                    <h3 class="jv-card-title">There Is a Place for You Here</h3>
+                    <p class="jv-card-text">
+                        Whether you are a mother navigating disability yourself, or someone who believes every mother deserves support, our community is open to you.
+                    </p>
+                    <a href="https://forms.gle/oCtCgwcdmKPBs2t97"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="btn btn-primary jv-card-btn"
+                       aria-label="Join the Community (opens in new tab)">
+                        Join the Community
+                    </a>
+                </article>
+
+                <article class="jv-card jv-card--alt">
+                    <h3 class="jv-card-title">Help Us Build the Bridge</h3>
+                    <p class="jv-card-text">
+                        We welcome volunteers who can contribute to storytelling, translation (Yor&ugrave;b&aacute;, Igbo, Hausa, Pidgin), community moderation, administrative support, content and social media, accessibility review, or research.
+                    </p>
+                    <a href="https://forms.gle/jLUxeg6rG1fuPZa27"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="btn btn-primary jv-card-btn"
+                       aria-label="Volunteer With Us (opens in new tab)">
+                        Volunteer With Us
+                    </a>
+                </article>
+            </div>
+        </div>
+    </section>
+
 
     <!-- ============================================
          CONTACT SECTION
          ============================================ -->
-    <section class="section contact-section" role="region" aria-labelledby="contact-title">
+    <section id="contact" class="section contact-section" role="region" aria-labelledby="contact-title">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title" id="contact-title">Get In Touch</h2>
@@ -4183,6 +4713,27 @@
                 </a>
             </div>
 
+            <!-- Newsletter Signup (consolidated to footer per May 2026 brief) -->
+            <div class="footer-newsletter">
+                <h3 id="footer-newsletter-heading">Stay Connected</h3>
+                <p class="footer-newsletter-text">Get stories, resources, and ways to support delivered to your inbox.</p>
+                <form id="footer-newsletter-form" class="footer-newsletter-form" novalidate aria-labelledby="footer-newsletter-heading">
+                    <label for="footer-newsletter-email" class="sr-only">Email address</label>
+                    <input
+                        type="email"
+                        id="footer-newsletter-email"
+                        name="email"
+                        class="footer-newsletter-input"
+                        placeholder="your.email@example.com"
+                        required
+                        aria-required="true"
+                        aria-describedby="footer-newsletter-status"
+                        autocomplete="email">
+                    <button type="submit" class="footer-newsletter-btn" id="footer-newsletter-submit">Subscribe</button>
+                </form>
+                <p class="footer-newsletter-status" id="footer-newsletter-status" role="status" aria-live="polite"></p>
+            </div>
+
             <!-- Social Media Section -->
             <div class="footer-social">
                 <h3>Connect With Us</h3>
@@ -4211,7 +4762,7 @@
 
             <!-- Copyright -->
             <p class="footer-content">
-                &copy; 2025 The Mum Bridge & Care Foundation. All rights reserved.<br>
+                &copy; 2026 The Mum Bridge &amp; Care Foundation. All rights reserved.<br>
                 Registered in Nigeria - CAC: 9112955
             </p>
         </div>
@@ -4310,11 +4861,36 @@
                     &times;
                 </button>
                 <div class="donation-icon">❤️</div>
-                <h2 class="donation-modal-title" id="donation-modal-title">Support Our Mission</h2>
-                <p class="donation-modal-subtitle">Your donation helps mothers with disabilities thrive</p>
+                <h2 class="donation-modal-title" id="donation-modal-title">Support The Mum Bridge &amp; Care Foundation</h2>
+                <p class="donation-modal-subtitle">Every contribution helps a mother with a disability find her community, access the resources she needs, and know that she is not invisible.</p>
             </div>
 
             <div class="donation-modal-body">
+                <!-- Tier summary (shown before payment options) -->
+                <div class="donation-tiers-summary" role="list" aria-label="Ways to give">
+                    <div class="donation-tier-item" role="listitem">
+                        <span class="donation-tier-pill">The Mum Bridge Support</span>
+                        <span class="donation-tier-meta">&#8358;5,000 &ndash; &#8358;150,000 <span class="donation-tier-meta-alt">(~$4 &ndash; $107)</span></span>
+                        <span class="donation-tier-line">Sustains community support, advocacy, and outreach.</span>
+                    </div>
+                    <div class="donation-tier-item" role="listitem">
+                        <span class="donation-tier-pill">Assistive Fund</span>
+                        <span class="donation-tier-meta">&#8358;75,000 <span class="donation-tier-meta-alt">(~$54)</span></span>
+                        <span class="donation-tier-line">Assistive devices, referrals, and essential resources.</span>
+                    </div>
+                    <div class="donation-tier-item" role="listitem">
+                        <span class="donation-tier-pill">Sponsor A Mum Bridge Circle</span>
+                        <span class="donation-tier-meta">&#8358;25,000 &ndash; &#8358;500,000 <span class="donation-tier-meta-alt">(~$18 &ndash; $357)</span></span>
+                        <span class="donation-tier-line">Covers an accessible community gathering &mdash; venue, materials, transport, meals, sign language.</span>
+                    </div>
+                    <div class="donation-tier-item donation-tier-item--feature" role="listitem">
+                        <span class="donation-tier-pill">Sponsor The Mum Bridge Gathering 2026</span>
+                        <span class="donation-tier-line">Corporate, foundation &amp; institutional partners welcome. Email <a href="mailto:info@themumbridge.org">info@themumbridge.org</a>.</span>
+                    </div>
+                </div>
+
+                <p class="donation-modal-give-line">To give at any amount, donate via Flutterwave or bank transfer below. Every amount matters.</p>
+
                 <!-- Online Payment Option -->
                 <a
                     href="https://flutterwave.com/donate/0dbi6mww4nxu"
@@ -4511,12 +5087,62 @@
             }, observerOptions);
 
             // Observe all sections for scroll-based animations
-            const sections = document.querySelectorAll('.section');
+            const sections = document.querySelectorAll('.section, .problem-section, .impact-so-far');
             if (sections.length > 0) {
                 sections.forEach(section => {
                     sectionObserver.observe(section);
                 });
                 console.log('✓ Initialized scroll animations for', sections.length, 'sections');
+            }
+
+            // ============================================
+            // COUNT-UP ANIMATION FOR IMPACT NUMBERS
+            // Animates numbers from 0 to target when in view.
+            // Respects prefers-reduced-motion.
+            // ============================================
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const countTargets = document.querySelectorAll('.impact-number[data-count-to]');
+
+            function animateCount(el) {
+                const target = parseInt(el.getAttribute('data-count-to'), 10);
+                const suffix = el.getAttribute('data-suffix') || '';
+                if (isNaN(target)) return;
+                if (prefersReducedMotion) {
+                    el.textContent = target + suffix;
+                    return;
+                }
+                const duration = 1400; // ms
+                const start = performance.now();
+                const startVal = 0;
+                function tick(now) {
+                    const elapsed = now - start;
+                    const t = Math.min(elapsed / duration, 1);
+                    // ease-out-quart
+                    const eased = 1 - Math.pow(1 - t, 4);
+                    const val = Math.round(startVal + (target - startVal) * eased);
+                    el.textContent = val + suffix;
+                    if (t < 1) requestAnimationFrame(tick);
+                }
+                requestAnimationFrame(tick);
+            }
+
+            if (countTargets.length > 0) {
+                const countObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            animateCount(entry.target);
+                            countObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                countTargets.forEach(el => {
+                    // initialize to 0 to avoid flash of final number before animation
+                    if (!prefersReducedMotion) {
+                        const suffix = el.getAttribute('data-suffix') || '';
+                        el.textContent = '0' + suffix;
+                    }
+                    countObserver.observe(el);
+                });
             }
 
         // ============================================
@@ -5562,6 +6188,43 @@
          *
          * ==============================================
          */
+
+        // ============================================
+        // FOOTER NEWSLETTER FORM
+        // Consolidated mid-page newsletter into footer (May 2026 brief)
+        // ============================================
+        const footerNewsletterForm = document.getElementById('footer-newsletter-form');
+        if (footerNewsletterForm) {
+            const fnInput = document.getElementById('footer-newsletter-email');
+            const fnStatus = document.getElementById('footer-newsletter-status');
+            const fnSubmit = document.getElementById('footer-newsletter-submit');
+            const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            footerNewsletterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const value = (fnInput.value || '').trim();
+                fnStatus.classList.remove('success', 'error');
+
+                if (!emailRe.test(value)) {
+                    fnStatus.textContent = 'Please enter a valid email address.';
+                    fnStatus.classList.add('error');
+                    fnInput.focus();
+                    return;
+                }
+
+                // No backend yet — mirror existing subscription flow (visual confirmation only).
+                fnSubmit.disabled = true;
+                fnSubmit.textContent = 'Subscribing…';
+
+                setTimeout(() => {
+                    fnStatus.textContent = 'Thanks for joining. We’ll be in touch soon.';
+                    fnStatus.classList.add('success');
+                    fnInput.value = '';
+                    fnSubmit.disabled = false;
+                    fnSubmit.textContent = 'Subscribe';
+                }, 600);
+            });
+        }
     </script>
 </body>
 </html>
