@@ -35,6 +35,12 @@ The homepage was restructured per the May 2026 "Website Restructure Brief + Copy
 - Added intro copy and a 4-tier summary block BEFORE the Flutterwave button + bank details
 - Tier summary uses `.donation-tiers-summary` with `role="list"`; feature tier (Gathering 2026) is full-width with deep-plum left border
 
+### Hero & video updates (June 2, 2026 — later same day)
+- **Hero background image** changed from the Unsplash hands stock photo to an authentic TMB community photo: `assets/hero/community-hero.jpg` (sourced from `assets/impact/may-2026/TMB-215.jpg`, resized to 2400×1600, quality 82, ~400KB). Chosen for wide composition, visible wheelchair user, TMB foundation banner in-frame, and B&W tonality that supports text legibility. Overlay updated to a deep-plum→warm-brown diagonal gradient (#4A2545 78% → 62% → warm brown 65%) plus a soft radial vignette.
+- **Open Graph / Twitter Card images** updated to point at the new hero image (was YouTube thumbnail of gxrBAENtICA).
+- **Mobile hero**: `background-attachment` switches from `fixed` to `scroll` below 768px (iOS perf + visual quality).
+- **Video order rotated** (request June 2, 2026): previously Our Story → Our Impact → Our Community. Now: Our Community (za7F0wHYMPc) → Our Story (gxrBAENtICA) → Our Impact (EGRzyEBu5Hk). Hook lines move with their videos.
+
 ### Polish (June 2, 2026)
 - Transition curves upgraded to `cubic-bezier(0.25, 1, 0.5, 1)` (ease-out-quart)
 - Staggered card reveals (impact, services, donate tiers, jv-cards, partners, board) — 80ms increments

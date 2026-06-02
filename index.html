@@ -14,17 +14,17 @@
     <meta property="og:url" content="https://themumbridge.org/">
     <meta property="og:title" content="The Mum Bridge & Care Foundation - Empowering Mothers with Disabilities">
     <meta property="og:description" content="Supporting mothers with disabilities through community, resources, and empowerment.">
-    <meta property="og:image" content="https://img.youtube.com/vi/gxrBAENtICA/maxresdefault.jpg">
-    <meta property="og:image:width" content="1280">
-    <meta property="og:image:height" content="720">
-    <meta property="og:image:alt" content="The Mum Bridge & Care Foundation">
+    <meta property="og:image" content="https://themumbridge.org/assets/hero/community-hero.jpg?v=20260602">
+    <meta property="og:image:width" content="2400">
+    <meta property="og:image:height" content="1600">
+    <meta property="og:image:alt" content="The Mum Bridge & Care Foundation community gathering with mothers including a wheelchair user">
     <meta property="og:site_name" content="The Mum Bridge & Care Foundation">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@themumbridge">
     <meta name="twitter:title" content="The Mum Bridge & Care Foundation - Empowering Mothers with Disabilities">
     <meta name="twitter:description" content="Supporting mothers with disabilities through community, resources, and empowerment.">
-    <meta name="twitter:image" content="https://img.youtube.com/vi/gxrBAENtICA/maxresdefault.jpg">
-    <meta name="twitter:image:alt" content="The Mum Bridge & Care Foundation">
+    <meta name="twitter:image" content="https://themumbridge.org/assets/hero/community-hero.jpg?v=20260602">
+    <meta name="twitter:image:alt" content="The Mum Bridge & Care Foundation community gathering">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RT75M8FH5G"></script>
@@ -447,7 +447,7 @@
         /* ============================================
            HERO SECTION
            Warm, authentic background with community focus
-           High-quality image from Unsplash: diverse community support
+           Hero background: authentic community photo from TMB gathering
            ============================================ */
         .hero {
             min-height: 85vh;
@@ -457,14 +457,17 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(
-                rgba(92, 64, 92, 0.80),
-                rgba(139, 101, 76, 0.75)
-            ), url('https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3');
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(74, 37, 69, 0.78) 0%,
+                    rgba(74, 37, 69, 0.62) 50%,
+                    rgba(139, 101, 76, 0.65) 100%
+                ),
+                url('assets/hero/community-hero.jpg?v=20260602');
             background-size: cover;
-            background-position: center;
+            background-position: center 30%;
             background-attachment: fixed;
-            /* Improve image sharpness */
             image-rendering: -webkit-optimize-contrast;
             image-rendering: crisp-edges;
         }
@@ -472,12 +475,19 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.15) 100%);
+            inset: 0;
+            background:
+                radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 100%),
+                linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 70%, rgba(0,0,0,0.25) 100%);
             pointer-events: none;
+        }
+
+        /* Mobile: no fixed attachment (iOS perf), shift focus point slightly */
+        @media (max-width: 768px) {
+            .hero {
+                background-attachment: scroll;
+                background-position: center 35%;
+            }
         }
 
         .hero-content {
@@ -4264,6 +4274,25 @@
 
                         <div class="video-card-wrap">
                             <a class="video-card"
+                               href="https://youtu.be/za7F0wHYMPc"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               aria-label="Watch Our Community on YouTube — meet the mothers we exist for (opens in new tab)">
+                                <img
+                                    src="https://img.youtube.com/vi/za7F0wHYMPc/maxresdefault.jpg"
+                                    alt="The Mum Bridge & Care Foundation — our community"
+                                    loading="lazy"
+                                >
+                                <span class="video-card-play" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+                                </span>
+                                <span class="video-card-label" aria-hidden="true">Our Community</span>
+                            </a>
+                            <p class="video-hook">Meet the mothers we exist for.</p>
+                        </div>
+
+                        <div class="video-card-wrap">
+                            <a class="video-card"
                                href="https://youtu.be/gxrBAENtICA"
                                target="_blank"
                                rel="noopener noreferrer"
@@ -4298,25 +4327,6 @@
                                 <span class="video-card-label" aria-hidden="true">Our Impact</span>
                             </a>
                             <p class="video-hook">What changes when a mother with a disability finds her community.</p>
-                        </div>
-
-                        <div class="video-card-wrap">
-                            <a class="video-card"
-                               href="https://youtu.be/za7F0wHYMPc"
-                               target="_blank"
-                               rel="noopener noreferrer"
-                               aria-label="Watch Our Community on YouTube — meet the mothers we exist for (opens in new tab)">
-                                <img
-                                    src="https://img.youtube.com/vi/za7F0wHYMPc/maxresdefault.jpg"
-                                    alt="The Mum Bridge & Care Foundation — our community"
-                                    loading="lazy"
-                                >
-                                <span class="video-card-play" aria-hidden="true">
-                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
-                                </span>
-                                <span class="video-card-label" aria-hidden="true">Our Community</span>
-                            </a>
-                            <p class="video-hook">Meet the mothers we exist for.</p>
                         </div>
 
                     </div>
