@@ -6,9 +6,10 @@ This document captures the comprehensive UI structure, design system, and user e
 ## July 6, 2026 — Parenting Resources (standalone page)
 
 **Final structure (end of day July 6, 2026):**
-- `resources.html` — **primary** immersive journey page (was `resources-v2.html`; renamed at Kehinde's request). Main-nav "Resources" points here.
-- `resources-old.html` — the initial glass-grid attempt, kept as a legacy reference (was `resources.html`). Linked as "Grid view (legacy)" in the footer of the primary page.
+- `resources/index.html` — **primary** immersive journey page, served at `themumbridge.org/resources` (or `/resources/`). Moved into folder form for clean URLs — GitHub Pages does not support server-side URL rewriting, so `folder/index.html` is the only way to drop the `.html` extension. All asset references inside this file are ROOT-ABSOLUTE (`/assets/…`) because relative paths would break from the subfolder location.
+- `resources-old.html` — the initial glass-grid attempt, kept at the root as a legacy reference. Linked as "Grid view (legacy)" in the footer of the primary page.
 - Homepage `#resources` coverflow section — **removed** (Kehinde: "remove the added resource section on home page"). All associated CSS, HTML, and JS was deleted from `index.html`. A `.bak.20260706` file was left behind in the working tree in case the removal needs to be reversed.
+- All internal links to the resources page use `/resources/` (with trailing slash), across `index.html`, `privacy-policy.html`, `terms-of-use.html`, and `resources-old.html`.
 
 ### Primary: `resources.html` (the journey experience)
 Formerly `resources-v2.html`. Immersive scroll-driven layout with 5 chapters, mouse+device-orientation parallax, custom cursor glow, big editorial serif type.
