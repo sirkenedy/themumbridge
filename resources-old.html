@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Accessible Parenting Resources — practical, community-created guides for mothers with disabilities. Antenatal care, hospital visits, delivery prep, everyday life, and more.">
+    <title>Parenting Resources — The Mum Bridge & Care Foundation</title>
+    <meta name="asset-version" content="20260706">
+    <link rel="icon" type="image/png" href="assets/logo/the-mum-bridge-icon.png?v=20260706">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://themumbridge.org/resources-old.html">
+    <meta property="og:title" content="Parenting Resources — The Mum Bridge & Care Foundation">
+    <meta property="og:description" content="Accessible Parenting Resources — practical, community-created guides for mothers with disabilities.">
+    <meta property="og:image" content="https://themumbridge.org/assets/hero/community-hero.jpg?v=20260706">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@themumbridge">
+    <meta name="twitter:title" content="Parenting Resources — The Mum Bridge & Care Foundation">
+    <meta name="twitter:description" content="Accessible Parenting Resources — practical, community-created guides for mothers with disabilities.">
+    <meta name="twitter:image" content="https://themumbridge.org/assets/hero/community-hero.jpg?v=20260706">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RT75M8FH5G"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RT75M8FH5G');
+    </script>
+
+    <style>
+        :root {
+            --color-primary: #7B5E7B;
+            --color-primary-light: #9D7E9D;
+            --color-primary-dark: #5A445A;
+            --color-plum-deep: #4A2545;
+            --color-accent: #D4A574;
+            --color-accent-light: #E8C9A0;
+            --color-gold-warm: #C9A84C;
+            --color-text-primary: #2C2C2C;
+            --color-text-secondary: #5F5F5F;
+            --color-text-light: #FFFFFF;
+            --color-background: #FDFBF9;
+            --color-background-alt: #F5F1ED;
+            --color-border: #E0DDD9;
+
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2.5rem;
+            --space-xl: 4rem;
+            --space-2xl: 6rem;
+
+            --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            --font-display: Georgia, 'Times New Roman', serif;
+
+            --text-xs: 0.875rem;
+            --text-sm: 1rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.5rem;
+            --text-xl: 2rem;
+            --text-2xl: 2.5rem;
+            --text-3xl: 3rem;
+
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+
+            --radius-sm: 0.375rem;
+            --radius-md: 0.75rem;
+            --radius-lg: 1.25rem;
+
+            --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+            --transition-fast: 200ms var(--ease-out-quart);
+            --transition-base: 320ms var(--ease-out-quart);
+            --transition-slow: 520ms var(--ease-out-quart);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            html { scroll-behavior: auto; }
+        }
+
+        body {
+            font-family: var(--font-primary);
+            font-size: var(--text-base);
+            line-height: 1.7;
+            color: var(--color-text-primary);
+            background-color: var(--color-background);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            padding-top: 82px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--color-text-primary);
+        }
+
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: color var(--transition-base);
+        }
+
+        a:hover, a:focus { color: var(--color-primary-dark); outline: none; }
+
+        a:focus-visible, button:focus-visible {
+            outline: 3px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+
+        .sr-only {
+            position: absolute; width: 1px; height: 1px; padding: 0;
+            margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+        }
+
+        /* ============================================
+           HEADER (simplified, matches privacy/terms)
+           ============================================ */
+        .header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: rgba(253, 251, 249, 0.92);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--color-border);
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-sm) 0;
+            gap: var(--space-md);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            text-decoration: none;
+        }
+
+        .logo-img { height: 50px; width: auto; }
+
+        .logo-text {
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-xs) var(--space-sm);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+            color: white;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: var(--text-sm);
+            transition: all var(--transition-base);
+        }
+
+        .back-home:hover, .back-home:focus {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            color: white;
+        }
+
+        /* ============================================
+           HERO
+           ============================================ */
+        .hero {
+            position: relative;
+            min-height: 52vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: var(--space-2xl) var(--space-md) var(--space-xl);
+            overflow: hidden;
+            background:
+                radial-gradient(ellipse 900px 600px at 20% 30%, rgba(74, 37, 69, 0.85) 0%, transparent 70%),
+                radial-gradient(ellipse 900px 700px at 85% 80%, rgba(201, 168, 76, 0.55) 0%, transparent 65%),
+                linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-plum-deep) 100%);
+            color: #fff;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 15% 15%, rgba(255, 255, 255, 0.06) 1px, transparent 2px) 0 0 / 60px 60px,
+                radial-gradient(circle at 85% 85%, rgba(255, 255, 255, 0.05) 1px, transparent 2px) 0 0 / 80px 80px;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .hero-inner { position: relative; z-index: 1; max-width: 780px; }
+
+        .hero-eyebrow {
+            display: inline-block;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--color-accent-light);
+            background: rgba(232, 201, 160, 0.14);
+            border: 1px solid rgba(232, 201, 160, 0.32);
+            padding: 0.4rem 0.9rem;
+            border-radius: 999px;
+            margin-bottom: var(--space-md);
+        }
+
+        .hero h1 {
+            color: #fff;
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: var(--space-md);
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        .hero-sub {
+            font-size: var(--text-base);
+            max-width: 620px;
+            margin: 0 auto var(--space-lg);
+            opacity: 0.94;
+            line-height: 1.75;
+        }
+
+        .hero-meta {
+            display: inline-flex;
+            gap: var(--space-lg);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+
+        .hero-meta-num {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--color-accent-light);
+        }
+
+        .hero-meta-label {
+            font-size: 0.85rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* ============================================
+           TOOLBAR — search + category filter
+           ============================================ */
+        .toolbar-section {
+            padding: var(--space-lg) 0 var(--space-md);
+            background: var(--color-background);
+            position: sticky;
+            top: 82px;
+            z-index: 50;
+            border-bottom: 1px solid var(--color-border);
+            backdrop-filter: blur(10px);
+            background: rgba(253, 251, 249, 0.9);
+        }
+
+        .toolbar {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            align-items: stretch;
+        }
+
+        .search-wrap {
+            position: relative;
+            max-width: 560px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .search-wrap svg {
+            position: absolute;
+            top: 50%;
+            left: 14px;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            color: var(--color-text-secondary);
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 2.75rem;
+            border: 1px solid var(--color-border);
+            border-radius: 999px;
+            font-family: var(--font-primary);
+            font-size: 0.95rem;
+            background: #fff;
+            transition: border-color var(--transition-base), box-shadow var(--transition-base);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 4px rgba(123, 94, 123, 0.12);
+        }
+
+        .search-clear {
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            transform: translateY(-50%);
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(74, 37, 69, 0.15);
+            color: var(--color-plum-deep);
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            line-height: 1;
+        }
+
+        .search-clear.visible { display: flex; }
+
+        .filter-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .chip {
+            border: 1px solid rgba(74, 37, 69, 0.2);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(6px);
+            color: var(--color-plum-deep);
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-family: var(--font-primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .chip-count {
+            font-size: 0.72rem;
+            font-weight: 700;
+            background: rgba(74, 37, 69, 0.12);
+            padding: 0.1rem 0.45rem;
+            border-radius: 999px;
+        }
+
+        .chip:hover, .chip:focus-visible {
+            background: rgba(74, 37, 69, 0.08);
+            transform: translateY(-1px);
+            outline: none;
+        }
+
+        .chip.active {
+            background: var(--color-plum-deep);
+            color: #fff;
+            border-color: var(--color-plum-deep);
+            box-shadow: 0 6px 20px -8px rgba(74, 37, 69, 0.5);
+        }
+
+        .chip.active .chip-count {
+            background: rgba(255, 255, 255, 0.22);
+            color: #fff;
+        }
+
+        /* ============================================
+           GRID — glass tile cards
+           ============================================ */
+        .grid-section {
+            padding: var(--space-xl) 0 var(--space-2xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .grid-section::before,
+        .grid-section::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.35;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .grid-section::before {
+            width: 480px; height: 480px;
+            top: 100px; left: -180px;
+            background: radial-gradient(circle, rgba(74, 37, 69, 0.35), transparent 70%);
+        }
+
+        .grid-section::after {
+            width: 520px; height: 520px;
+            bottom: 60px; right: -200px;
+            background: radial-gradient(circle, rgba(201, 168, 76, 0.35), transparent 70%);
+        }
+
+        .grid-section .container { position: relative; z-index: 1; }
+
+        .grid-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: var(--space-lg);
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .grid-meta-count {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+        }
+
+        .grid-meta-count strong {
+            color: var(--color-plum-deep);
+            font-weight: 700;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem 1.5rem;
+            perspective: 2200px;
+            perspective-origin: 50% 30%;
+        }
+
+        /* ---- Individual tile — 3D with mouse tilt + sheen ---- */
+        .resource-tile {
+            /* Mouse-driven CSS custom properties (set by JS) */
+            --rx: 0deg;
+            --ry: 0deg;
+            --tz: 0px;
+            --mx: 50%;
+            --my: 50%;
+            --lift: 0px;
+            --float-delay: 0s;
+
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            background:
+                /* Layer 1: highlight sheen at top */
+                radial-gradient(120% 80% at 30% 0%, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.15) 40%, transparent 70%),
+                /* Layer 2: soft plum warmth at bottom */
+                radial-gradient(140% 100% at 70% 100%, rgba(74, 37, 69, 0.12) 0%, transparent 60%),
+                /* Layer 3: base frost */
+                linear-gradient(160deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.28) 100%);
+            -webkit-backdrop-filter: blur(24px) saturate(160%);
+                    backdrop-filter: blur(24px) saturate(160%);
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            box-shadow:
+                0 20px 60px -18px rgba(74, 37, 69, 0.35),
+                0 8px 24px -8px rgba(0, 0, 0, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.7),
+                inset 0 -1px 0 rgba(74, 37, 69, 0.08);
+            padding: 0;
+            font: inherit;
+            color: inherit;
+            text-align: left;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition:
+                transform 480ms var(--ease-out-quart),
+                box-shadow 480ms var(--ease-out-quart),
+                opacity 400ms var(--ease-out-quart);
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            will-change: transform;
+        }
+
+        /* Continuous floating (subtle Y motion, staggered per tile) */
+        @keyframes tileFloat {
+            0%, 100% { --lift: 0px; }
+            50%      { --lift: -8px; }
+        }
+
+        /* Register the CSS variables so they can animate smoothly */
+        @property --rx { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+        @property --ry { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+        @property --tz { syntax: '<length>'; inherits: false; initial-value: 0px; }
+        @property --lift { syntax: '<length>'; inherits: false; initial-value: 0px; }
+        @property --mx { syntax: '<percentage>'; inherits: false; initial-value: 50%; }
+        @property --my { syntax: '<percentage>'; inherits: false; initial-value: 50%; }
+
+        /* Gradient border via mask */
+        .resource-tile::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1.5px;
+            background:
+                conic-gradient(from calc(var(--mx) + var(--my)),
+                    rgba(255, 255, 255, 0.9),
+                    rgba(212, 165, 116, 0.55) 25%,
+                    rgba(74, 37, 69, 0.65) 50%,
+                    rgba(212, 165, 116, 0.55) 75%,
+                    rgba(255, 255, 255, 0.9));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+                    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+                    mask-composite: exclude;
+            opacity: 0.75;
+            pointer-events: none;
+            z-index: 4;
+            transition: opacity 480ms var(--ease-out-quart);
+        }
+
+        /* Sheen highlight — cursor-following gloss */
+        .resource-tile::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(
+                380px circle at var(--mx) var(--my),
+                rgba(255, 255, 255, 0.28) 0%,
+                rgba(255, 255, 255, 0.10) 30%,
+                transparent 60%
+            );
+            opacity: 0;
+            pointer-events: none;
+            z-index: 3;
+            mix-blend-mode: overlay;
+            transition: opacity 380ms var(--ease-out-quart);
+        }
+
+        .resource-tile:hover,
+        .resource-tile:focus-visible {
+            --tz: 40px;
+            box-shadow:
+                0 40px 90px -20px rgba(74, 37, 69, 0.45),
+                0 20px 50px -12px rgba(0, 0, 0, 0.20),
+                inset 0 1px 0 rgba(255, 255, 255, 0.85),
+                inset 0 -1px 0 rgba(74, 37, 69, 0.1);
+            outline: none;
+            animation-play-state: paused;
+        }
+
+        .resource-tile:hover::after,
+        .resource-tile:focus-visible::after {
+            opacity: 1;
+        }
+
+        .resource-tile:hover::before,
+        .resource-tile:focus-visible::before {
+            opacity: 1;
+        }
+
+        /* ---- Inner 3D layers — parallax depth on tilt ---- */
+        .tile-thumb {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            transform: translateZ(30px);
+            transform-style: preserve-3d;
+        }
+
+        .tile-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 700ms var(--ease-out-quart);
+        }
+
+        .resource-tile:hover .tile-thumb img,
+        .resource-tile:focus-visible .tile-thumb img {
+            transform: scale(1.08);
+        }
+
+        .tile-thumb::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, transparent 40%, rgba(74, 37, 69, 0.6) 100%);
+            pointer-events: none;
+        }
+
+        .tile-number {
+            position: absolute;
+            top: 14px; left: 14px;
+            font-family: var(--font-primary);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #fff;
+            background: rgba(74, 37, 69, 0.92);
+            padding: 0.32rem 0.7rem;
+            border-radius: 999px;
+            backdrop-filter: blur(8px);
+            z-index: 3;
+            transform: translateZ(50px);
+            box-shadow: 0 4px 12px -2px rgba(74, 37, 69, 0.4);
+        }
+
+        .tile-slidecount {
+            position: absolute;
+            top: 14px; right: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-family: var(--font-primary);
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.42);
+            padding: 0.28rem 0.6rem;
+            border-radius: 999px;
+            backdrop-filter: blur(8px);
+            z-index: 3;
+            transform: translateZ(50px);
+        }
+
+        .tile-slidecount svg { width: 12px; height: 12px; }
+
+        .tile-body {
+            padding: 1.15rem 1.25rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+            flex: 1;
+            transform: translateZ(40px);
+            transform-style: preserve-3d;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tile-category {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--color-plum-deep);
+            background: rgba(212, 165, 116, 0.22);
+            border: 1px solid rgba(212, 165, 116, 0.35);
+            padding: 0.28rem 0.6rem;
+            border-radius: 999px;
+            align-self: flex-start;
+            transform: translateZ(10px);
+        }
+
+        .tile-title {
+            font-family: var(--font-display);
+            font-size: 1.08rem;
+            line-height: 1.28;
+            color: var(--color-plum-deep);
+            margin: 0;
+            transform: translateZ(18px);
+        }
+
+        .tile-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font-primary);
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--color-plum-deep);
+            margin-top: auto;
+            transform: translateZ(24px);
+        }
+
+        .tile-cta svg {
+            width: 14px; height: 14px;
+            transition: transform var(--transition-base);
+        }
+
+        .resource-tile:hover .tile-cta svg,
+        .resource-tile:focus-visible .tile-cta svg {
+            transform: translateX(6px);
+        }
+
+        .resource-tile.filtered-out {
+            display: none;
+        }
+
+        /* Register CSS vars used in entrance (needed for @keyframes to animate them) */
+        @property --enter-y { syntax: '<length>'; inherits: false; initial-value: 40px; }
+        @property --enter-rx { syntax: '<angle>'; inherits: false; initial-value: -20deg; }
+        @property --enter-op { syntax: '<number>'; inherits: false; initial-value: 0; }
+
+        /* Reveal animation — 3D flip-in from a tilted starting pose,
+           coexists with floating + mouse tilt via CSS variables. */
+        .resource-tile {
+            --enter-y: 40px;
+            --enter-rx: -18deg;
+            opacity: var(--enter-op, 0);
+            transform:
+                translate3d(0, calc(var(--lift) + var(--enter-y)), var(--tz))
+                rotateX(calc(var(--rx) + var(--enter-rx)))
+                rotateY(var(--ry));
+            animation:
+                tileEnter 900ms var(--ease-out-quart) forwards,
+                tileFloat 7s ease-in-out infinite;
+            animation-delay: var(--enter-delay, 0ms), var(--float-delay, 0s);
+        }
+
+        @keyframes tileEnter {
+            0%   { --enter-y: 40px;  --enter-rx: -18deg; --enter-op: 0; }
+            100% { --enter-y: 0px;   --enter-rx: 0deg;   --enter-op: 1; }
+        }
+
+        .resource-tile:nth-child(1) { --enter-delay: 60ms;  --float-delay: 0s; }
+        .resource-tile:nth-child(2) { --enter-delay: 140ms; --float-delay: -1.1s; }
+        .resource-tile:nth-child(3) { --enter-delay: 220ms; --float-delay: -2.2s; }
+        .resource-tile:nth-child(4) { --enter-delay: 300ms; --float-delay: -3.3s; }
+        .resource-tile:nth-child(5) { --enter-delay: 380ms; --float-delay: -0.6s; }
+        .resource-tile:nth-child(6) { --enter-delay: 460ms; --float-delay: -1.7s; }
+        .resource-tile:nth-child(7) { --enter-delay: 540ms; --float-delay: -2.8s; }
+        .resource-tile:nth-child(8) { --enter-delay: 620ms; --float-delay: -3.9s; }
+
+        .empty-state {
+            text-align: center;
+            padding: var(--space-2xl) var(--space-md);
+            display: none;
+        }
+
+        .empty-state.visible { display: block; }
+
+        .empty-state h3 {
+            font-family: var(--font-display);
+            color: var(--color-plum-deep);
+            margin-bottom: var(--space-sm);
+        }
+
+        .empty-state p { color: var(--color-text-secondary); }
+
+        /* ============================================
+           CTA STRIP — send us a question
+           ============================================ */
+        .cta-strip {
+            padding: var(--space-2xl) var(--space-md);
+            background: linear-gradient(135deg, var(--color-plum-deep) 0%, var(--color-primary-dark) 100%);
+            color: #fff;
+            text-align: center;
+        }
+
+        .cta-strip h2 {
+            color: #fff;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: var(--space-sm);
+        }
+
+        .cta-strip p {
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 620px;
+            margin: 0 auto var(--space-md);
+        }
+
+        .cta-actions {
+            display: inline-flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.75rem 1.5rem;
+            border-radius: 999px;
+            font-family: var(--font-primary);
+            font-size: 0.95rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .cta-btn.primary {
+            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-gold-warm) 100%);
+            color: var(--color-plum-deep);
+        }
+
+        .cta-btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .cta-btn:hover, .cta-btn:focus-visible {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.4);
+            outline: none;
+        }
+
+        /* ============================================
+           FOOTER (simplified)
+           ============================================ */
+        .footer {
+            background: linear-gradient(135deg, #2C2C2C 0%, #3D3D3D 100%);
+            color: #fff;
+            padding: var(--space-xl) 0 var(--space-md);
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-lg);
+            list-style: none;
+            margin-bottom: var(--space-md);
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--color-text-light);
+            font-size: var(--text-sm);
+        }
+
+        .footer-link:hover, .footer-link:focus { color: var(--color-accent-light); }
+
+        .footer-content {
+            font-size: var(--text-sm);
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: var(--space-md);
+        }
+
+        /* ============================================
+           RESOURCE VIEWER MODAL
+           ============================================ */
+        .resource-viewer {
+            position: fixed;
+            inset: 0;
+            z-index: 3200;
+            background: radial-gradient(ellipse at center, rgba(74, 37, 69, 0.85) 0%, rgba(0, 0, 0, 0.94) 70%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--transition-base), visibility var(--transition-base);
+            padding: var(--space-lg) var(--space-md);
+        }
+
+        .resource-viewer.active { opacity: 1; visibility: visible; }
+
+        .resource-viewer-inner {
+            position: relative;
+            width: 100%;
+            max-width: 980px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .resource-viewer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            gap: var(--space-md);
+            color: #fff;
+        }
+
+        .resource-viewer-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            color: #fff;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .resource-viewer-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--color-accent-light);
+            background: rgba(232, 201, 160, 0.14);
+            padding: 0.3rem 0.7rem;
+            border-radius: 999px;
+            margin-bottom: 0.35rem;
+        }
+
+        .resource-viewer-stage {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            max-height: 72vh;
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 30px 80px -10px rgba(0, 0, 0, 0.6);
+            perspective: 1400px;
+        }
+
+        .resource-viewer-slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translate3d(60px, 0, -120px) rotateY(-12deg);
+            transition:
+                opacity 500ms var(--ease-out-quart),
+                transform 600ms var(--ease-out-quart);
+            pointer-events: none;
+        }
+
+        .resource-viewer-slide.active {
+            opacity: 1;
+            transform: translate3d(0, 0, 0) rotateY(0);
+            pointer-events: auto;
+        }
+
+        .resource-viewer-slide.leaving-left {
+            opacity: 0;
+            transform: translate3d(-60px, 0, -120px) rotateY(12deg);
+        }
+
+        .resource-viewer-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            background: #FFFFFF;
+        }
+
+        .resource-viewer-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            font-size: 2rem;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--transition-fast), transform var(--transition-fast);
+            z-index: 5;
+            backdrop-filter: blur(8px);
+        }
+
+        .resource-viewer-nav.prev { left: -70px; }
+        .resource-viewer-nav.next { right: -70px; }
+
+        .resource-viewer-nav:hover,
+        .resource-viewer-nav:focus-visible {
+            background: rgba(232, 201, 160, 0.3);
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
+        .resource-viewer-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        .resource-viewer-close {
+            position: absolute;
+            top: var(--space-md); right: var(--space-md);
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--transition-fast), transform var(--transition-fast);
+            backdrop-filter: blur(8px);
+            z-index: 6;
+        }
+
+        .resource-viewer-close:hover,
+        .resource-viewer-close:focus-visible {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
+        .resource-viewer-progress {
+            display: flex;
+            gap: 6px;
+            width: 100%;
+            max-width: 480px;
+            justify-content: center;
+        }
+
+        .resource-viewer-progress span {
+            height: 3px;
+            flex: 1;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 999px;
+        }
+
+        .resource-viewer-progress span.active {
+            background: linear-gradient(90deg, var(--color-accent-light), var(--color-gold-warm));
+        }
+
+        .resource-viewer-counter {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+            font-family: var(--font-primary);
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 900px) {
+            .resource-viewer-nav.prev { left: 8px; }
+            .resource-viewer-nav.next { right: 8px; }
+        }
+
+        @media (max-width: 768px) {
+            body { padding-top: 70px; }
+
+            .header-content {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .logo-text {
+                font-size: var(--text-base);
+                display: none;
+            }
+
+            .hero { min-height: 40vh; padding-top: var(--space-xl); }
+
+            .hero-meta { gap: var(--space-md); }
+            .hero-meta-num { font-size: 1.4rem; }
+
+            .toolbar-section {
+                top: 70px;
+                padding: var(--space-md) 0 var(--space-sm);
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: var(--space-sm);
+            }
+
+            .resources-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 1.25rem;
+                perspective: 1400px;
+            }
+
+            .tile-title { font-size: 0.98rem; }
+
+            /* Damped float on mobile (still active, but less dramatic) */
+            @keyframes tileFloat {
+                0%, 100% { --lift: 0px; }
+                50%      { --lift: -4px; }
+            }
+
+            .resource-viewer-nav { width: 42px; height: 42px; font-size: 1.5rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .resource-tile,
+            .resource-viewer-slide,
+            .tile-thumb img {
+                transition: none !important;
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         HEADER
+         ============================================ -->
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo" aria-label="The Mum Bridge & Care Foundation Home">
+                    <img src="assets/logo/the-mum-bridge-icon.png?v=20260706" alt="The Mum Bridge Logo" class="logo-img">
+                    <span class="logo-text">The Mum Bridge</span>
+                </a>
+                <a href="index.html" class="back-home">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Back to Home
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================
+         HERO
+         ============================================ -->
+    <section class="hero" role="region" aria-label="Parenting Resources introduction">
+        <div class="hero-inner">
+            <span class="hero-eyebrow">The Accessible Parenting Resource</span>
+            <h1>Parenting Resources for Mothers with Disabilities</h1>
+            <p class="hero-sub">
+                Practical, community-created guides — the ones we wished existed. Antenatal appointments, delivery preparation, hospital visits, and the everyday moments that need the right words.
+            </p>
+            <div class="hero-meta" aria-hidden="true">
+                <div class="hero-meta-item">
+                    <span class="hero-meta-num" id="hero-count">8</span>
+                    <span class="hero-meta-label">Resources</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span class="hero-meta-num">6</span>
+                    <span class="hero-meta-label">Topics</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span class="hero-meta-num">100%</span>
+                    <span class="hero-meta-label">Free</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         TOOLBAR — search + category chips
+         ============================================ -->
+    <section class="toolbar-section" role="region" aria-label="Filter resources">
+        <div class="container">
+            <div class="toolbar">
+                <div class="search-wrap">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/>
+                    </svg>
+                    <label for="resource-search" class="sr-only">Search resources</label>
+                    <input type="search" id="resource-search" class="search-input" placeholder="Search resources — try “hospital”, “stares”, “delivery”…" autocomplete="off">
+                    <button type="button" class="search-clear" id="search-clear" aria-label="Clear search">&times;</button>
+                </div>
+
+                <div class="filter-chips" id="filter-chips" role="tablist" aria-label="Category filter">
+                    <button type="button" class="chip active" data-category="all" role="tab" aria-selected="true">All <span class="chip-count">8</span></button>
+                    <button type="button" class="chip" data-category="pregnancy" role="tab" aria-selected="false">Pregnancy &amp; Birth <span class="chip-count">2</span></button>
+                    <button type="button" class="chip" data-category="postpartum" role="tab" aria-selected="false">Postpartum <span class="chip-count">1</span></button>
+                    <button type="button" class="chip" data-category="healthcare" role="tab" aria-selected="false">Healthcare <span class="chip-count">1</span></button>
+                    <button type="button" class="chip" data-category="everyday" role="tab" aria-selected="false">Everyday Life <span class="chip-count">2</span></button>
+                    <button type="button" class="chip" data-category="sensory" role="tab" aria-selected="false">Sensory-Specific <span class="chip-count">2</span></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         GRID
+         ============================================ -->
+    <section class="grid-section" role="region" aria-label="Resources grid">
+        <div class="container">
+            <div class="grid-meta">
+                <p class="grid-meta-count"><strong id="visible-count">8</strong> of <strong id="total-count">8</strong> resources shown</p>
+            </div>
+
+            <div class="resources-grid" id="resources-grid">
+
+                <!-- Resource 19 -->
+                <button class="resource-tile" type="button"
+                        data-resource-id="19"
+                        data-title="Hospital Visits With Children"
+                        data-slug="resource-19-hospital-visits"
+                        data-slides="5"
+                        data-ext="png"
+                        data-category="healthcare"
+                        data-search="hospital visits children clinic queues"
+                        aria-label="Open resource 19: Hospital Visits With Children (5 slides)">
+                    <div class="tile-thumb">
+                        <img src="assets/parenting-resources/resource-19-hospital-visits/slide-01-cover.png?v=20260706" alt="Cover slide for Resource 19: Hospital Visits With Children" loading="lazy">
+                        <span class="tile-number">Resource 19</span>
+                        <span class="tile-slidecount" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>5</span>
+                    </div>
+                    <div class="tile-body">
+                        <span class="tile-category">Healthcare</span>
+                        <h3 class="tile-title">Hospital Visits With Children</h3>
+                        <span class="tile-cta">Read the guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+                    </div>
+                </button>
+
+                <!-- Resource 20 -->
+                <button class="resource-tile" type="button"
+                        data-resource-id="20"
+                        data-title="Antenatal Appointments With a Disability"
+                        data-slug="resource-20-antenatal-appointments"
+                        data-slides="6"
+                        data-ext="png"
+                        data-category="pregnancy"
+                        data-search="antenatal appointments pregnancy prenatal check-up"
+                        aria-label="Open resource 20: Antenatal Appointments With a Disability (6 slides)">
+                    <div class="tile-thumb">
+                        <img src="assets/parenting-resources/resource-20-antenatal-appointments/slide-01-cover.png?v=20260706" alt="Cover slide for Resource 20: Antenatal Appointments With a Disability" loading="lazy">
+                        <span class="tile-number">Resource 20</span>
+                        <span class="tile-slidecount" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>6</span>
+                    </div>
+                    <div class="tile-body">
+                        <span class="tile-category">Pregnancy &amp; Birth</span>
+                        <h3 class="tile-title">Antenatal Appointments With a Disability</h3>
+                        <span class="tile-cta">Read the guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+                    </div>
+                </button>
+
+                <!-- Resource 21 -->
+                <button class="resource-tile" type="button"
+                        data-resource-id="21"
+                        data-title="Delivery Preparation as a Mother With a Disability"
+                        data-slug="resource-21-delivery-preparation"
+                        data-slides="5"
+                        data-ext="png"
+                        data-category="pregnancy"
+                        data-search="delivery preparation birth labour labor plan"
+                        aria-label="Open resource 21: Delivery Preparation as a Mother With a Disability (5 slides)">
+                    <div class="tile-thumb">
+                        <img src="assets/parenting-resources/resource-21-delivery-preparation/slide-01-cover.png?v=20260706" alt="Cover slide for Resource 21: Delivery Preparation as a Mother With a Disability" loading="lazy">
+                        <span class="tile-number">Resource 21</span>
+                        <span class="tile-slidecount" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>5</span>
+                    </div>
+                    <div class="tile-body">
+                        <span class="tile-category">Pregnancy &amp; Birth</span>
+                        <h3 class="tile-title">Delivery Preparation as a Mother With a Disability</h3>
+                        <span class="tile-cta">Read the guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+                    </div>
+                </button>
+
+                <!-- Resource 22 -->
+                <button class="resource-tile" type="button"
+                        data-resource-id="22"
+                        data-title="Postpartum Recovery With a Disability"
+                        data-slug="resource-22-postpartum-recovery"
+                        data-slides="4"
+                        data-ext="jpg"
+                        data-category="postpartum"
+                        data-search="postpartum recovery after birth healing new mother"
+                        aria-label="Open resource 22: Postpartum Recovery With a Disability (4 slides)">
+                    <div class="tile-thumb">
+                        <img src="assets/parenting-resources/resource-22-postpartum-recovery/slide-01-cover.jpg?v=20260706" alt="Cover slide for Resource 22: Postpartum Recovery With a Disability" loading="lazy">
+                        <span class="tile-number">Resource 22</span>
+                        <span class="tile-slidecount" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>4</span>
+                    </div>
+                    <div class="tile-body">
+                        <span class="tile-category">Postpartum</span>
+                        <h3 class="tile-title">Postpartum Recovery With a Disability</h3>
+                        <span class="tile-cta">Read the guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+                    </div>
+                </button>
+
+                <!-- Resource 28 -->
+                <button class="resource-tile" type="button"
+                        data-resource-id="28"
+                        data-title="When People Pity Your Child Because You Have A Disability"
+                        data-slug="resource-28-people-pity-your-child"
+                        data-slides="4"
+                        data-ext="png"
+                        data-category="everyday"
+                        data-search="pity child stigma respect mother strangers"
+                        aria-label="Open resource 28: When People Pity Your Child Because You Have A Disability (4 slides)">
+                    <div class="tile-thumb">
+                        <img src="assets/parenting-resources/resource-28-people-pity-your-child/slide-01-cover.png?v=20260706" alt="Cover slide for Resource 28: When People Pity Your Child Because You Have A Disability" loading="lazy">
+                        <span class="tile-number">Resource 28</span>
+                        <span class="tile-slidecount" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>4</span>
+                    </div>
+                    <div class="tile-body">
+                        <span class="tile-category">Everyday Life</span>
+                        <h3 class="tile-title">When People Pity Your Child Because You Have A Disability</h3>
+                        <span class="tile-cta">Read the guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+                    </div>
+                </button>
+
+                <!-- Resource 29 -->
+                <button class="resource-tile" type="button"
+                        data-resource-id="29"
+                        data-title="Dealing With Stares in Public"
+                        data-slug="resource-29-dealing-with-stares"
+                        data-slides="5"
+                        data-ext="png"
+                        data-category="everyday"
+                        data-search="stares public strangers stigma out and about"
+                        aria-label="Open resource 29: Dealing With Stares in Public (5 slides)">
+                    <div class="tile-thumb">
+                        <img src="assets/parenting-resources/resource-29-dealing-with-stares/slide-01-cover.png?v=20260706" alt="Cover slide for Resource 29: Dealing With Stares in Public" loading="lazy">
+                        <span class="tile-number">Resource 29</span>
+                        <span class="tile-slidecount" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>5</span>
+                    </div>
+                    <div class="tile-body">
+                        <span class="tile-category">Everyday Life</span>
+                        <h3 class="tile-title">Dealing With Stares in Public</h3>
+                        <span class="tile-cta">Read the guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+                    </div>
+                </button>
+
+                <!-- Resource 31 -->
+                <button class="resource-tile" type="button"
+                        data-resource-id="31"
+                        data-title="Parenting With Hearing Loss"
+                        data-slug="resource-31-parenting-with-hearing-loss"
+                        data-slides="4"
+                        data-ext="png"
+                        data-category="sensory"
+                        data-search="parenting hearing loss deaf hard of hearing"
+                        aria-label="Open resource 31: Parenting With Hearing Loss (4 slides)">
+                    <div class="tile-thumb">
+                        <img src="assets/parenting-resources/resource-31-parenting-with-hearing-loss/slide-01-cover.png?v=20260706" alt="Cover slide for Resource 31: Parenting With Hearing Loss" loading="lazy">
+                        <span class="tile-number">Resource 31</span>
+                        <span class="tile-slidecount" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>4</span>
+                    </div>
+                    <div class="tile-body">
+                        <span class="tile-category">Sensory-Specific</span>
+                        <h3 class="tile-title">Parenting With Hearing Loss</h3>
+                        <span class="tile-cta">Read the guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+                    </div>
+                </button>
+
+                <!-- Resource 32 -->
+                <button class="resource-tile" type="button"
+                        data-resource-id="32"
+                        data-title="Parenting With Visual Impairment"
+                        data-slug="resource-32-parenting-with-visual-impairment"
+                        data-slides="5"
+                        data-ext="png"
+                        data-category="sensory"
+                        data-search="parenting visual impairment blind low vision"
+                        aria-label="Open resource 32: Parenting With Visual Impairment (5 slides)">
+                    <div class="tile-thumb">
+                        <img src="assets/parenting-resources/resource-32-parenting-with-visual-impairment/slide-01-cover.png?v=20260706" alt="Cover slide for Resource 32: Parenting With Visual Impairment" loading="lazy">
+                        <span class="tile-number">Resource 32</span>
+                        <span class="tile-slidecount" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>5</span>
+                    </div>
+                    <div class="tile-body">
+                        <span class="tile-category">Sensory-Specific</span>
+                        <h3 class="tile-title">Parenting With Visual Impairment</h3>
+                        <span class="tile-cta">Read the guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+                    </div>
+                </button>
+
+            </div>
+
+            <div class="empty-state" id="empty-state">
+                <h3>No resources match that search</h3>
+                <p>Try a different keyword, or clear filters to see everything.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CTA STRIP
+         ============================================ -->
+    <section class="cta-strip" role="region" aria-label="Suggest a resource">
+        <h2>Can't find what you're looking for?</h2>
+        <p>Send us a question and we'll feature it in a future resource. These guides grow with our community.</p>
+        <div class="cta-actions">
+            <a class="cta-btn primary" href="mailto:info@themumbridge.org?subject=Resource%20Suggestion">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Email your question
+            </a>
+            <a class="cta-btn secondary" href="index.html#join-volunteer">
+                Join our community
+            </a>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="index.html" class="footer-link">Home</a></li>
+                <li><a href="resources.html" class="footer-link">Resources</a></li>
+                <li><a href="privacy-policy.html" class="footer-link">Privacy Policy</a></li>
+                <li><a href="terms-of-use.html" class="footer-link">Terms of Use</a></li>
+                <li><a href="index.html#contact" class="footer-link">Contact</a></li>
+            </ul>
+            <p class="footer-content">
+                &copy; 2026 The Mum Bridge &amp; Care Foundation. All rights reserved.<br>
+                Registered in Nigeria - CAC: 9112955
+            </p>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         RESOURCE SLIDE VIEWER
+         ============================================ -->
+    <div class="resource-viewer" id="resource-viewer" role="dialog" aria-modal="true" aria-labelledby="resource-viewer-title">
+        <button class="resource-viewer-close" id="resource-viewer-close" aria-label="Close resource viewer">&times;</button>
+        <div class="resource-viewer-inner">
+            <div class="resource-viewer-header">
+                <div>
+                    <span class="resource-viewer-badge" id="resource-viewer-badge">Resource</span>
+                    <h3 class="resource-viewer-title" id="resource-viewer-title">Resource title</h3>
+                </div>
+                <span class="resource-viewer-counter" id="resource-viewer-counter" aria-live="polite">1 of 1</span>
+            </div>
+            <div class="resource-viewer-stage" id="resource-viewer-stage">
+                <button type="button" class="resource-viewer-nav prev" id="resource-viewer-prev" aria-label="Previous slide">&#8249;</button>
+                <button type="button" class="resource-viewer-nav next" id="resource-viewer-next" aria-label="Next slide">&#8250;</button>
+            </div>
+            <div class="resource-viewer-progress" id="resource-viewer-progress" aria-hidden="true"></div>
+        </div>
+    </div>
+
+    <script>
+        (function initResourcesPage() {
+            const grid = document.getElementById('resources-grid');
+            if (!grid) return;
+
+            const tiles = Array.from(grid.querySelectorAll('.resource-tile'));
+            const chips = Array.from(document.querySelectorAll('.chip'));
+            const search = document.getElementById('resource-search');
+            const searchClear = document.getElementById('search-clear');
+            const emptyState = document.getElementById('empty-state');
+            const visibleCount = document.getElementById('visible-count');
+            const totalCount = document.getElementById('total-count');
+
+            const viewer = document.getElementById('resource-viewer');
+            const viewerClose = document.getElementById('resource-viewer-close');
+            const viewerPrev = document.getElementById('resource-viewer-prev');
+            const viewerNext = document.getElementById('resource-viewer-next');
+            const viewerStage = document.getElementById('resource-viewer-stage');
+            const viewerTitle = document.getElementById('resource-viewer-title');
+            const viewerBadge = document.getElementById('resource-viewer-badge');
+            const viewerCounter = document.getElementById('resource-viewer-counter');
+            const viewerProgress = document.getElementById('resource-viewer-progress');
+
+            totalCount.textContent = tiles.length;
+
+            let activeCategory = 'all';
+            let searchQuery = '';
+            let lastFocused = null;
+
+            // ============================================
+            // 3D MOUSE TILT + SHEEN HIGHLIGHT
+            // Tracks cursor on each tile and applies rotateX/rotateY
+            // via CSS custom properties. Also drives sheen position.
+            // Skipped when prefers-reduced-motion is enabled.
+            // ============================================
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+            if (!prefersReducedMotion && canHover) {
+                const MAX_TILT = 10;   // degrees
+                const RAF_MAP = new WeakMap();
+
+                tiles.forEach(tile => {
+                    let rect = null;
+
+                    function refreshRect() { rect = tile.getBoundingClientRect(); }
+
+                    tile.addEventListener('pointerenter', () => {
+                        refreshRect();
+                    });
+
+                    tile.addEventListener('pointermove', (e) => {
+                        if (!rect) refreshRect();
+                        // Cancel any queued frame
+                        cancelAnimationFrame(RAF_MAP.get(tile) || 0);
+                        const frame = requestAnimationFrame(() => {
+                            const px = (e.clientX - rect.left) / rect.width;   // 0..1
+                            const py = (e.clientY - rect.top)  / rect.height;  // 0..1
+                            const ry = (px - 0.5) * (MAX_TILT * 2);            // -MAX..+MAX
+                            const rx = (0.5 - py) * (MAX_TILT * 2);
+                            tile.style.setProperty('--rx', rx.toFixed(2) + 'deg');
+                            tile.style.setProperty('--ry', ry.toFixed(2) + 'deg');
+                            tile.style.setProperty('--mx', (px * 100).toFixed(1) + '%');
+                            tile.style.setProperty('--my', (py * 100).toFixed(1) + '%');
+                        });
+                        RAF_MAP.set(tile, frame);
+                    });
+
+                    tile.addEventListener('pointerleave', () => {
+                        cancelAnimationFrame(RAF_MAP.get(tile) || 0);
+                        tile.style.setProperty('--rx', '0deg');
+                        tile.style.setProperty('--ry', '0deg');
+                        tile.style.setProperty('--mx', '50%');
+                        tile.style.setProperty('--my', '50%');
+                        rect = null;
+                    });
+
+                    // Refresh rect on scroll/resize while hovering
+                    window.addEventListener('scroll', () => { if (rect) refreshRect(); }, { passive: true });
+                    window.addEventListener('resize', () => { if (rect) refreshRect(); });
+                });
+            }
+
+            // ---- Filtering ----
+            function applyFilters() {
+                let visible = 0;
+                tiles.forEach(tile => {
+                    const cat = tile.dataset.category;
+                    const searchStr = ((tile.dataset.search || '') + ' ' + (tile.dataset.title || '')).toLowerCase();
+                    const catMatch = activeCategory === 'all' || cat === activeCategory;
+                    const qMatch = !searchQuery || searchStr.includes(searchQuery);
+                    const show = catMatch && qMatch;
+                    tile.classList.toggle('filtered-out', !show);
+                    if (show) visible++;
+                });
+                visibleCount.textContent = visible;
+                emptyState.classList.toggle('visible', visible === 0);
+            }
+
+            chips.forEach(chip => {
+                chip.addEventListener('click', () => {
+                    chips.forEach(c => {
+                        c.classList.remove('active');
+                        c.setAttribute('aria-selected', 'false');
+                    });
+                    chip.classList.add('active');
+                    chip.setAttribute('aria-selected', 'true');
+                    activeCategory = chip.dataset.category;
+                    applyFilters();
+                });
+            });
+
+            search.addEventListener('input', () => {
+                searchQuery = search.value.trim().toLowerCase();
+                searchClear.classList.toggle('visible', searchQuery.length > 0);
+                applyFilters();
+            });
+
+            searchClear.addEventListener('click', () => {
+                search.value = '';
+                searchQuery = '';
+                searchClear.classList.remove('visible');
+                applyFilters();
+                search.focus();
+            });
+
+            // ---- Tile click ----
+            grid.addEventListener('click', (e) => {
+                const tile = e.target.closest('.resource-tile');
+                if (!tile) return;
+                lastFocused = tile;
+                openViewer(tile);
+            });
+
+            // ---- Viewer ----
+            const RESOURCE_SLIDE_MAP = {
+                'resource-19-hospital-visits': [
+                    'slide-01-cover.png', 'slide-02-quote.png',
+                    'slide-03-before-leaving.png', 'slide-04-at-the-hospital.png', 'slide-05-cta.png'
+                ],
+                'resource-20-antenatal-appointments': [
+                    'slide-01-cover.png', 'slide-02-quote.png',
+                    'slide-03-before.png', 'slide-04-during.png', 'slide-05-after.png', 'slide-06-cta.png'
+                ],
+                'resource-21-delivery-preparation': [
+                    'slide-01-cover.png', 'slide-02-quote.png',
+                    'slide-03-plan.png', 'slide-04-checklist.png', 'slide-05-cta.png'
+                ],
+                'resource-22-postpartum-recovery': [
+                    'slide-01-cover.jpg', 'slide-02-quote.jpg',
+                    'slide-03-tips.jpg', 'slide-04-cta.jpg'
+                ],
+                'resource-28-people-pity-your-child': [
+                    'slide-01-cover.png', 'slide-02-quote.png',
+                    'slide-03-say-this-firmly.png', 'slide-04-cta.png'
+                ],
+                'resource-29-dealing-with-stares': [
+                    'slide-01-cover.png', 'slide-02-quote.png',
+                    'slide-03-what-to-do.png', 'slide-04-what-to-say.png', 'slide-05-cta.png'
+                ],
+                'resource-31-parenting-with-hearing-loss': [
+                    'slide-01-cover.png', 'slide-02-quote.png',
+                    'slide-03-tips.png', 'slide-04-cta.png'
+                ],
+                'resource-32-parenting-with-visual-impairment': [
+                    'slide-01-cover.png', 'slide-02-quote.png',
+                    'slide-03-tips.png', 'slide-04-more-tips.png', 'slide-05-cta.png'
+                ]
+            };
+
+            let viewerSlides = [];
+            let viewerIdx = 0;
+            let viewerTotal = 0;
+
+            function openViewer(tile) {
+                const title = tile.dataset.title;
+                const slug = tile.dataset.slug;
+                const count = parseInt(tile.dataset.slides, 10);
+                const id = tile.dataset.resourceId;
+
+                viewerTitle.textContent = title;
+                viewerBadge.textContent = 'Resource ' + id;
+
+                Array.from(viewerStage.querySelectorAll('.resource-viewer-slide')).forEach(n => n.remove());
+                viewerProgress.innerHTML = '';
+
+                viewerSlides = [];
+                const filenames = RESOURCE_SLIDE_MAP[slug] || [];
+
+                for (let i = 0; i < count; i++) {
+                    const slide = document.createElement('div');
+                    slide.className = 'resource-viewer-slide';
+                    const img = document.createElement('img');
+                    img.alt = title + ' — slide ' + (i + 1) + ' of ' + count;
+                    img.loading = i === 0 ? 'eager' : 'lazy';
+                    if (filenames[i]) {
+                        img.src = 'assets/parenting-resources/' + slug + '/' + filenames[i] + '?v=20260706';
+                    }
+                    slide.appendChild(img);
+                    viewerStage.insertBefore(slide, viewerNext);
+                    viewerSlides.push(slide);
+
+                    const pip = document.createElement('span');
+                    viewerProgress.appendChild(pip);
+                }
+
+                viewerTotal = viewerSlides.length;
+                viewerIdx = 0;
+                renderViewer();
+
+                viewer.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => viewerClose.focus(), 80);
+            }
+
+            function closeViewer() {
+                viewer.classList.remove('active');
+                document.body.style.overflow = '';
+                if (lastFocused) lastFocused.focus();
+            }
+
+            function renderViewer() {
+                viewerSlides.forEach((el, i) => {
+                    el.classList.remove('active', 'leaving-left');
+                    if (i === viewerIdx)      el.classList.add('active');
+                    else if (i < viewerIdx)   el.classList.add('leaving-left');
+                });
+                Array.from(viewerProgress.children).forEach((pip, i) => {
+                    pip.classList.toggle('active', i <= viewerIdx);
+                });
+                viewerCounter.textContent = (viewerIdx + 1) + ' of ' + viewerTotal;
+                viewerPrev.disabled = viewerIdx === 0;
+                viewerNext.disabled = viewerIdx === viewerTotal - 1;
+            }
+
+            function viewerGo(delta) {
+                const next = viewerIdx + delta;
+                if (next < 0 || next >= viewerTotal) return;
+                viewerIdx = next;
+                renderViewer();
+            }
+
+            viewerClose.addEventListener('click', closeViewer);
+            viewerPrev.addEventListener('click', () => viewerGo(-1));
+            viewerNext.addEventListener('click', () => viewerGo(1));
+
+            viewer.addEventListener('click', (e) => {
+                if (e.target === viewer) closeViewer();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (!viewer.classList.contains('active')) return;
+                if (e.key === 'Escape')     { e.preventDefault(); closeViewer(); }
+                if (e.key === 'ArrowLeft')  { e.preventDefault(); viewerGo(-1); }
+                if (e.key === 'ArrowRight') { e.preventDefault(); viewerGo(1); }
+            });
+
+            let vTouchStart = 0;
+            viewerStage.addEventListener('touchstart', (e) => {
+                vTouchStart = e.changedTouches[0].clientX;
+            }, { passive: true });
+            viewerStage.addEventListener('touchend', (e) => {
+                const dx = vTouchStart - e.changedTouches[0].clientX;
+                if (Math.abs(dx) > 50) dx > 0 ? viewerGo(1) : viewerGo(-1);
+            }, { passive: true });
+
+            // ---- Deep-link support: ?r=28 opens resource 28 ----
+            const params = new URLSearchParams(window.location.search);
+            const preselect = params.get('r');
+            if (preselect) {
+                const target = tiles.find(t => t.dataset.resourceId === preselect);
+                if (target) {
+                    setTimeout(() => {
+                        lastFocused = target;
+                        openViewer(target);
+                    }, 200);
+                }
+            }
+
+            console.log('✓ Resources page initialized —', tiles.length, 'resources');
+        })();
+    </script>
+
+</body>
+</html>

@@ -1,7 +1,115 @@
 # The Mum Bridge & Care Foundation - Website Knowledge Base
 
 ## Overview
-This document captures the comprehensive UI structure, design system, and user experience of The Mum Bridge & Care Foundation website (themumbridge.org). Created: February 25, 2026 | Last Updated: June 2, 2026
+This document captures the comprehensive UI structure, design system, and user experience of The Mum Bridge & Care Foundation website (themumbridge.org). Created: February 25, 2026 | Last Updated: July 6, 2026
+
+## July 6, 2026 — Parenting Resources (standalone page)
+
+**Final structure (end of day July 6, 2026):**
+- `resources.html` — **primary** immersive journey page (was `resources-v2.html`; renamed at Kehinde's request). Main-nav "Resources" points here.
+- `resources-old.html` — the initial glass-grid attempt, kept as a legacy reference (was `resources.html`). Linked as "Grid view (legacy)" in the footer of the primary page.
+- Homepage `#resources` coverflow section — **removed** (Kehinde: "remove the added resource section on home page"). All associated CSS, HTML, and JS was deleted from `index.html`. A `.bak.20260706` file was left behind in the working tree in case the removal needs to be reversed.
+
+### Primary: `resources.html` (the journey experience)
+Formerly `resources-v2.html`. Immersive scroll-driven layout with 5 chapters, mouse+device-orientation parallax, custom cursor glow, big editorial serif type.
+
+- **Simplified page shell** matching the pattern used by `privacy-policy.html` / `terms-of-use.html`: fixed glassy header (logo + "Back to Home" pill), gradient hero, main content, dark footer
+- **Hero** — deep plum + gold radial gradient with subtle noise, eyebrow badge, H1, sub-copy, and a stats strip (Resources / Topics / Free)
+- **Sticky toolbar** below the header (top = 82px desktop, 70px mobile) with:
+  - Rounded search input with icon + clear button, matching on `data-search` keywords AND `data-title`
+  - Category chip filter (rounded pills, active pill turns deep plum). Categories: All, Pregnancy & Birth, Postpartum, Healthcare, Everyday Life, Sensory-Specific. Counts are hard-coded in the chip label and should be updated when the library grows.
+- **Grid of `.resource-tile` cards** — responsive `repeat(auto-fill, minmax(280px, 1fr))`, glassmorphism (18px blur + 140% saturate), gradient-masked border, aspect-16:9 thumbnail with "Resource NN" pill + slide-count chip, body with category chip + title + "Read the guide →" CTA
+- **Hover** — lift + subtle rotateX(3deg) via `perspective: 1400px` on grid; thumbnail zooms
+- **Staggered reveal** — nth-child(1..8) animation-delay from 40ms to 460ms; `prefers-reduced-motion` disables
+- **Empty state** — displayed when zero tiles match the current filter/search combo
+- **CTA strip** — deep plum→dark plum gradient, "Can't find what you're looking for?" with email link and community CTA
+- **Slide viewer modal** — identical behaviour to homepage version (3D transitions, keyboard, swipe, ESC, focus trap)
+- **Deep-link support** — `resources.html?r=28` auto-opens Resource 28 on load (useful for social sharing)
+
+Categories per resource (used by chip filter):
+| # | Category |
+|---|---|
+| 19 | Healthcare |
+| 20, 21 | Pregnancy & Birth |
+| 22 | Postpartum |
+| 28, 29 | Everyday Life |
+| 31, 32 | Sensory-Specific |
+
+### Comparison version: homepage section (kept on `index.html` for now)
+The 3D coverflow section was left in place on the homepage between Community Gallery and the About section. Per Kehinde's July 6, 2026 request: "do not remove the one on the index page for now so I can compare both". The coverflow section is described below.
+
+**Nav wiring**: The "Resources" link in the main nav (index.html line ~4529) now points to `resources.html`, NOT the `#resources` anchor. The homepage section is currently reachable only by direct scroll — no in-page anchor link, so it does not compete with the standalone page in nav flow.
+
+**Footer wiring**: A "Resources" footer link was added to all three legal-family footers (`index.html`, `privacy-policy.html`, `terms-of-use.html`).
+
+### Coverflow (index.html section — comparison-only, may be removed)
+A new **Parenting Resources** section between the Community Gallery and the About section.
+
+### What it is
+Eight branded, slide-based "Accessible Parenting Resource" guides — originally distributed as multi-slide social carousels — surfaced natively on the site as a 3D coverflow with an in-page slide viewer.
+
+### Resources included (8 total)
+| # | Title | Slides | Slug |
+|---|---|---|---|
+| 19 | Hospital Visits With Children | 5 | `resource-19-hospital-visits` |
+| 20 | Antenatal Appointments With a Disability | 6 | `resource-20-antenatal-appointments` |
+| 21 | Delivery Preparation as a Mother With a Disability | 5 | `resource-21-delivery-preparation` |
+| 22 | Postpartum Recovery With a Disability | 4 | `resource-22-postpartum-recovery` (jpg) |
+| 28 | When People Pity Your Child Because You Have A Disability | 4 | `resource-28-people-pity-your-child` |
+| 29 | Dealing With Stares in Public | 5 | `resource-29-dealing-with-stares` |
+| 31 | Parenting With Hearing Loss | 4 | `resource-31-parenting-with-hearing-loss` |
+| 32 | Parenting With Visual Impairment | 5 | `resource-32-parenting-with-visual-impairment` |
+
+### Asset structure
+- `assets/parenting-resources/<slug>/slide-NN-<label>.<ext>` — one folder per resource, files named `slide-01-cover.<ext>`, `slide-02-quote.<ext>`, then topical labels (`before-leaving`, `what-to-say`, `checklist`, etc.), ending with `slide-NN-cta.<ext>`
+- Slide 1 = cover (used as card thumbnail), slide 2 = pull quote, middle slides = topical advice, final slide = CTA/contact
+- Resource 22 uses `.jpg`; all others use `.png`. The card's `data-ext` attribute captures this per-card
+
+### 3D coverflow design (section-level)
+- `.resources-section` — soft radial gradient background with plum & gold glow blobs
+- `.resources-stage` — `perspective: 1600px` container, 520px min-height
+- `.resource-card` — 320×440 glassmorphism cards (`backdrop-filter: blur(18px) saturate(140%)`), 22px radius, gradient border via mask compositing, positioned absolutely and layered via `data-pos` attribute:
+  - `center` — front & centered, subtle scale 1.02
+  - `left-1` / `right-1` — translated -260/+260 px on X, -160 on Z, rotated ±28° on Y, scale 0.9, opacity 0.85
+  - `left-2` / `right-2` — translated -420/+420 px, -320 on Z, rotated ±36°, scale 0.78, opacity 0.55, slight blur
+  - `hidden` — pushed back on Z, opacity 0
+- Each card contains a thumbnail (cover image with a bottom gradient), a "Resource NN" pill (top-left), a slide-count chip with icon (top-right), and a bottom body with title + "Slide to read →" CTA
+- Cards rearrange with 700ms `cubic-bezier(0.25, 1, 0.5, 1)` transitions
+- Controls: circular prev/next glass buttons, plum active pill dots (26px wide when active), and an italic hint line "Use the arrow keys, drag, or click any card to explore."
+
+### Interaction model
+- Click a **side card** → carousel rotates that card to center (does not open viewer)
+- Click the **center card** → opens the full-screen slide viewer
+- Keyboard: arrow keys navigate the carousel; Enter/Space on the focused center card opens the viewer
+- Mouse/touch drag horizontally on the stage (>60px) rotates the carousel
+- Dots (`role="tab"`) jump straight to a specific resource
+
+### Resource Slide Viewer (`#resource-viewer`)
+- Full-screen `role="dialog" aria-modal="true"` overlay with radial plum→black gradient background
+- Header shows resource badge ("Resource NN"), title, and a live "X of Y" counter (`aria-live="polite"`)
+- Stage has `perspective: 1400px`; slides transition with `translate3d + rotateY` (incoming from right at -12°, outgoing to left at +12°)
+- Progress bar at the bottom fills gold-gradient as user progresses
+- Prev/next glass buttons at `-70px` on desktop (inside stage on mobile <900px)
+- Close (X): fixed top-right, rotates 90° on hover; ESC key or backdrop click also closes
+- Touch swipe left/right on the stage advances/retreats
+- Slide filenames are looked up from a JS `RESOURCE_SLIDE_MAP` keyed by slug (populated inline at the end of `initResources()`)
+
+### Accessibility
+- All controls are native `<button>` elements with descriptive `aria-label`s
+- Center card is `tabindex=0`; off-center cards `tabindex=-1` and `aria-hidden="true"`
+- `prefers-reduced-motion` disables the coverflow, viewer slide, and thumbnail zoom transitions
+- Focus is restored to the triggering card when the viewer closes
+- Body scroll is locked while viewer is active
+
+### Responsive behavior
+- **≥900px**: full 5-position coverflow (2 cards each side), viewer nav buttons outside the stage
+- **600–899px**: 3-position coverflow (center + 1 each side), side-2 cards hidden, viewer nav inside stage
+- **<600px**: tighter card (230×340), reduced side offsets, smaller nav buttons (42px)
+
+### Asset version bump
+The deployment version was bumped from `20260602` → `20260706` across `index.html`, `privacy-policy.html`, and `terms-of-use.html` (privacy/terms were still on `20260416`; now unified on `20260706`).
+
+## June 2, 2026 — Major Restructure (Developer Brief, May 2026)
 
 ## June 2, 2026 — Major Restructure (Developer Brief, May 2026)
 The homepage was restructured per the May 2026 "Website Restructure Brief + Copy" with ~40% copy reduction and a new scroll order. Key changes:
@@ -449,7 +557,7 @@ Both pages share a consistent design system with the main site while being optim
   sed -i '' 's/v=OLD_DATE/v=NEW_DATE/g' index.html privacy-policy.html terms-of-use.html
   sed -i '' 's/content="OLD_DATE"/content="NEW_DATE"/g' index.html privacy-policy.html terms-of-use.html
   ```
-- Current version: `20260602` (bumped June 2, 2026 for May 2026 restructure)
+- Current version: `20260706` (bumped July 6, 2026 for Parenting Resources section launch; privacy/terms unified from `20260416`)
 
 ### JavaScript
 - Vanilla JS (no framework overhead)
@@ -641,6 +749,6 @@ This document MUST be updated whenever changes are made to the codebase. Before 
 
 ---
 
-**Last Updated**: June 2, 2026
+**Last Updated**: July 6, 2026
 **Document Maintainer**: Development Team
 **Purpose**: Onboarding, reference, and continuity across development sessions
