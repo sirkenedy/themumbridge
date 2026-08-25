@@ -4143,49 +4143,93 @@
             --color-border: #ffffff;
         }
 
-        html.a11y-high-contrast body {
-            background: #000000;
-            color: #ffffff;
-        }
-
-        html.a11y-high-contrast a {
-            color: #ffff00;
-        }
-
-        html.a11y-high-contrast .section,
-        html.a11y-high-contrast .hero,
-        html.a11y-high-contrast .problem-section,
-        html.a11y-high-contrast .impact-so-far,
-        html.a11y-high-contrast .footer,
-        html.a11y-high-contrast .header,
-        html.a11y-high-contrast .main-nav,
-        html.a11y-high-contrast .board-member,
-        html.a11y-high-contrast .donation-modal,
-        html.a11y-high-contrast .modal,
-        html.a11y-high-contrast .a11y-panel {
-            background: #000000 !important;
+        /* Force EVERY element to black-bg/white-text/white-border rather
+           than whitelisting specific component classes — the page has
+           dozens of card types (service, donate-tier, partner, jv-card,
+           gathering callout...) with their own hardcoded white
+           backgrounds; a class whitelist previously missed most of them,
+           leaving white-on-white (invisible) body text inside those
+           cards. Component rules below layer back on top for buttons,
+           form controls, branded CTA pills, and the toolbar's own
+           switches so those stay legible instead of flattening too. */
+        html.a11y-high-contrast,
+        html.a11y-high-contrast * {
+            background-color: #000000 !important;
             background-image: none !important;
             color: #ffffff !important;
             border-color: #ffffff !important;
+            text-shadow: none !important;
         }
 
-        html.a11y-high-contrast .btn-donate,
-        html.a11y-high-contrast .nav-donate-btn,
-        html.a11y-high-contrast .btn-primary,
-        html.a11y-high-contrast .btn-hero-outline {
-            background: #ffff00 !important;
+        html.a11y-high-contrast *:focus-visible {
+            outline: 3px solid #ffff00 !important;
+            outline-offset: 2px !important;
+            box-shadow: none !important;
+        }
+
+        html.a11y-high-contrast a,
+        html.a11y-high-contrast a * {
+            color: #ffff00 !important;
+            text-decoration: underline !important;
+        }
+
+        html.a11y-high-contrast button,
+        html.a11y-high-contrast .btn,
+        html.a11y-high-contrast .btn *,
+        html.a11y-high-contrast input[type="submit"],
+        html.a11y-high-contrast input[type="button"] {
+            background-color: #ffff00 !important;
             color: #000000 !important;
             border: 2px solid #ffffff !important;
         }
 
-        html.a11y-high-contrast .board-member-name,
-        html.a11y-high-contrast .board-member-role,
-        html.a11y-high-contrast .section-title,
-        html.a11y-high-contrast h1,
-        html.a11y-high-contrast h2,
-        html.a11y-high-contrast h3,
-        html.a11y-high-contrast h4 {
+        html.a11y-high-contrast input,
+        html.a11y-high-contrast textarea,
+        html.a11y-high-contrast select {
+            background-color: #000000 !important;
             color: #ffffff !important;
+            border: 2px solid #ffffff !important;
+        }
+
+        /* Branded CTA pills that are <a> tags, not <button>/.btn */
+        html.a11y-high-contrast .btn-donate,
+        html.a11y-high-contrast .nav-donate-btn,
+        html.a11y-high-contrast .btn-primary,
+        html.a11y-high-contrast .btn-hero-outline {
+            background-color: #ffff00 !important;
+            color: #000000 !important;
+            border: 2px solid #ffffff !important;
+        }
+
+        /* Toolbar's own controls: kept black/white (not yellow like other
+           buttons) so the ON/OFF switches stay distinguishable instead of
+           turning into identical yellow blobs. */
+        html.a11y-high-contrast .a11y-toggle,
+        html.a11y-high-contrast .a11y-panel,
+        html.a11y-high-contrast .a11y-btn,
+        html.a11y-high-contrast .a11y-toggle-btn,
+        html.a11y-high-contrast .a11y-panel-close,
+        html.a11y-high-contrast .a11y-reset-all {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            border: 2px solid #ffffff !important;
+        }
+
+        html.a11y-high-contrast .a11y-toggle-btn[aria-pressed="true"] {
+            background-color: #ffff00 !important;
+            color: #000000 !important;
+        }
+
+        html.a11y-high-contrast .a11y-switch {
+            background-color: #666666 !important;
+        }
+
+        html.a11y-high-contrast .a11y-switch::before {
+            background-color: #ffffff !important;
+        }
+
+        html.a11y-high-contrast .a11y-toggle-btn[aria-pressed="true"] .a11y-switch {
+            background-color: #000000 !important;
         }
     </style>
 </head>
