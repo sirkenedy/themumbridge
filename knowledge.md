@@ -719,8 +719,8 @@ Both pages share a consistent design system with the main site while being optim
 ### To Add
 - ✅ Privacy Policy page — Added (Feb 25, 2026)
 - ✅ Terms of Use page — Added (Feb 25, 2026)
-- ⏳ Sitemap.xml
-- ⏳ Robots.txt
+- ✅ Sitemap.xml — Added (Aug 25, 2026)
+- ✅ Robots.txt — Added (Aug 25, 2026), references sitemap.xml
 - ✅ Open Graph tags — Added May 4, 2026
 - ⏳ Schema.org structured data
 
