@@ -1,7 +1,30 @@
 # The Mum Bridge & Care Foundation - Website Knowledge Base
 
 ## Overview
-This document captures the comprehensive UI structure, design system, and user experience of The Mum Bridge & Care Foundation website (themumbridge.org). Created: February 25, 2026 | Last Updated: July 6, 2026
+This document captures the comprehensive UI structure, design system, and user experience of The Mum Bridge & Care Foundation website (themumbridge.org). Created: February 25, 2026 | Last Updated: August 25, 2026
+
+## August 25, 2026 — Accessibility Toolbar & WCAG Audit
+
+Kehinde asked for the site to be made "100% accessible," inspired by a screenshot of diaswithdisabilities.org's floating accessibility-widget icon. Decision made with Kehinde: build a **custom, self-hosted** floating toolbar rather than a paid third-party overlay (UserWay/AccessiBe-style), since overlays don't fix underlying markup and the site already had a no-external-dependencies rule. Both a widget and a real code-level WCAG 2.1 AA audit were done — the audit is the part that actually matters for compliance, not the widget alone.
+
+### Accessibility Toolbar (new)
+- Floating circular button, bottom-left, on **every page**: `index.html`, `resources/index.html`, `resources-old.html`, `privacy-policy.html`, `terms-of-use.html`. Inline SVG icon, brand colors (`--color-primary-dark` circle), no external icon font.
+- Opens a non-modal disclosure panel (`role="region"`, `aria-expanded`/`aria-controls` on the toggle) — Tab moves through the panel's own controls (not force-trapped, per ARIA APG for non-modal popovers), Escape closes and returns focus to the toggle, click-outside closes.
+- Controls: **Font size** (A−/Reset/A+, 5 steps 100–150%, scales the whole page via `html { font-size: calc(16px * var(--a11y-font-scale)) }` so both type and rem-based spacing scale together like a zoom) · **High contrast** (remaps `--color-*` variables to a black/white/yellow-cyan palette, ≥7:1 ratios, plus explicit overrides for the handful of hardcoded colors like `.btn-donate`) · **Readable font** (Verdana/Tahoma stack, wider letter-spacing/line-height — described accurately as "readable," not a dyslexia-specific font since none is used) · **Underline links** · **Reduce motion** (explicit user-facing override, independent of the OS `prefers-reduced-motion` the site already partially respected) · **Reset all**.
+- All settings persist to `localStorage` under the `tmb-a11y-*` key namespace and are shared across pages (same origin). Each page has a small inline script immediately after `<body>` that re-applies saved settings before the rest of the page renders, to minimize flash-of-un-adjusted-content.
+- High-contrast mode deliberately does **not** use a `filter: invert()` trick — that approach was tried and rejected because CSS `filter` on an ancestor creates a new containing block for `position: fixed` descendants, which would have broken the sticky header, both modals, the mobile nav, and the gallery lightbox site-wide the moment the toggle was switched on.
+
+### WCAG audit — issues found & fixed
+- **Landmark structure**: `index.html`, `resources/index.html`, and `resources-old.html` had no `<main>` element (content sections floated directly under `<body>`). Added `<main id="main-content">` wrapping the primary content on all three; `privacy-policy.html`/`terms-of-use.html` already had `<main>` and just needed the `id`.
+- **Skip link**: present on `index.html` but pointed at `#hero` instead of a main-content landmark — repointed to `#main-content`. Missing entirely on the other four pages — added (`.sr-only` + `.sr-only:focus` visible-on-focus styles, matching `index.html`'s existing pattern, since 3 of those pages had no `.sr-only` utility at all).
+- **Focus indicators — the big one**: the sitewide `:focus-visible` outline (and several component-specific ones: mobile menu toggle, gallery thumbnails, video cards, filter chips, search input) used `var(--color-accent)` (warm gold, `#D4A574`), which is only ~2.2:1 against the site's white/off-white sections — fails the 3:1 minimum for focus indicators. Replaced with a two-tone "sandwich" ring (`outline: 3px solid var(--color-primary-dark)` + `box-shadow: 0 0 0 2px #fff`) that stays visible at 3:1+ regardless of whether the element sits on a light or dark section. Applied across all 5 pages. (Left the gold outline in place on the two full-screen dark overlays — gallery lightbox and resource slide viewer — where it already passes ~5.7:1.)
+- **Text contrast**: `.board-member-role` (board bios) and the board-member social-icon hover state used gold text/icons directly on white cards (~2.2:1, fails 4.5:1 for normal-size text). Added `--color-accent-text: #8A5F1F` (a darkened gold, ~5.6:1 on white) and swapped those two usages to it. `.vm-label` and `.sdg-focus` used the same failing gold-on-white pattern but are dead CSS (Vision & Mission / SDG sections were removed in the June 2026 restructure) — left alone.
+- **Donation modal had no focus trap**: unlike the subscription modal and gallery lightbox (which both trap Tab), the donation modal only had ESC-to-close and focus restoration — Tab could escape it into the page behind. Added a matching focus-trap handler.
+- **Weak/missing focus rings on form controls**: `.form-input:focus` and the footer newsletter form relied on a border-color change alone (thin, low-contrast); `.search-input:focus` on the resources pages used a 12%-opacity box-shadow ring (too faint). Strengthened all three with a real box-shadow ring.
+- **Checked and found already solid** (no changes needed): all `<img>` have `alt` (meaningful or `alt=""` for genuinely decorative cases, correctly paired with `aria-hidden` on the parent); heading hierarchy is one `<h1>` per page with no skipped levels; no duplicate `id` attributes anywhere; no positive `tabindex`; newsletter/subscription form inputs are properly `<label>`-linked; donation modal, subscription modal, and gallery lightbox all have `role="dialog"`, `aria-modal`, `aria-labelledby`/`aria-label`, ESC-to-close, backdrop-click-to-close, and focus restoration; no `<iframe>` embeds (video cards link out to YouTube rather than embedding).
+
+### Verification note
+No live browser was available this session (Chrome extension not connected), so this was verified via code review, contrast-ratio calculation, HTML tag-balance checks, JS syntax checks (`node --check` on every inline `<script>`), and a static-file smoke test (`python3 -m http.server` + `curl` 200 on every page) — **not** a visual/screen-reader pass. Recommend a manual browser + screen-reader QA pass (VoiceOver/NVDA, keyboard-only navigation, and the new toolbar's four toggles) before considering this fully done.
 
 ## July 6, 2026 — Parenting Resources (standalone page)
 
@@ -750,6 +773,6 @@ This document MUST be updated whenever changes are made to the codebase. Before 
 
 ---
 
-**Last Updated**: July 6, 2026
+**Last Updated**: August 25, 2026
 **Document Maintainer**: Development Team
 **Purpose**: Onboarding, reference, and continuity across development sessions

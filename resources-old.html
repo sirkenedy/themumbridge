@@ -125,9 +125,12 @@
 
         a:hover, a:focus { color: var(--color-primary-dark); outline: none; }
 
+        /* Two-tone "sandwich" ring (white + dark plum) stays visible at 3:1+
+           contrast whether the element sits on a light or dark section. */
         a:focus-visible, button:focus-visible {
-            outline: 3px solid var(--color-accent);
+            outline: 3px solid var(--color-primary-dark);
             outline-offset: 2px;
+            box-shadow: 0 0 0 2px #ffffff;
         }
 
         .container {
@@ -139,6 +142,26 @@
         .sr-only {
             position: absolute; width: 1px; height: 1px; padding: 0;
             margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+        }
+
+        /* Make skip link visible when focused */
+        .sr-only:focus {
+            position: fixed;
+            top: var(--space-sm);
+            left: var(--space-sm);
+            width: auto;
+            height: auto;
+            padding: var(--space-sm) 1.25rem;
+            margin: 0;
+            overflow: visible;
+            clip: auto;
+            white-space: normal;
+            background: var(--color-primary-dark);
+            color: #ffffff;
+            z-index: 9999;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-lg);
+            font-weight: 600;
         }
 
         /* ============================================
@@ -338,7 +361,7 @@
         .search-input:focus {
             outline: none;
             border-color: var(--color-primary);
-            box-shadow: 0 0 0 4px rgba(123, 94, 123, 0.12);
+            box-shadow: 0 0 0 3px rgba(123, 94, 123, 0.45);
         }
 
         .search-clear {
@@ -396,7 +419,12 @@
         .chip:hover, .chip:focus-visible {
             background: rgba(74, 37, 69, 0.08);
             transform: translateY(-1px);
-            outline: none;
+        }
+
+        .chip:focus-visible {
+            outline: 3px solid var(--color-primary-dark);
+            outline-offset: 2px;
+            box-shadow: 0 0 0 2px #ffffff;
         }
 
         .chip.active {
@@ -582,8 +610,12 @@
                 0 20px 50px -12px rgba(0, 0, 0, 0.20),
                 inset 0 1px 0 rgba(255, 255, 255, 0.85),
                 inset 0 -1px 0 rgba(74, 37, 69, 0.1);
-            outline: none;
             animation-play-state: paused;
+        }
+
+        .resource-tile:focus-visible {
+            outline: 3px solid var(--color-primary-dark);
+            outline-offset: 2px;
         }
 
         .resource-tile:hover::after,
@@ -834,7 +866,11 @@
         .cta-btn:hover, .cta-btn:focus-visible {
             transform: translateY(-2px);
             box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.4);
-            outline: none;
+        }
+
+        .cta-btn:focus-visible {
+            outline: 3px solid #ffffff;
+            outline-offset: 2px;
         }
 
         /* ============================================
@@ -1120,9 +1156,362 @@
                 transform: none !important;
             }
         }
+
+        /* ============================================
+           ACCESSIBILITY TOOLBAR
+           Floating widget with font size, high contrast,
+           readable font, underline links, and reduce motion
+           controls. Settings persist via localStorage and
+           apply site-wide through CSS custom properties.
+           ============================================ */
+        :root {
+            --a11y-font-scale: 1;
+        }
+
+        html {
+            font-size: calc(16px * var(--a11y-font-scale));
+        }
+
+        .a11y-widget {
+            position: fixed;
+            left: var(--space-md);
+            bottom: var(--space-md);
+            z-index: 1600;
+        }
+
+        .a11y-toggle {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: none;
+            background: var(--color-primary-dark);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+            transition: transform var(--transition-base), background var(--transition-base);
+        }
+
+        .a11y-toggle:hover {
+            background: var(--color-primary);
+            transform: scale(1.06);
+        }
+
+        .a11y-toggle:focus-visible {
+            outline: 3px solid var(--color-primary-dark);
+            outline-offset: 3px;
+            box-shadow: 0 0 0 2px #ffffff, 0 6px 20px rgba(0, 0, 0, 0.28);
+        }
+
+        .a11y-toggle svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .a11y-panel {
+            position: absolute;
+            bottom: 68px;
+            left: 0;
+            width: 300px;
+            max-width: calc(100vw - (2 * var(--space-md)));
+            max-height: 70vh;
+            overflow-y: auto;
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            padding: var(--space-md);
+        }
+
+        .a11y-panel[hidden] {
+            display: none;
+        }
+
+        .a11y-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-sm);
+            padding-bottom: var(--space-sm);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .a11y-panel-title {
+            font-size: var(--text-base);
+            font-weight: 700;
+            color: var(--color-text-primary);
+            font-family: var(--font-display);
+        }
+
+        .a11y-panel-close {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: transparent;
+            font-size: 1.25rem;
+            line-height: 1;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+        }
+
+        .a11y-panel-close:hover {
+            background: var(--color-background-alt);
+        }
+
+        .a11y-control-group {
+            margin-bottom: var(--space-md);
+        }
+
+        .a11y-control-label {
+            display: block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .a11y-btn-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .a11y-btn {
+            flex: 1;
+            padding: 8px 4px;
+            border-radius: var(--radius-sm);
+            border: 2px solid var(--color-border);
+            background: #ffffff;
+            color: var(--color-text-primary);
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .a11y-btn:hover {
+            border-color: var(--color-primary);
+        }
+
+        .a11y-toggle-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            border-radius: var(--radius-sm);
+            border: 2px solid var(--color-border);
+            background: #ffffff;
+            color: var(--color-text-primary);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .a11y-toggle-btn:hover {
+            border-color: var(--color-primary);
+        }
+
+        .a11y-toggle-btn .a11y-switch {
+            flex-shrink: 0;
+            width: 36px;
+            height: 20px;
+            border-radius: 999px;
+            background: var(--color-border);
+            position: relative;
+            transition: background var(--transition-base);
+        }
+
+        .a11y-toggle-btn .a11y-switch::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #ffffff;
+            transition: transform var(--transition-base);
+        }
+
+        .a11y-toggle-btn[aria-pressed="true"] {
+            border-color: var(--color-primary);
+            background: rgba(123, 94, 123, 0.08);
+        }
+
+        .a11y-toggle-btn[aria-pressed="true"] .a11y-switch {
+            background: var(--color-primary);
+        }
+
+        .a11y-toggle-btn[aria-pressed="true"] .a11y-switch::before {
+            transform: translateX(16px);
+        }
+
+        .a11y-reset-all {
+            width: 100%;
+            padding: 10px 12px;
+            margin-top: var(--space-xs);
+            border-radius: var(--radius-sm);
+            border: 2px solid var(--color-primary-dark);
+            background: transparent;
+            color: var(--color-primary-dark);
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .a11y-reset-all:hover {
+            background: var(--color-primary-dark);
+            color: #ffffff;
+        }
+
+        @media (max-width: 480px) {
+            .a11y-widget {
+                left: var(--space-sm);
+                bottom: var(--space-sm);
+            }
+
+            .a11y-panel {
+                width: 264px;
+            }
+        }
+
+        /* Underline links toggle */
+        html.a11y-underline-links a {
+            text-decoration: underline !important;
+        }
+
+        /* Readable font toggle — legible sans stack, wider spacing */
+        html.a11y-readable-font body,
+        html.a11y-readable-font input,
+        html.a11y-readable-font textarea,
+        html.a11y-readable-font button {
+            font-family: Verdana, Tahoma, Geneva, sans-serif !important;
+            letter-spacing: 0.03em !important;
+            line-height: 1.9 !important;
+        }
+
+        /* Reduce motion toggle — explicit user override, independent of OS setting */
+        html.a11y-reduce-motion *,
+        html.a11y-reduce-motion *::before,
+        html.a11y-reduce-motion *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+
+        /* High contrast toggle — remaps the site's color variables to a
+           black/white/cyan palette (all ratios ≥7:1) plus targeted
+           overrides for hardcoded colors on this page's key surfaces. */
+        html.a11y-high-contrast {
+            --color-primary: #ffff00;
+            --color-primary-light: #ffff66;
+            --color-primary-dark: #000000;
+            --color-accent: #00e5ff;
+            --color-accent-light: #66f0ff;
+            --color-text-primary: #ffffff;
+            --color-text-secondary: #f2f2f2;
+            --color-background: #000000;
+            --color-background-alt: #0d0d0d;
+            --color-border: #ffffff;
+        }
+
+        html.a11y-high-contrast body {
+            background: #000000;
+            color: #ffffff;
+        }
+
+        html.a11y-high-contrast a {
+            color: #ffff00;
+        }
+
+        html.a11y-high-contrast .header,
+        html.a11y-high-contrast .hero,
+        html.a11y-high-contrast .toolbar-section,
+        html.a11y-high-contrast .resource-tile,
+        html.a11y-high-contrast .cta-strip,
+        html.a11y-high-contrast .footer,
+        html.a11y-high-contrast .a11y-panel {
+            background: #000000 !important;
+            background-image: none !important;
+            color: #ffffff !important;
+            border-color: #ffffff !important;
+        }
+
+        html.a11y-high-contrast h1,
+        html.a11y-high-contrast h2,
+        html.a11y-high-contrast h3 {
+            color: #ffffff !important;
+        }
     </style>
 </head>
 <body>
+
+    <!-- Apply saved accessibility settings as early as possible to avoid a flash of un-adjusted content -->
+    <script>
+        (function () {
+            try {
+                var root = document.documentElement;
+                var scale = localStorage.getItem('tmb-a11y-fontSize');
+                if (scale) root.style.setProperty('--a11y-font-scale', parseFloat(scale) / 100);
+                ['highContrast', 'readableFont', 'underlineLinks', 'reduceMotion'].forEach(function (key) {
+                    if (localStorage.getItem('tmb-a11y-' + key) === 'true') {
+                        root.classList.add('a11y-' + key.replace(/([A-Z])/g, '-$1').toLowerCase());
+                    }
+                });
+            } catch (e) {}
+        })();
+    </script>
+
+    <!-- Skip link for keyboard users - ACCESSIBILITY -->
+    <a href="#main-content" class="sr-only">Skip to main content</a>
+
+    <!-- ============================================
+         ACCESSIBILITY TOOLBAR
+         ============================================ -->
+    <div class="a11y-widget">
+        <button type="button" class="a11y-toggle" id="a11yToggle" aria-expanded="false" aria-controls="a11yPanel" aria-label="Accessibility options">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12,2c1.1,0,2,0.9,2,2s-0.9,2-2,2s-2-0.9-2-2S10.9,2,12,2z M21,9h-6v13h-2v-6h-2v6H9V9H3V7h18V9z"/>
+            </svg>
+        </button>
+        <div class="a11y-panel" id="a11yPanel" role="region" aria-label="Accessibility options" hidden>
+            <div class="a11y-panel-header">
+                <h2 class="a11y-panel-title">Accessibility</h2>
+                <button type="button" class="a11y-panel-close" id="a11yPanelClose" aria-label="Close accessibility options">&times;</button>
+            </div>
+            <div class="a11y-panel-body">
+                <div class="a11y-control-group">
+                    <span class="a11y-control-label" id="a11yFontLabel">Font size</span>
+                    <div class="a11y-btn-row" role="group" aria-labelledby="a11yFontLabel">
+                        <button type="button" class="a11y-btn" id="a11yFontDecrease" aria-label="Decrease font size">A&minus;</button>
+                        <button type="button" class="a11y-btn" id="a11yFontReset" aria-label="Reset font size">Reset</button>
+                        <button type="button" class="a11y-btn" id="a11yFontIncrease" aria-label="Increase font size">A+</button>
+                    </div>
+                </div>
+                <button type="button" class="a11y-toggle-btn" id="a11yHighContrast" aria-pressed="false">
+                    <span>High contrast</span>
+                    <span class="a11y-switch" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="a11y-toggle-btn" id="a11yReadableFont" aria-pressed="false">
+                    <span>Readable font</span>
+                    <span class="a11y-switch" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="a11y-toggle-btn" id="a11yUnderlineLinks" aria-pressed="false">
+                    <span>Underline links</span>
+                    <span class="a11y-switch" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="a11y-toggle-btn" id="a11yReduceMotion" aria-pressed="false">
+                    <span>Reduce motion</span>
+                    <span class="a11y-switch" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="a11y-reset-all" id="a11yResetAll">Reset all</button>
+            </div>
+        </div>
+    </div>
 
     <!-- ============================================
          HEADER
@@ -1144,6 +1533,7 @@
         </div>
     </header>
 
+    <main id="main-content">
     <!-- ============================================
          HERO
          ============================================ -->
@@ -1410,6 +1800,7 @@
             </a>
         </div>
     </section>
+    </main>
 
     <!-- ============================================
          FOOTER
@@ -1731,6 +2122,119 @@
             }
 
             console.log('✓ Resources page initialized —', tiles.length, 'resources');
+        })();
+
+        // ============================================
+        // ACCESSIBILITY TOOLBAR
+        // Font size, high contrast, readable font,
+        // underline links, reduce motion — persisted
+        // via localStorage so settings follow the user
+        // across pages on the site.
+        // ============================================
+        (function initA11yToolbar() {
+            const toggle = document.getElementById('a11yToggle');
+            const panel = document.getElementById('a11yPanel');
+            const panelClose = document.getElementById('a11yPanelClose');
+            if (!toggle || !panel) return;
+
+            const STORAGE_PREFIX = 'tmb-a11y-';
+            const root = document.documentElement;
+
+            function getStored(key, fallback) {
+                try {
+                    const v = localStorage.getItem(STORAGE_PREFIX + key);
+                    return v === null ? fallback : v;
+                } catch (e) { return fallback; }
+            }
+            function setStored(key, value) {
+                try { localStorage.setItem(STORAGE_PREFIX + key, value); } catch (e) {}
+            }
+
+            function outsideClick(e) {
+                if (!panel.contains(e.target) && !toggle.contains(e.target)) closePanel(false);
+            }
+            function onKeydown(e) {
+                if (e.key === 'Escape') closePanel(true);
+            }
+            function openPanel() {
+                panel.hidden = false;
+                toggle.setAttribute('aria-expanded', 'true');
+                const firstFocusable = panel.querySelector('button');
+                if (firstFocusable) firstFocusable.focus();
+                document.addEventListener('click', outsideClick);
+                document.addEventListener('keydown', onKeydown);
+            }
+            function closePanel(returnFocus) {
+                panel.hidden = true;
+                toggle.setAttribute('aria-expanded', 'false');
+                document.removeEventListener('click', outsideClick);
+                document.removeEventListener('keydown', onKeydown);
+                if (returnFocus) toggle.focus();
+            }
+            toggle.addEventListener('click', () => {
+                if (panel.hidden) openPanel(); else closePanel(true);
+            });
+            if (panelClose) {
+                panelClose.addEventListener('click', () => closePanel(true));
+            }
+
+            const FONT_STEPS = [100, 112.5, 125, 137.5, 150];
+            let fontStepIndex = FONT_STEPS.indexOf(parseFloat(getStored('fontSize', '100')));
+            if (fontStepIndex === -1) fontStepIndex = 0;
+
+            function applyFontSize() {
+                root.style.setProperty('--a11y-font-scale', FONT_STEPS[fontStepIndex] / 100);
+                setStored('fontSize', FONT_STEPS[fontStepIndex]);
+            }
+            document.getElementById('a11yFontIncrease').addEventListener('click', () => {
+                fontStepIndex = Math.min(fontStepIndex + 1, FONT_STEPS.length - 1);
+                applyFontSize();
+            });
+            document.getElementById('a11yFontDecrease').addEventListener('click', () => {
+                fontStepIndex = Math.max(fontStepIndex - 1, 0);
+                applyFontSize();
+            });
+            document.getElementById('a11yFontReset').addEventListener('click', () => {
+                fontStepIndex = 0;
+                applyFontSize();
+            });
+            applyFontSize();
+
+            function setupToggle(id, className, storageKey) {
+                const btn = document.getElementById(id);
+                if (!btn) return null;
+                let active = getStored(storageKey, 'false') === 'true';
+
+                function render() {
+                    root.classList.toggle(className, active);
+                    btn.setAttribute('aria-pressed', String(active));
+                }
+                btn.addEventListener('click', () => {
+                    active = !active;
+                    setStored(storageKey, active);
+                    render();
+                });
+                render();
+                return {
+                    reset: () => { active = false; setStored(storageKey, false); render(); }
+                };
+            }
+
+            const toggles = [
+                setupToggle('a11yHighContrast', 'a11y-high-contrast', 'highContrast'),
+                setupToggle('a11yReadableFont', 'a11y-readable-font', 'readableFont'),
+                setupToggle('a11yUnderlineLinks', 'a11y-underline-links', 'underlineLinks'),
+                setupToggle('a11yReduceMotion', 'a11y-reduce-motion', 'reduceMotion')
+            ];
+
+            const resetAllBtn = document.getElementById('a11yResetAll');
+            if (resetAllBtn) {
+                resetAllBtn.addEventListener('click', () => {
+                    fontStepIndex = 0;
+                    applyFontSize();
+                    toggles.forEach(t => t && t.reset());
+                });
+            }
         })();
     </script>
 
