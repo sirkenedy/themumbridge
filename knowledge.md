@@ -1,7 +1,126 @@
 # The Mum Bridge & Care Foundation - Website Knowledge Base
 
 ## Overview
-This document captures the comprehensive UI structure, design system, and user experience of The Mum Bridge & Care Foundation website (themumbridge.org). Created: February 25, 2026 | Last Updated: August 25, 2026
+This document captures the comprehensive UI structure, design system, and user experience of The Mum Bridge & Care Foundation website (themumbridge.org). Created: February 25, 2026 | Last Updated: September 21, 2026
+
+## September 21, 2026 — Changes staged in `preview/` instead of `index.html`
+
+Kehinde: *"only index.html should not change. have a folder preview/index and let the recent changes move there."* The September restructure and asset work now live at **`preview/index.html`**, served at `themumbridge.org/preview/`. `index.html` is byte-identical to commit `c9afa62` again.
+
+### What this means
+- **`index.html` — reverted, do not edit.** It is the live homepage and stays on asset-version `20260825`.
+- **`preview/index.html` — the new homepage**, holding the board/team split, 8 impact cards, reordered videos, partnership announcements and the 24-photo gallery.
+- Because the page moved one level down, **every asset path in it is root-absolute** (`/assets/...`), including the CSS `url()` for the hero background, and the footer links to `/privacy-policy.html` and `/terms-of-use.html`. GitHub Pages cannot rewrite URLs, so `preview/index.html` is what gives the clean `/preview/` URL — the same trick `resources/index.html` uses.
+- The preview carries `<meta name="robots" content="noindex, nofollow">`, a `[PREVIEW]` title prefix and a plum banner linking back to `/`, so it cannot be mistaken for the live site or picked up by search. It is deliberately **not** in `sitemap.xml`.
+- **`assets/directors/ayomide-aboyade.jpeg` was restored.** The reverted `index.html` still references it; it can only be deleted when the preview is promoted.
+
+### The other pages were NOT reverted
+Only `index.html` was named, so `resources/index.html`, `resources-old.html`, `resources-v2.html`, `privacy-policy.html` and `terms-of-use.html` keep their changes — including the 13-resource library and the `Disability-Specific` category rename. **Pushing deploys those immediately**, unlike the homepage work.
+
+### Promoting the preview later
+Copy `preview/index.html` over `index.html`, rewrite the root-absolute `/assets/` paths back to relative `assets/`, drop the banner/noindex/title prefix, delete `assets/directors/ayomide-aboyade.jpeg`, and remove the `preview/` folder.
+
+## September 11, 2026 — New Asset Integration
+
+Kehinde supplied a `new-assests/` drop (49 files, mostly HEIC). Everything was converted, renamed and moved into `assets/`; the source folder is his to delete.
+
+### Conversion notes
+- **HEIC → PNG** for all resource slides and partnership graphics, **HEIC → JPG** (q82) for gallery photos, via `sips`.
+- Three source filenames contained **literal newlines** and several had double spaces — normalised on import.
+- Both `Archive.zip` and `Archive 2.zip` were redundant (the latter merely nests the former); every file was already loose on disk. Ignored.
+
+### People
+- `serina-whyte.jpg` and `oyindamola-animashaun.jpg` added (resized to 900px max edge, q80, matching the existing director convention). Both cards **uncommented and now live**.
+- Spelling: the photo arrived as "Serena" but the brief says **Serina** throughout — Kehinde confirmed Serina. Board is now 6 live, Team 2 live.
+- **Yetunde Adeoye remains the only commented-out person** — still no photo.
+
+### Resource library: 8 → 13 entries
+Resource numbers are **embedded in the cover artwork itself** — that is the source of truth for numbering, not the filename.
+
+| # | Title | Slides | Status |
+|---|---|---|---|
+| 8 | Market Runs With Children While Managing Disability | 5 | new |
+| 14 | Holiday Travel With Children | 5 | new |
+| 22 | Postpartum Recovery With a Disability | 4 | **replaced** (jpg → png) |
+| 32 | Parenting With Visual Impairment | 5 | **replaced** (same filenames, new artwork) |
+| 33 | Parenting With Mobility Disability | 4 | new |
+| 34 | Parenting With Chronic Illness or Fatigue | 5 | new |
+| 35 | Still I Mother | 8 | new — affirmation card series, no cover/quote/CTA structure |
+
+- **New slides are 1080×1080**, where every pre-existing slide is 1920×1080. Kept native: the tile thumbnail is `object-fit: cover` on a 16:9 box, which crops off exactly the white bands the square covers carry; the viewer is `object-fit: contain` on white. No content is lost either way.
+- **Resource 22 changed extension jpg → png.** Its `data-ext`, tile `src` and `RESOURCE_SLIDE_MAP` entry had to change in **four** files — `resources/index.html`, `resources-old.html`, `resources-v2.html` and the map in each. Deleting the old `.jpg` files broke the legacy and orphan pages until those were fixed; check all three whenever a resource's extension changes.
+- Resource 32 deliberately reuses the existing slide filenames (`tips`, `more-tips`), so its map entry needed no edit — only the image bytes changed.
+
+### Category taxonomy change
+`Sensory-Specific` → **`Disability-Specific`** (both the chip label and the `data-category` value, `sensory` → `disability`). Mobility and chronic illness are not sensory, so the old label only fitted two of the four disability-specific guides. Now holds 31, 32, 33, 34. Chip counts: All 13, Pregnancy & Birth 2, Postpartum 1, Healthcare 1, Everyday Life 5, Disability-Specific 4.
+
+### Partnership Announcements (new component)
+Misty Glam and Gathr supplied **social announcement graphics, not logos**, so they do not fit the logo-on-white partner cards. Per Kehinde: shown "as is" in a new `.partnership-announcements` block below the partners grid — `<figure>` cards on an `auto-fit minmax(320px, 1fr)` grid with `align-items: start`, images at `width:100%; height:auto` so each keeps its own aspect (Misty Glam is 4:5 portrait, Gathr ~1.9:1 landscape). Captions carry the partnership text; alt text describes the full graphic content including Gathr's four programme areas.
+
+The partners grid itself stays at three logo cards (MatchBox, LASODA, NNGO).
+
+### Gallery: 20 → 24 photos
+Four photos from the **Niamh Ní Hoireabhaird visit** added in `assets/impact/niamh-visit-2026/` (resized to 1600px max edge, q82), initially hidden. Adding photos means updating the **hardcoded `of NN` string in every thumbnail `aria-label`** (24 of them) plus the toggle button text — the JS derives its own counts from the DOM, so no JS change.
+
+**Still outstanding from the September brief**: Reflection sessions and Community Media Engagement Session photos were not in the drop.
+
+### Asset version
+Bumped `20260910` → `20260911` across the five linked pages. `resources-v2.html` remains an unlinked orphan on `20260706` (its slide map was still corrected, since it is publicly reachable).
+
+## September 10, 2026 — Restructure Brief (People Structure, Impact, Videos, Partners)
+
+Implemented the September 2026 developer handoff brief. The headline change is **separating governance from operations**: the single `#board` section mixed trustees with staff, so a visitor could not tell a trustee from a volunteer. It is now two sections.
+
+### Scroll order
+The brief's 12-position order already matched the live DOM for 11 of 12 positions — the **only** structural change was splitting `#board`. No section moved. Final order: Hero → Problem → Impact So Far → What We Do → Gallery → Who We Are → Partners → **Board of Trustees** → **Our Team** → Donate → Join/Volunteer → Contact+Footer.
+
+### Board of Trustees (`#board`) and Our Team (`#team`)
+Both sections reuse `class="section board"`, so every existing board card/grid/hover/image-crop/responsive rule applies to both for free. Only the `aria-labelledby` ids differ (`board-title`, `team-title`).
+
+Board order was set with Kehinde: **Solace first**, then governance seniority — this deliberately overrides the brief's "Solace should appear last".
+
+| Board of Trustees | Role | Our Team | Role |
+|---|---|---|---|
+| Solace Olabode | Founder & Trustee | Solace Olabode | Founder & Executive Director |
+| Adedotun Soyemi | Chairperson | Yetunde Adeoye *(commented — no photo)* | Community Manager, Volunteer |
+| Sarah George-Ashiru | Deputy Chairperson | Oyindamola Animashaun *(commented — no photo/LinkedIn)* | Social Media Manager, Volunteer |
+| Kehinde Owoputi | Trustee, Technology | | |
+| Oluwademilade Adejoorin | Trustee, Finance | | |
+| Serina Whyte *(commented — no photo/LinkedIn)* | Trustee, Skills Development & Capacity Building | | |
+
+- The brief's Board table listed only 4 people but supplied bios for 6; merged per Kehinde's confirmation so every supplied bio maps to a slot.
+- Role lines render as `Trustee, Technology` rather than the brief's literal `Board of Trustees, Technology` — redundant under a section already titled "Board of Trustees".
+- All bios replaced with the brief's text **verbatim**. Team cards keep bios (the brief's "keep each card simple" read as "no View More expandable", since bios were supplied for team members).
+- **Ayomide Aboyade removed entirely**, including `assets/directors/ayomide-aboyade.jpeg`.
+- Nav "Our Team" link repointed from `#board` to `#team` so the label matches its destination.
+- Solace appears in both sections and carries `data-member="solace"` in each (drives the image-crop override).
+
+### Impact So Far — 6 cards → 8
+`80+` community (was `70+`), `150+` reached (was `100+`), `5–6` LGAs, `2` in-person gatherings, `3` virtual gatherings, `10+` parenting resources, `18+` opportunities (6 successful outcomes), `100%` sign-language interpretation.
+
+Dropped per the brief: the "The Mum Bridge Circle" text card (superseded by "2 In-person gatherings") and "3 Institutional partnerships".
+
+**Non-integer cards omit `data-count-to` entirely** — that is the whole mechanism (`animateCount` selects `.impact-number[data-count-to]`). Never write `data-count-to="5-6"`: `parseInt` is lenient and would silently animate to 5.
+
+### Stagger CSS — extended past 6
+The shared `cardStagger` delays stopped at `:nth-child(6)`. Added `:nth-child(7)` (560ms) and `:nth-child(8)` (640ms) for `.impact-card`, and added `.partners-section.visible .partner-card` to the `:nth-child(4)` rule. Also added `.videos-section .video-card-wrap` to the `prefers-reduced-motion` block — it had been animating regardless of the user's motion preference.
+
+### Videos — reordered, grid rebuilt for 5
+Order is now Our Story → Our Impact → Our Community (Impact and Community swapped); hooks stayed bound to their original video IDs. **By Design** and **Disability Etiquette** are written but commented out pending YouTube links. The three "may include" hooks in the brief were treated as future/optional — no action.
+
+`.videos-grid` was hard-coded `repeat(3, 1fr)`, which would have rendered 5 cards as 3 + 2 orphaned against an empty cell. Switched to the `.services-grid` precedent already in the file: 6-column base, each card `span 2`, `:nth-child(4) { grid-column: 2 / span 2; }` to centre the trailing row. Harmless at 3 cards.
+
+### Partners
+**Misty Glam Company** added as a 4th card, commented out pending logo and description.
+
+### Removed dead code
+The "View More" expandable is gone: its only markup lived inside the commented-out Adeoye block, so the JS handler had been running against an empty NodeList. Deleted the CSS (`.board-member-details`, `.board-member-full-bio`, `.btn-view-more` + states), the JS handler, and the disabled `initBoardCarousel` stub.
+
+### Blocked on assets (each ships as a ready-to-enable HTML comment)
+Photos: Serina Whyte, Yetunde Adeoye, Oyindamola Animashaun · Logo + description: Misty Glam Company · YouTube links: By Design, Disability Etiquette · LinkedIn: Serina, Oyindamola · Gallery photos: Reflection sessions, Community Media Engagement, Niamh Ní Hoireabhaird visit (Section 5 of the brief — **not yet done**, no assets supplied).
+
+### Verification note
+Verified by code review, `node --check` on every inline script, HTML comment/tag balance checks, and a `python3 -m http.server` + `curl` smoke test. **No browser or screen-reader pass was performed** — still outstanding, and now also covers the August 2026 accessibility work which was never visually verified either.
 
 ## August 25, 2026 — Accessibility Toolbar & WCAG Audit
 
@@ -141,7 +260,7 @@ The homepage was restructured per the May 2026 "Website Restructure Brief + Copy
 ### New scroll order (replaces previous)
 1. Hero — new headline + Donate as primary CTA (deep plum #4A2545)
 2. The Problem — "The Weight She Carries Alone" — dark plum bg, image on right
-3. Impact So Far (NEW) — 6 stat cards (70+, 100+, 5–6, Mum Bridge Circle, 3, 100%)
+3. Impact So Far (NEW) — 6 stat cards (70+, 100+, 5–6, Mum Bridge Circle, 3, 100%) — *superseded September 10, 2026: now 8 cards starting at 80+*
 4. What We Do — reduced from 6 cards to 5; removed all emoji icons; bottom row centered
 5. Community Photos Gallery — moved up (was between Board and Partners)
 6. Who We Are — About section cut by ~60%; 3 videos retained with per-card hook lines
@@ -315,8 +434,10 @@ The website uses a warm, accessible, and dignified color scheme:
   - Quote section at bottom with gradient background
 
 ### 8. Board of Trustees Section
+> **Superseded September 10, 2026** — split into two sections, `#board` (Board of Trustees) and `#team` (Our Team), both using `class="section board"`. The "View More" expandable described below has been deleted. See the September 10, 2026 entry at the top of this document.
+
 - **Background**: Alternate background
-- **Layout**: 3-column grid (6 visible members as of April 16, 2026; 7th member Adeoye Yetunde Adeyita commented out pending photo)
+- **Layout**: 3-column grid
 - **Responsive**: 1 column mobile, 2 columns tablet
 - **Components**:
   - Member cards with image (340px height)
@@ -581,7 +702,7 @@ Both pages share a consistent design system with the main site while being optim
   sed -i '' 's/v=OLD_DATE/v=NEW_DATE/g' index.html privacy-policy.html terms-of-use.html
   sed -i '' 's/content="OLD_DATE"/content="NEW_DATE"/g' index.html privacy-policy.html terms-of-use.html
   ```
-- Current version: `20260706` (bumped July 6, 2026 for Parenting Resources section launch; privacy/terms unified from `20260416`)
+- Current version: `20260911` (bumped September 11, 2026 for the new asset drop). Note `resources-v2.html` is an unlinked orphan still on `20260706` and is excluded from the bump.
 
 ### JavaScript
 - Vanilla JS (no framework overhead)
@@ -773,6 +894,6 @@ This document MUST be updated whenever changes are made to the codebase. Before 
 
 ---
 
-**Last Updated**: August 25, 2026
+**Last Updated**: September 21, 2026
 **Document Maintainer**: Development Team
 **Purpose**: Onboarding, reference, and continuity across development sessions
