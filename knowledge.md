@@ -3,6 +3,12 @@
 ## Overview
 This document captures the comprehensive UI structure, design system, and user experience of The Mum Bridge & Care Foundation website (themumbridge.org). Created: February 25, 2026 | Last Updated: September 22, 2026
 
+## September 22, 2026 (later) — Faith's photo, announcement cards, gallery polish
+
+- **Faith Makanjuola is live.** Source was a 4480×6720 studio portrait, centre-cropped to 3:4 and resized to 600×900. Team is now 3 live; **Yetunde Adeoye is the only person still commented out** — her photo was mentioned but not actually attached.
+- **Partnership Announcements reported as broken.** The images were fine — live, valid PNGs, correct `content-type`, HTTP 200 — so that was a stale browser cache. The section had a real design fault regardless: Misty Glam is 4:5 portrait and Gathr ~1.9:1 landscape, so in an auto-fit grid the two cards came out badly mismatched. Each image now sits in a fixed **16:10 frame with `object-fit: contain`** on a soft brand gradient, so both cards match height and neither graphic is cropped. Both open full size in the shared lightbox, and the alt text was shortened so it no longer repeats the visible caption word for word.
+- **Gallery grids now use flex, not grid.** `justify-content: center` on a wrapping flex row means a short final row **centres instead of leaving an orphan** hanging at the left — which is what a 4-photo collection did in a 3-column grid. Applied on both the homepage and `/gallery/`. Homepage now shows **6 + 3** (two clean rows, then one) rather than 6 + 4.
+
 ## September 22, 2026 — Restructure Brief v2 (Trainings, DIMS, From Our Mums, gallery collections)
 
 A revised handoff brief superseded the earlier September one. It reverses several decisions and adds two homepage sections, two new pages, and a gallery restructure. All of it landed in **`preview/index.html`** plus two new pages; **`index.html` remains frozen at `c9afa62`**.

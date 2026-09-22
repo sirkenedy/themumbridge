@@ -4501,6 +4501,65 @@
             .affirmation-card:hover, .affirmation-card:focus-visible { transform: none; }
         }
 
+
+        /* ---- announcement cards: equal height, art never cropped ---- */
+        .announcement-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+
+        .announcement-card { display: flex; flex-direction: column; }
+
+        .announcement-frame {
+            display: block;
+            width: 100%;
+            border: 0;
+            padding: 0;
+            aspect-ratio: 16 / 10;
+            background: linear-gradient(140deg, #F6F1F5 0%, #EFE7EE 100%);
+            cursor: zoom-in;
+            overflow: hidden;
+        }
+        .announcement-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            transition: transform 600ms var(--ease-out-quart);
+        }
+        .announcement-card:hover .announcement-frame img { transform: scale(1.03); }
+        .announcement-card figcaption { flex: 1; }
+
+        /* ---- gallery: flex grid so a short final row centres instead of orphaning ---- */
+        .gallery-collection .gallery-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--space-sm);
+        }
+        .gallery-collection .gallery-item {
+            flex: 0 1 calc((100% - 2 * var(--space-sm)) / 3);
+            min-width: 220px;
+            transition: transform var(--transition-base), box-shadow var(--transition-base);
+        }
+        .gallery-collection .gallery-item:hover,
+        .gallery-collection .gallery-item:focus-within {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        @media (max-width: 768px) {
+            .gallery-collection .gallery-item { flex: 0 1 calc((100% - var(--space-xs)) / 2); min-width: 150px; }
+        }
+        @media (max-width: 480px) {
+            .gallery-collection .gallery-item { flex: 0 1 100%; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .announcement-frame img { transition: none; }
+            .announcement-card:hover .announcement-frame img { transform: none; }
+            .gallery-collection .gallery-item { transition: none; }
+            .gallery-collection .gallery-item:hover,
+            .gallery-collection .gallery-item:focus-within { transform: none; }
+        }
+
     </style>
 </head>
 <body>
@@ -4886,47 +4945,47 @@
                     <p class="collection-desc">Our flagship physical community gathering, bringing mothers with disabilities together for connection, conversation, peer support and shared learning.</p>
                     <div class="gallery-grid">
 
-                    <figure class="gallery-item">
-                        <button class="gallery-thumb-btn" data-index="0" aria-label="View photo 1 of 10: A wide view of The Mum Bridge community gathering">
-                            <img src="/assets/impact/may-2026/TMB-215.jpg?v=20260922" alt="A wide view of The Mum Bridge community gathering, showing a full room of mothers including wheelchair users in attendance" loading="lazy">
-                            <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                        </button>
-                    </figure>
+                        <figure class="gallery-item">
+                            <button class="gallery-thumb-btn" data-index="0" aria-label="View photo 1 of 9: A wide view of The Mum Bridge community gathering">
+                                <img src="/assets/impact/may-2026/TMB-215.jpg?v=20260922" alt="A wide view of The Mum Bridge community gathering, showing a full room of mothers including wheelchair users in attendance" loading="lazy">
+                                <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                            </button>
+                        </figure>
 
-                    <figure class="gallery-item">
-                        <button class="gallery-thumb-btn" data-index="1" aria-label="View photo 2 of 10: Mothers seated together during a community session including a wheelchair user">
-                            <img src="/assets/impact/may-2026/TMB-74.jpg?v=20260922" alt="Mothers with disabilities seated together during a Mum Bridge community session, including a participant using a wheelchair" loading="lazy">
-                            <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                        </button>
-                    </figure>
+                        <figure class="gallery-item">
+                            <button class="gallery-thumb-btn" data-index="1" aria-label="View photo 2 of 9: Mothers seated together during a community session including a wheelchair user">
+                                <img src="/assets/impact/may-2026/TMB-74.jpg?v=20260922" alt="Mothers with disabilities seated together during a Mum Bridge community session, including a participant using a wheelchair" loading="lazy">
+                                <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                            </button>
+                        </figure>
 
-                    <figure class="gallery-item">
-                        <button class="gallery-thumb-btn" data-index="2" aria-label="View photo 3 of 10: Participants seated attentively during a Mum Bridge programme">
-                            <img src="/assets/impact/may-2026/TMB-147.jpg?v=20260922" alt="Mothers seated attentively with hands on their chests during a Mum Bridge programme" loading="lazy">
-                            <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                        </button>
-                    </figure>
+                        <figure class="gallery-item">
+                            <button class="gallery-thumb-btn" data-index="2" aria-label="View photo 3 of 9: Participants seated attentively during a Mum Bridge programme">
+                                <img src="/assets/impact/may-2026/TMB-147.jpg?v=20260922" alt="Mothers seated attentively with hands on their chests during a Mum Bridge programme" loading="lazy">
+                                <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                            </button>
+                        </figure>
 
-                    <figure class="gallery-item">
-                        <button class="gallery-thumb-btn" data-index="3" aria-label="View photo 4 of 10: Two facilitators addressing the community with a microphone">
-                            <img src="/assets/impact/may-2026/TMB-76.jpg?v=20260922" alt="Two Mum Bridge facilitators at the front of the room, one speaking into a microphone with the foundation banner visible behind them" loading="lazy">
-                            <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                        </button>
-                    </figure>
+                        <figure class="gallery-item">
+                            <button class="gallery-thumb-btn" data-index="3" aria-label="View photo 4 of 9: Two facilitators addressing the community with a microphone">
+                                <img src="/assets/impact/may-2026/TMB-76.jpg?v=20260922" alt="Two Mum Bridge facilitators at the front of the room, one speaking into a microphone with the foundation banner visible behind them" loading="lazy">
+                                <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                            </button>
+                        </figure>
 
-                    <figure class="gallery-item">
-                        <button class="gallery-thumb-btn" data-index="4" aria-label="View photo 5 of 10: Facilitator with sign language interpreter on stage">
-                            <img src="/assets/impact/may-2026/TMB-73.jpg?v=20260922" alt="A Mum Bridge facilitator speaks into a microphone while a sign language interpreter communicates alongside her" loading="lazy">
-                            <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                        </button>
-                    </figure>
+                        <figure class="gallery-item">
+                            <button class="gallery-thumb-btn" data-index="4" aria-label="View photo 5 of 9: Facilitator with sign language interpreter on stage">
+                                <img src="/assets/impact/may-2026/TMB-73.jpg?v=20260922" alt="A Mum Bridge facilitator speaks into a microphone while a sign language interpreter communicates alongside her" loading="lazy">
+                                <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                            </button>
+                        </figure>
 
-                    <figure class="gallery-item">
-                        <button class="gallery-thumb-btn" data-index="5" aria-label="View photo 6 of 10: Team member and sign language interpreter ensuring an accessible session">
-                            <img src="/assets/impact/may-2026/TMB-137.jpg?v=20260922" alt="A Mum Bridge team member addresses the community with a sign language interpreter beside her, ensuring the session is accessible for deaf participants" loading="lazy">
-                            <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                        </button>
-                    </figure>
+                        <figure class="gallery-item">
+                            <button class="gallery-thumb-btn" data-index="5" aria-label="View photo 6 of 9: Team member and sign language interpreter ensuring an accessible session">
+                                <img src="/assets/impact/may-2026/TMB-137.jpg?v=20260922" alt="A Mum Bridge team member addresses the community with a sign language interpreter beside her, ensuring the session is accessible for deaf participants" loading="lazy">
+                                <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                            </button>
+                        </figure>
 
                     </div>
                 </div>
@@ -4936,33 +4995,26 @@
                     <p class="collection-desc">An interactive session bringing mothers with disabilities together to engage with media, storytelling, representation and the power of their own voices.</p>
                     <div class="gallery-grid">
 
-                    <figure class="gallery-item">
-                        <button class="gallery-thumb-btn" data-index="6" aria-label="View photo 7 of 10: Mothers seated together during The Mum Bridge community visit with Niamh Ni Hoireabhaird, including two participants using wheelchairs">
-                            <img src="/assets/impact/niamh-visit-2026/niamh-01.jpg?v=20260922" alt="The Mum Bridge community gathered for the visit with disability advocate Niamh Ni Hoireabhaird, with mothers seated together and two participants using wheelchairs" loading="lazy">
-                            <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                        </button>
-                    </figure>
+                        <figure class="gallery-item">
+                            <button class="gallery-thumb-btn" data-index="6" aria-label="View photo 7 of 9: Mothers seated together during The Mum Bridge community visit with Niamh Ni Hoireabhaird, including two participants using wheelchairs">
+                                <img src="/assets/impact/niamh-visit-2026/niamh-01.jpg?v=20260922" alt="The Mum Bridge community gathered for the visit with disability advocate Niamh Ni Hoireabhaird, with mothers seated together and two participants using wheelchairs" loading="lazy">
+                                <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                            </button>
+                        </figure>
 
-                    <figure class="gallery-item">
-                        <button class="gallery-thumb-btn" data-index="7" aria-label="View photo 8 of 10: Mum Bridge team members and visitors together, with two wheelchair users seated in front">
-                            <img src="/assets/impact/niamh-visit-2026/niamh-02.jpg?v=20260922" alt="Mum Bridge team members in branded shirts standing behind visiting advocate Niamh Ni Hoireabhaird and another wheelchair user seated in front" loading="lazy">
-                            <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                        </button>
-                    </figure>
+                        <figure class="gallery-item">
+                            <button class="gallery-thumb-btn" data-index="7" aria-label="View photo 8 of 9: Mum Bridge team members and visitors together, with two wheelchair users seated in front">
+                                <img src="/assets/impact/niamh-visit-2026/niamh-02.jpg?v=20260922" alt="Mum Bridge team members in branded shirts standing behind visiting advocate Niamh Ni Hoireabhaird and another wheelchair user seated in front" loading="lazy">
+                                <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                            </button>
+                        </figure>
 
-                    <figure class="gallery-item">
-                        <button class="gallery-thumb-btn" data-index="8" aria-label="View photo 9 of 10: A wide view of the room during the Niamh Ni Hoireabhaird community session">
-                            <img src="/assets/impact/niamh-visit-2026/niamh-03.jpg?v=20260922" alt="A wide view of the room during The Mum Bridge session with Niamh Ni Hoireabhaird, with participants seated in a semicircle and a wheelchair user at the centre" loading="lazy">
-                            <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                        </button>
-                    </figure>
-
-                    <figure class="gallery-item">
-                        <button class="gallery-thumb-btn" data-index="9" aria-label="View photo 10 of 10: Group portrait from the Niamh Ni Hoireabhaird visit with Mum Bridge team and community members">
-                            <img src="/assets/impact/niamh-visit-2026/niamh-04.jpg?v=20260922" alt="Group portrait from the Niamh Ni Hoireabhaird visit, with Mum Bridge team members standing behind seated wheelchair users" loading="lazy">
-                            <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                        </button>
-                    </figure>
+                        <figure class="gallery-item">
+                            <button class="gallery-thumb-btn" data-index="8" aria-label="View photo 9 of 9: A wide view of the room during the Niamh Ni Hoireabhaird community session">
+                                <img src="/assets/impact/niamh-visit-2026/niamh-03.jpg?v=20260922" alt="A wide view of the room during The Mum Bridge session with Niamh Ni Hoireabhaird, with participants seated in a semicircle and a wheelchair user at the centre" loading="lazy">
+                                <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+                            </button>
+                        </figure>
 
                     </div>
                 </div>
@@ -5226,7 +5278,9 @@
 
                 <div class="announcement-grid">
                     <figure class="announcement-card">
-                        <img src="/assets/partners/misty-glam-partnership.png?v=20260922" alt="Partnership announcement: Misty Glam Company and The Mum Bridge. A new partnership committed to amplifying representation, creating opportunities and celebrating the voices of mothers with disabilities." loading="lazy">
+                        <button type="button" class="announcement-frame" data-flyer="/assets/partners/misty-glam-partnership.png?v=20260922" data-flyer-alt="Misty Glam Company and The Mum Bridge partnership announcement" aria-label="View the Misty Glam Company partnership announcement at full size">
+                            <img src="/assets/partners/misty-glam-partnership.png?v=20260922" alt="Misty Glam Company and The Mum Bridge partnership announcement graphic" loading="lazy">
+                        </button>
                         <figcaption>
                             <strong>Misty Glam Company &times; The Mum Bridge</strong>
                             A partnership committed to amplifying representation, creating opportunities and celebrating the voices of mothers with disabilities.
@@ -5234,7 +5288,9 @@
                     </figure>
 
                     <figure class="announcement-card">
-                        <img src="/assets/partners/gathr-partnership.png?v=20260922" alt="Partnership announcement: Gathr and The Mum Bridge, supporting 100 mothers with disabilities in Lagos across maternal health, parenting support and economic opportunity, including 50 assistive devices, laptops and digital skills training, health insurance consultations, and a visibility runway for 20 mothers." loading="lazy">
+                        <button type="button" class="announcement-frame" data-flyer="/assets/partners/gathr-partnership.png?v=20260922" data-flyer-alt="Gathr and The Mum Bridge partnership announcement" aria-label="View the Gathr partnership announcement at full size">
+                            <img src="/assets/partners/gathr-partnership.png?v=20260922" alt="Gathr and The Mum Bridge partnership announcement graphic" loading="lazy">
+                        </button>
                         <figcaption>
                             <strong>Gathr &times; The Mum Bridge</strong>
                             Supporting 100 mothers with disabilities in Lagos &mdash; bridging maternal health, parenting support and economic opportunity through assistive devices, digital skills, health insurance and visibility.
@@ -5434,8 +5490,6 @@
                 </article>
                 -->
 
-                <!-- Faith Makanjuola — awaiting photo -->
-                <!--
                 <article class="board-member">
                     <div class="board-member-image">
                         <img src="/assets/directors/faith-makanjuola.jpg?v=20260922" alt="Portrait of Faith Makanjuola" loading="lazy">
@@ -5448,7 +5502,6 @@
                         </p>
                     </div>
                 </article>
-                -->
 
                 <article class="board-member">
                     <div class="board-member-image">
