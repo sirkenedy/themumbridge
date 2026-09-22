@@ -3,6 +3,28 @@
 ## Overview
 This document captures the comprehensive UI structure, design system, and user experience of The Mum Bridge & Care Foundation website (themumbridge.org). Created: February 25, 2026 | Last Updated: September 22, 2026
 
+## September 22, 2026 — LAUNCH: preview promoted to the live site
+
+`preview/index.html` is now **`index.html`**. The preview folder is gone and the site is live in its restructured form.
+
+### What the promotion involved
+- Preview banner, `noindex, nofollow` and the `[PREVIEW]` title prefix stripped from the homepage **and** from `dims/index.html` and `gallery/index.html`, which had been carrying them too. Forgetting the latter two would have left the new pages permanently unindexable.
+- **Asset paths were left root-absolute** (`/assets/...`). They were written that way because the page lived in `preview/`, and they resolve identically from the web root, so no rewrite was needed — do not "fix" them back to relative.
+- `preview/` removed, `assets/directors/ayomide-aboyade.jpeg` finally deleted (the frozen `index.html` was its last referrer).
+- `sitemap.xml` gained `/dims/` (priority 0.9) and `/gallery/` (0.7); all `lastmod` values refreshed.
+
+### Link audit at launch
+Zero broken internal links across all eight pages — assets, page links, in-page anchors and every `RESOURCE_SLIDE_MAP` entry. Of 27 distinct external URLs, everything resolved except the LinkedIn profiles, which return **999** because LinkedIn blocks automated checks; that is expected and not a fault. The TikTok URL was confirmed working once its `&amp;` entity is decoded.
+
+### Verification gap
+The sandbox lost network access to `themumbridge.org` and `sirkenedy.github.io` immediately before the launch push (`curl: (7) Failed to connect`, while `github.com` and other hosts stayed reachable, and DNS still resolved to the correct GitHub Pages IPs). **The post-launch deploy was therefore never verified from here** — confirm `/`, `/dims/` and `/gallery/` in a browser.
+
+### Still outstanding
+- **By Design** and **Disability Etiquette** video cards remain commented out — the supplied link (`youtube.com/shorts/MW7sIYw_Xyw`) is a single Short and it is not clear which of the two it is; the cards also expect a 16:9 thumbnail, and a Short is vertical.
+- **Reflection Sessions** gallery collection still omitted — the file supplied for it was the session's flyer, already in use as a Bridge to Business card, not photographs.
+- DIMS **Partners & Supporters** and **Updates** remain the placeholder paragraphs the brief specifies.
+- **No browser or screen-reader pass has ever been done** on any of this work.
+
 ## September 22, 2026 (corrections) — sections removed, Team completed
 
 Four corrections from Kehinde against the preview.
