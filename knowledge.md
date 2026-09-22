@@ -1,7 +1,47 @@
 # The Mum Bridge & Care Foundation - Website Knowledge Base
 
 ## Overview
-This document captures the comprehensive UI structure, design system, and user experience of The Mum Bridge & Care Foundation website (themumbridge.org). Created: February 25, 2026 | Last Updated: September 21, 2026
+This document captures the comprehensive UI structure, design system, and user experience of The Mum Bridge & Care Foundation website (themumbridge.org). Created: February 25, 2026 | Last Updated: September 22, 2026
+
+## September 22, 2026 — Restructure Brief v2 (Trainings, DIMS, From Our Mums, gallery collections)
+
+A revised handoff brief superseded the earlier September one. It reverses several decisions and adds two homepage sections, two new pages, and a gallery restructure. All of it landed in **`preview/index.html`** plus two new pages; **`index.html` remains frozen at `c9afa62`**.
+
+### Reversals from the first brief — read before trusting older entries
+- **Solace is LAST on the Board again** (the brief says so twice). The "Solace first" instruction from Sept 10 no longer applies. She is still first in Our Team.
+- **Affirmations are OFF the Resources page.** Resource 35 was deleted; the library is back to **12** entries, Everyday Life back to 4. The cards moved to `assets/affirmations/` and became the homepage **From Our Mums** section. The brief is explicit that this series stays separate from Resources.
+- **Board roles use the long form** — `Board of Trustees, Technology`, not the `Trustee, Technology` shortening assumed on Sept 10. `Chairperson` → **Board Chair**, `Deputy Chairperson` → **Deputy Board Chair**.
+- **Impact:** `5–6` → **7** Lagos LGAs (now animates, since it is an integer), `2` → **3** in-person gatherings.
+- Team titles take a parenthesised `(Volunteer)` suffix.
+
+### Final scroll order (15 sections)
+Hero → Problem → Impact So Far → What We Do → **Trainings & Learning** → **DIMS 2026** → Gallery → **From Our Mums** → Who We Are → Partners → Board of Trustees → Our Team → Donate → Join/Volunteer → Contact+Footer.
+
+Note the brief's own table lists 14 positions and omits From Our Mums, but its placement note puts it between Gallery and Who We Are — that is where it sits.
+
+### People
+Board is now **7**: Adedotun (Board Chair), Sarah (Deputy Board Chair), Kehinde, Oluwademilade, Serina, **Dámilọ́lá Adébọ́nọ̀jọ** (new — Knowledge, Culture & Storytelling), Solace last. Team is **4**: Solace, Yetunde, **Faith Makanjuola** (new), Oyindamola. Every bio was replaced with the brief's text verbatim.
+
+Still commented out for want of a photo: **Yetunde Adeoye**, **Faith Makanjuola**.
+
+Dámilọ́lá's source photo is a 6000×4000 landscape; it is cropped to 3:4 centred at x=0.565 of the frame. Her name and bio contain Yorùbá diacritics — the files are UTF-8, do not transliterate them.
+
+### New sections and pages
+- **Trainings & Learning** — four cards driven by the supplied flyers. Filenames arrived mangled (`Training.png`, `Training.png.png`, `Training.pngs.png`, `Training.pngf.pdf`); they map to Braiders Club, Bridge to Business, Our Bodies Our Questions and Reflection Session respectively, confirmed by reading each flyer. Now `assets/trainings/<slug>.jpg`.
+- **DIMS 2026** — homepage section using `where-she-blooms-01.jpg`, plus a dedicated **`dims/index.html`** at `/dims/` carrying the nine subsections the brief lists. Per the brief, the volunteer and partner creatives live only on that page, not the homepage. The artwork supplies detail the brief omits: **20 mothers on the Visibility Runway**, phone **+234 906 598 7847**, volunteer signup `bit.ly/4r9q25f`.
+- **From Our Mums** — 8 affirmation cards, 4 shown with a "View More From Our Mums" toggle; each opens full-size in a shared lightbox. Adding a Tuesday card means copying one `<button class="affirmation-card">` and dropping a PNG in `assets/affirmations/`. Alt text is deliberately generic to preserve the anonymity the brief asks for.
+- **Gallery** — split into **The Mum Bridge Circle** (20 photos) and **Community Media Engagement Session** (the 4 Niamh photos, per Kehinde). The **Reflection Sessions** collection the brief names is omitted: no photographs exist for it yet. Homepage shows 10 with "See all 24 photos" → new **`gallery/index.html`** at `/gallery/`, which carries all 24 with its own lightbox.
+
+Both new pages are generated from `privacy-policy.html` as a shell, so they inherit the accessibility toolbar, skip link and footer. Being one level down, all their asset paths are root-absolute.
+
+### Partners
+Misty Glam now has a real transparent-PNG logo and its own card (partners = 4). The Misty Glam and Gathr **announcement graphics remain** in the separate Partnership Announcements block — the brief does not mention Gathr at all, so it was left as-is pending a decision.
+
+### Social
+Instagram moved to `themumbridgecarefoundation`; **TikTok added**. Twitter and LinkedIn untouched.
+
+### Still outstanding
+Photos for **Yetunde** and **Faith** · **Reflection Session** photographs · YouTube links for **By Design** and **Disability Etiquette** · a decision on where **Gathr** belongs.
 
 ## September 21, 2026 — Changes staged in `preview/` instead of `index.html`
 
@@ -702,7 +742,7 @@ Both pages share a consistent design system with the main site while being optim
   sed -i '' 's/v=OLD_DATE/v=NEW_DATE/g' index.html privacy-policy.html terms-of-use.html
   sed -i '' 's/content="OLD_DATE"/content="NEW_DATE"/g' index.html privacy-policy.html terms-of-use.html
   ```
-- Current version: `20260911` (bumped September 11, 2026 for the new asset drop). Note `resources-v2.html` is an unlinked orphan still on `20260706` and is excluded from the bump.
+- Current version: `20260922` (bumped September 22, 2026 for brief v2). `index.html` is deliberately left on `20260825` while frozen. Note `resources-v2.html` is an unlinked orphan still on `20260706` and is excluded from the bump.
 
 ### JavaScript
 - Vanilla JS (no framework overhead)
@@ -894,6 +934,6 @@ This document MUST be updated whenever changes are made to the codebase. Before 
 
 ---
 
-**Last Updated**: September 21, 2026
+**Last Updated**: September 22, 2026
 **Document Maintainer**: Development Team
 **Purpose**: Onboarding, reference, and continuity across development sessions
