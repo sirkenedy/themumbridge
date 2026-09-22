@@ -3,6 +3,37 @@
 ## Overview
 This document captures the comprehensive UI structure, design system, and user experience of The Mum Bridge & Care Foundation website (themumbridge.org). Created: February 25, 2026 | Last Updated: September 22, 2026
 
+## September 22, 2026 — Performance pass + fourth video
+
+The From Our Mums cards were loading very slowly. Root cause: the affirmation artwork shipped as **PNG**, averaging 570KB per card, ~4.5MB for the section alone. That exposed a site-wide problem.
+
+### Image pipeline — all pages
+- **Affirmations PNG → JPEG → WebP**, capped at 900px (cards render ~280px, lightbox 780px): 4.46 MB → 0.30 MB.
+- **Gallery photographs** recompressed at 1400px / q80, then WebP.
+- **All homepage, /dims/ and /gallery/ imagery converted to WebP** at q86 — 54 files, 28% smaller with no visible loss.
+- **The 57 parenting-resource slides converted to WebP: 33.4 MB → 3.8 MB, 89% smaller.** These were full-size PNG exports and were by far the heaviest thing on the site.
+- `matchbox.png` was a 480KB logo rendered at 200px — now 12KB.
+
+| Page | Before | After |
+|---|---|---|
+| Homepage | 13.74 MB | **3.08 MB** |
+| /resources/ | 9.73 MB | **0.79 MB** |
+| /gallery/ | — | 3.23 MB |
+| /dims/ | — | 0.84 MB |
+
+**WebP is safe here**: the site already requires `aspect-ratio`, `backdrop-filter` and CSS grid, all of which have narrower support than WebP. Logos stay PNG because the favicon needs it. `data-ext` on the resource tiles is vestigial — the viewer builds paths from `RESOURCE_SLIDE_MAP`, so only the map and the cover `src` actually matter.
+
+### Affirmation cards
+Given `height: auto` and mixed source aspects (four 2:3, four 1:1) the cards rendered at ragged heights and reserved no space, so the section visibly jumped as images arrived. They now use `aspect-ratio: 4/5` with `object-fit: contain` on white — uniform height, nothing cropped, no layout shift, and the letterboxing is invisible against the white card.
+
+### Fourth video
+`youtube.com/shorts/MW7sIYw_Xyw` added. Its oEmbed title is **"Disability doesn't make you less of a mother"**, which matches one of the brief's *optional* extra hooks — it is **not** By Design or Disability Etiquette, both of which are still commented out awaiting links. Labelled "Disability & Motherhood". The grid moved from the 6-column/span-2 arrangement to `repeat(4, 1fr)` so all four sit on one row, halving to 2 on tablet and 1 on mobile.
+
+Note it is a **Short**, so its thumbnail is pillarboxed inside the 16:9 card.
+
+### Unreferenced assets (10.03 MB, left in place)
+`adedotun-soyemi-1.jpg` (8.8 MB unoptimised original), `misty-glam-partnership.png`, `gathr-partnership.png`, `where-she-blooms-02.jpg`, `solace-olabode-1.jpg` and three logo variants. None are loaded by any page, so they cost nothing at runtime — they only bloat the repo and the Pages artifact.
+
 ## September 22, 2026 — LAUNCH: preview promoted to the live site
 
 `preview/index.html` is now **`index.html`**. The preview folder is gone and the site is live in its restructured form.

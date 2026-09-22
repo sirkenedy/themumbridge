@@ -14,7 +14,7 @@
     <meta property="og:url" content="https://themumbridge.org/">
     <meta property="og:title" content="The Mum Bridge & Care Foundation - Empowering Mothers with Disabilities">
     <meta property="og:description" content="Supporting mothers with disabilities through community, resources, and empowerment.">
-    <meta property="og:image" content="https://themumbridge.org/assets/hero/community-hero.jpg?v=20260922">
+    <meta property="og:image" content="https://themumbridge.org/assets/hero/community-hero.webp?v=20260922">
     <meta property="og:image:width" content="2400">
     <meta property="og:image:height" content="1600">
     <meta property="og:image:alt" content="The Mum Bridge & Care Foundation community gathering with mothers including a wheelchair user">
@@ -23,7 +23,7 @@
     <meta name="twitter:site" content="@themumbridge">
     <meta name="twitter:title" content="The Mum Bridge & Care Foundation - Empowering Mothers with Disabilities">
     <meta name="twitter:description" content="Supporting mothers with disabilities through community, resources, and empowerment.">
-    <meta name="twitter:image" content="https://themumbridge.org/assets/hero/community-hero.jpg?v=20260922">
+    <meta name="twitter:image" content="https://themumbridge.org/assets/hero/community-hero.webp?v=20260922">
     <meta name="twitter:image:alt" content="The Mum Bridge & Care Foundation community gathering">
 
     <!-- Google tag (gtag.js) -->
@@ -475,7 +475,7 @@
                     rgba(74, 37, 69, 0.62) 50%,
                     rgba(139, 101, 76, 0.65) 100%
                 ),
-                url('/assets/hero/community-hero.jpg?v=20260922');
+                url('/assets/hero/community-hero.webp?v=20260922');
             background-size: cover;
             background-position: center 30%;
             background-attachment: fixed;
@@ -1552,34 +1552,21 @@
 
         .videos-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: var(--space-md);
             align-items: start;
         }
 
-        .video-card-wrap {
-            grid-column: span 2;
-        }
-
-        /* Centre the bottom row when there are exactly 5 cards:
-           4th card starts at col 2, 5th naturally follows in col 4-5. */
-        .videos-grid > .video-card-wrap:nth-child(4) {
-            grid-column: 2 / span 2;
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .videos-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--space-sm);
+            }
         }
 
         @media (max-width: 768px) {
             .videos-grid {
                 grid-template-columns: 1fr;
-            }
-            .video-card-wrap,
-            .videos-grid > .video-card-wrap:nth-child(4) {
-                grid-column: span 1;
-            }
-        }
-
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .videos-grid {
-                gap: var(--space-sm);
             }
         }
 
@@ -4410,7 +4397,13 @@
             transform: translateY(-4px);
             box-shadow: var(--shadow-md);
         }
-        .affirmation-card img { display: block; width: 100%; height: auto; }
+        .affirmation-card img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: contain;
+            background: #FFFFFF;
+        }
         .affirmation-card--hidden { display: none; }
 
         .affirmations-footer { text-align: center; margin-top: var(--space-lg); }
@@ -4602,7 +4595,7 @@
                 </p>
             </div>
             <div class="problem-image" aria-hidden="true">
-                <img src="/assets/impact/may-2026/TMB-126.jpg?v=20260922" alt="" loading="lazy">
+                <img src="/assets/impact/may-2026/TMB-126.webp?v=20260922" alt="" loading="lazy">
             </div>
         </div>
     </section>
@@ -4738,8 +4731,8 @@
 
             <div class="trainings-grid">
                 <article class="training-card">
-                    <button type="button" class="training-flyer" data-flyer="/assets/trainings/braiders-club-hair-making.jpg?v=20260922" data-flyer-alt="Flyer for Braiders Club Hair-Making Training" aria-label="View the full flyer for Braiders Club Hair-Making Training">
-                        <img src="/assets/trainings/braiders-club-hair-making.jpg?v=20260922" alt="Flyer for Braiders Club Hair-Making Training" loading="lazy">
+                    <button type="button" class="training-flyer" data-flyer="/assets/trainings/braiders-club-hair-making.webp?v=20260922" data-flyer-alt="Flyer for Braiders Club Hair-Making Training" aria-label="View the full flyer for Braiders Club Hair-Making Training">
+                        <img src="/assets/trainings/braiders-club-hair-making.webp?v=20260922" alt="Flyer for Braiders Club Hair-Making Training" loading="lazy">
                     </button>
                     <div class="training-body">
                         <h3 class="training-title">Braiders Club Hair-Making Training</h3>
@@ -4749,8 +4742,8 @@
                 </article>
 
                 <article class="training-card">
-                    <button type="button" class="training-flyer" data-flyer="/assets/trainings/bridge-to-business.jpg?v=20260922" data-flyer-alt="Flyer for Bridge to Business" aria-label="View the full flyer for Bridge to Business">
-                        <img src="/assets/trainings/bridge-to-business.jpg?v=20260922" alt="Flyer for Bridge to Business" loading="lazy">
+                    <button type="button" class="training-flyer" data-flyer="/assets/trainings/bridge-to-business.webp?v=20260922" data-flyer-alt="Flyer for Bridge to Business" aria-label="View the full flyer for Bridge to Business">
+                        <img src="/assets/trainings/bridge-to-business.webp?v=20260922" alt="Flyer for Bridge to Business" loading="lazy">
                     </button>
                     <div class="training-body">
                         <h3 class="training-title">Bridge to Business</h3>
@@ -4760,8 +4753,8 @@
                 </article>
 
                 <article class="training-card">
-                    <button type="button" class="training-flyer" data-flyer="/assets/trainings/our-bodies-our-questions.jpg?v=20260922" data-flyer-alt="Flyer for Our Bodies, Our Questions" aria-label="View the full flyer for Our Bodies, Our Questions">
-                        <img src="/assets/trainings/our-bodies-our-questions.jpg?v=20260922" alt="Flyer for Our Bodies, Our Questions" loading="lazy">
+                    <button type="button" class="training-flyer" data-flyer="/assets/trainings/our-bodies-our-questions.webp?v=20260922" data-flyer-alt="Flyer for Our Bodies, Our Questions" aria-label="View the full flyer for Our Bodies, Our Questions">
+                        <img src="/assets/trainings/our-bodies-our-questions.webp?v=20260922" alt="Flyer for Our Bodies, Our Questions" loading="lazy">
                     </button>
                     <div class="training-body">
                         <h3 class="training-title">Our Bodies, Our Questions</h3>
@@ -4771,8 +4764,8 @@
                 </article>
 
                 <article class="training-card">
-                    <button type="button" class="training-flyer" data-flyer="/assets/trainings/reflection-session.jpg?v=20260922" data-flyer-alt="Flyer for Reflection Session" aria-label="View the full flyer for Reflection Session">
-                        <img src="/assets/trainings/reflection-session.jpg?v=20260922" alt="Flyer for Reflection Session" loading="lazy">
+                    <button type="button" class="training-flyer" data-flyer="/assets/trainings/reflection-session.webp?v=20260922" data-flyer-alt="Flyer for Reflection Session" aria-label="View the full flyer for Reflection Session">
+                        <img src="/assets/trainings/reflection-session.webp?v=20260922" alt="Flyer for Reflection Session" loading="lazy">
                     </button>
                     <div class="training-body">
                         <h3 class="training-title">Reflection Session</h3>
@@ -4813,7 +4806,7 @@
                 </div>
 
                 <div class="dims-artwork">
-                    <img src="/assets/dims/where-she-blooms-01.jpg?v=20260922" alt="Disability-Inclusive Motherhood Summit 2026 — Where She Blooms: a celebration of mums with disabilities. 100 mothers with disabilities, 50 assistive devices, 20 mothers on the Visibility Runway, health support and economic empowerment opportunities. November 2026, Lagos Mainland, Nigeria." loading="lazy">
+                    <img src="/assets/dims/where-she-blooms-01.webp?v=20260922" alt="Disability-Inclusive Motherhood Summit 2026 — Where She Blooms: a celebration of mums with disabilities. 100 mothers with disabilities, 50 assistive devices, 20 mothers on the Visibility Runway, health support and economic empowerment opportunities. November 2026, Lagos Mainland, Nigeria." loading="lazy">
                 </div>
             </div>
         </div>
@@ -4839,42 +4832,42 @@
 
                         <figure class="gallery-item">
                             <button class="gallery-thumb-btn" data-index="0" aria-label="View photo 1 of 9: A wide view of The Mum Bridge community gathering">
-                                <img src="/assets/impact/may-2026/TMB-215.jpg?v=20260922" alt="A wide view of The Mum Bridge community gathering, showing a full room of mothers including wheelchair users in attendance" loading="lazy">
+                                <img src="/assets/impact/may-2026/TMB-215.webp?v=20260922" alt="A wide view of The Mum Bridge community gathering, showing a full room of mothers including wheelchair users in attendance" loading="lazy">
                                 <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
                             </button>
                         </figure>
 
                         <figure class="gallery-item">
                             <button class="gallery-thumb-btn" data-index="1" aria-label="View photo 2 of 9: Mothers seated together during a community session including a wheelchair user">
-                                <img src="/assets/impact/may-2026/TMB-74.jpg?v=20260922" alt="Mothers with disabilities seated together during a Mum Bridge community session, including a participant using a wheelchair" loading="lazy">
+                                <img src="/assets/impact/may-2026/TMB-74.webp?v=20260922" alt="Mothers with disabilities seated together during a Mum Bridge community session, including a participant using a wheelchair" loading="lazy">
                                 <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
                             </button>
                         </figure>
 
                         <figure class="gallery-item">
                             <button class="gallery-thumb-btn" data-index="2" aria-label="View photo 3 of 9: Participants seated attentively during a Mum Bridge programme">
-                                <img src="/assets/impact/may-2026/TMB-147.jpg?v=20260922" alt="Mothers seated attentively with hands on their chests during a Mum Bridge programme" loading="lazy">
+                                <img src="/assets/impact/may-2026/TMB-147.webp?v=20260922" alt="Mothers seated attentively with hands on their chests during a Mum Bridge programme" loading="lazy">
                                 <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
                             </button>
                         </figure>
 
                         <figure class="gallery-item">
                             <button class="gallery-thumb-btn" data-index="3" aria-label="View photo 4 of 9: Two facilitators addressing the community with a microphone">
-                                <img src="/assets/impact/may-2026/TMB-76.jpg?v=20260922" alt="Two Mum Bridge facilitators at the front of the room, one speaking into a microphone with the foundation banner visible behind them" loading="lazy">
+                                <img src="/assets/impact/may-2026/TMB-76.webp?v=20260922" alt="Two Mum Bridge facilitators at the front of the room, one speaking into a microphone with the foundation banner visible behind them" loading="lazy">
                                 <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
                             </button>
                         </figure>
 
                         <figure class="gallery-item">
                             <button class="gallery-thumb-btn" data-index="4" aria-label="View photo 5 of 9: Facilitator with sign language interpreter on stage">
-                                <img src="/assets/impact/may-2026/TMB-73.jpg?v=20260922" alt="A Mum Bridge facilitator speaks into a microphone while a sign language interpreter communicates alongside her" loading="lazy">
+                                <img src="/assets/impact/may-2026/TMB-73.webp?v=20260922" alt="A Mum Bridge facilitator speaks into a microphone while a sign language interpreter communicates alongside her" loading="lazy">
                                 <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
                             </button>
                         </figure>
 
                         <figure class="gallery-item">
                             <button class="gallery-thumb-btn" data-index="5" aria-label="View photo 6 of 9: Team member and sign language interpreter ensuring an accessible session">
-                                <img src="/assets/impact/may-2026/TMB-137.jpg?v=20260922" alt="A Mum Bridge team member addresses the community with a sign language interpreter beside her, ensuring the session is accessible for deaf participants" loading="lazy">
+                                <img src="/assets/impact/may-2026/TMB-137.webp?v=20260922" alt="A Mum Bridge team member addresses the community with a sign language interpreter beside her, ensuring the session is accessible for deaf participants" loading="lazy">
                                 <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
                             </button>
                         </figure>
@@ -4889,21 +4882,21 @@
 
                         <figure class="gallery-item">
                             <button class="gallery-thumb-btn" data-index="6" aria-label="View photo 7 of 9: Mothers seated together during The Mum Bridge community visit with Niamh Ni Hoireabhaird, including two participants using wheelchairs">
-                                <img src="/assets/impact/niamh-visit-2026/niamh-01.jpg?v=20260922" alt="The Mum Bridge community gathered for the visit with disability advocate Niamh Ni Hoireabhaird, with mothers seated together and two participants using wheelchairs" loading="lazy">
+                                <img src="/assets/impact/niamh-visit-2026/niamh-01.webp?v=20260922" alt="The Mum Bridge community gathered for the visit with disability advocate Niamh Ni Hoireabhaird, with mothers seated together and two participants using wheelchairs" loading="lazy">
                                 <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
                             </button>
                         </figure>
 
                         <figure class="gallery-item">
                             <button class="gallery-thumb-btn" data-index="7" aria-label="View photo 8 of 9: Mum Bridge team members and visitors together, with two wheelchair users seated in front">
-                                <img src="/assets/impact/niamh-visit-2026/niamh-02.jpg?v=20260922" alt="Mum Bridge team members in branded shirts standing behind visiting advocate Niamh Ni Hoireabhaird and another wheelchair user seated in front" loading="lazy">
+                                <img src="/assets/impact/niamh-visit-2026/niamh-02.webp?v=20260922" alt="Mum Bridge team members in branded shirts standing behind visiting advocate Niamh Ni Hoireabhaird and another wheelchair user seated in front" loading="lazy">
                                 <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
                             </button>
                         </figure>
 
                         <figure class="gallery-item">
                             <button class="gallery-thumb-btn" data-index="8" aria-label="View photo 9 of 9: A wide view of the room during the Niamh Ni Hoireabhaird community session">
-                                <img src="/assets/impact/niamh-visit-2026/niamh-03.jpg?v=20260922" alt="A wide view of the room during The Mum Bridge session with Niamh Ni Hoireabhaird, with participants seated in a semicircle and a wheelchair user at the centre" loading="lazy">
+                                <img src="/assets/impact/niamh-visit-2026/niamh-03.webp?v=20260922" alt="A wide view of the room during The Mum Bridge session with Niamh Ni Hoireabhaird, with participants seated in a semicircle and a wheelchair user at the centre" loading="lazy">
                                 <span class="gallery-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
                             </button>
                         </figure>
@@ -4932,36 +4925,36 @@
             </div>
 
             <div class="affirmations-grid" id="affirmations-grid">
-                <button type="button" class="affirmation-card" data-flyer="/assets/affirmations/affirmation-01.png?v=20260922" data-flyer-alt="Still I Mother affirmation card 1" aria-label="Read affirmation card 1 at full size">
-                    <img src="/assets/affirmations/affirmation-01.png?v=20260922" alt="Still I Mother — an affirmation in the words of a mother in The Mum Bridge community" loading="lazy">
+                <button type="button" class="affirmation-card" data-flyer="/assets/affirmations/affirmation-01.webp?v=20260922" data-flyer-alt="Still I Mother affirmation card 1" aria-label="Read affirmation card 1 at full size">
+                    <img src="/assets/affirmations/affirmation-01.webp?v=20260922" alt="Still I Mother — an affirmation in the words of a mother in The Mum Bridge community" loading="lazy">
                 </button>
 
-                <button type="button" class="affirmation-card" data-flyer="/assets/affirmations/affirmation-02.png?v=20260922" data-flyer-alt="Still I Mother affirmation card 2" aria-label="Read affirmation card 2 at full size">
-                    <img src="/assets/affirmations/affirmation-02.png?v=20260922" alt="Still I Mother — an affirmation in the words of a mother in The Mum Bridge community" loading="lazy">
+                <button type="button" class="affirmation-card" data-flyer="/assets/affirmations/affirmation-02.webp?v=20260922" data-flyer-alt="Still I Mother affirmation card 2" aria-label="Read affirmation card 2 at full size">
+                    <img src="/assets/affirmations/affirmation-02.webp?v=20260922" alt="Still I Mother — an affirmation in the words of a mother in The Mum Bridge community" loading="lazy">
                 </button>
 
-                <button type="button" class="affirmation-card" data-flyer="/assets/affirmations/affirmation-03.png?v=20260922" data-flyer-alt="Still I Mother affirmation card 3" aria-label="Read affirmation card 3 at full size">
-                    <img src="/assets/affirmations/affirmation-03.png?v=20260922" alt="Still I Mother — an affirmation in the words of a mother in The Mum Bridge community" loading="lazy">
+                <button type="button" class="affirmation-card" data-flyer="/assets/affirmations/affirmation-03.webp?v=20260922" data-flyer-alt="Still I Mother affirmation card 3" aria-label="Read affirmation card 3 at full size">
+                    <img src="/assets/affirmations/affirmation-03.webp?v=20260922" alt="Still I Mother — an affirmation in the words of a mother in The Mum Bridge community" loading="lazy">
                 </button>
 
-                <button type="button" class="affirmation-card" data-flyer="/assets/affirmations/affirmation-04.png?v=20260922" data-flyer-alt="Still I Mother affirmation card 4" aria-label="Read affirmation card 4 at full size">
-                    <img src="/assets/affirmations/affirmation-04.png?v=20260922" alt="Still I Mother — an affirmation in the words of a mother in The Mum Bridge community" loading="lazy">
+                <button type="button" class="affirmation-card" data-flyer="/assets/affirmations/affirmation-04.webp?v=20260922" data-flyer-alt="Still I Mother affirmation card 4" aria-label="Read affirmation card 4 at full size">
+                    <img src="/assets/affirmations/affirmation-04.webp?v=20260922" alt="Still I Mother — an affirmation in the words of a mother in The Mum Bridge community" loading="lazy">
                 </button>
 
-                <button type="button" class="affirmation-card affirmation-card--hidden" data-flyer="/assets/affirmations/affirmation-05.png?v=20260922" data-flyer-alt="Still I Mother affirmation card 5" aria-label="Read affirmation card 5 at full size">
-                    <img src="/assets/affirmations/affirmation-05.png?v=20260922" alt="Still I Mother — an affirmation in the words of a mother in The Mum Bridge community" loading="lazy">
+                <button type="button" class="affirmation-card affirmation-card--hidden" data-flyer="/assets/affirmations/affirmation-05.webp?v=20260922" data-flyer-alt="Still I Mother affirmation card 5" aria-label="Read affirmation card 5 at full size">
+                    <img src="/assets/affirmations/affirmation-05.webp?v=20260922" alt="Still I Mother — an affirmation in the words of a mother in The Mum Bridge community" loading="lazy">
                 </button>
 
-                <button type="button" class="affirmation-card affirmation-card--hidden" data-flyer="/assets/affirmations/affirmation-06.png?v=20260922" data-flyer-alt="Still I Mother affirmation card 6" aria-label="Read affirmation card 6 at full size">
-                    <img src="/assets/affirmations/affirmation-06.png?v=20260922" alt="Still I Mother — an affirmation in the words of a mother in The Mum Bridge community" loading="lazy">
+                <button type="button" class="affirmation-card affirmation-card--hidden" data-flyer="/assets/affirmations/affirmation-06.webp?v=20260922" data-flyer-alt="Still I Mother affirmation card 6" aria-label="Read affirmation card 6 at full size">
+                    <img src="/assets/affirmations/affirmation-06.webp?v=20260922" alt="Still I Mother — an affirmation in the words of a mother in The Mum Bridge community" loading="lazy">
                 </button>
 
-                <button type="button" class="affirmation-card affirmation-card--hidden" data-flyer="/assets/affirmations/affirmation-07.png?v=20260922" data-flyer-alt="Still I Mother affirmation card 7" aria-label="Read affirmation card 7 at full size">
-                    <img src="/assets/affirmations/affirmation-07.png?v=20260922" alt="Still I Mother — an affirmation in the words of a mother in The Mum Bridge community" loading="lazy">
+                <button type="button" class="affirmation-card affirmation-card--hidden" data-flyer="/assets/affirmations/affirmation-07.webp?v=20260922" data-flyer-alt="Still I Mother affirmation card 7" aria-label="Read affirmation card 7 at full size">
+                    <img src="/assets/affirmations/affirmation-07.webp?v=20260922" alt="Still I Mother — an affirmation in the words of a mother in The Mum Bridge community" loading="lazy">
                 </button>
 
-                <button type="button" class="affirmation-card affirmation-card--hidden" data-flyer="/assets/affirmations/affirmation-08.png?v=20260922" data-flyer-alt="Still I Mother affirmation card 8" aria-label="Read affirmation card 8 at full size">
-                    <img src="/assets/affirmations/affirmation-08.png?v=20260922" alt="Still I Mother — an affirmation in the words of a mother in The Mum Bridge community" loading="lazy">
+                <button type="button" class="affirmation-card affirmation-card--hidden" data-flyer="/assets/affirmations/affirmation-08.webp?v=20260922" data-flyer-alt="Still I Mother affirmation card 8" aria-label="Read affirmation card 8 at full size">
+                    <img src="/assets/affirmations/affirmation-08.webp?v=20260922" alt="Still I Mother — an affirmation in the words of a mother in The Mum Bridge community" loading="lazy">
                 </button>
             </div>
 
@@ -5054,6 +5047,25 @@
                             <p class="video-hook">Meet the mothers we exist for.</p>
                         </div>
 
+                        <div class="video-card-wrap">
+                            <a class="video-card"
+                               href="https://youtu.be/MW7sIYw_Xyw"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               aria-label="Watch Disability &amp; Motherhood on YouTube — disability does not make someone less of a mother (opens in new tab)">
+                                <img
+                                    src="https://img.youtube.com/vi/MW7sIYw_Xyw/maxresdefault.jpg"
+                                    alt="The Mum Bridge &amp; Care Foundation — disability and motherhood"
+                                    loading="lazy"
+                                >
+                                <span class="video-card-play" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+                                </span>
+                                <span class="video-card-label" aria-hidden="true">Disability &amp; Motherhood</span>
+                            </a>
+                            <p class="video-hook">Disability does not make someone less of a mother.</p>
+                        </div>
+
                         <!-- By Design — awaiting YouTube link -->
                         <!--
                         <div class="video-card-wrap">
@@ -5120,7 +5132,7 @@
             <div class="partners-grid">
                 <article class="partner-card">
                     <div class="partner-logo-container">
-                        <img src="/assets/partners/matchbox.png?v=20260922" alt="MatchBox Logo" class="partner-logo" loading="lazy">
+                        <img src="/assets/partners/matchbox.webp?v=20260922" alt="MatchBox Logo" class="partner-logo" loading="lazy">
                     </div>
                     <h3 class="partner-name">MatchBox</h3>
                     <p class="partner-description">
@@ -5131,7 +5143,7 @@
 
                 <article class="partner-card">
                     <div class="partner-logo-container">
-                        <img src="/assets/partners/lasoda-logo.png?v=20260922" alt="LASODA Logo" class="partner-logo" loading="lazy">
+                        <img src="/assets/partners/lasoda-logo.webp?v=20260922" alt="LASODA Logo" class="partner-logo" loading="lazy">
                     </div>
                     <h3 class="partner-name">LASODA</h3>
                     <p class="partner-description">
@@ -5142,7 +5154,7 @@
 
                 <article class="partner-card">
                     <div class="partner-logo-container">
-                        <img src="/assets/partners/nngo.png?v=20260922" alt="NNGO Logo" class="partner-logo" loading="lazy">
+                        <img src="/assets/partners/nngo.webp?v=20260922" alt="NNGO Logo" class="partner-logo" loading="lazy">
                     </div>
                     <h3 class="partner-name">NNGO</h3>
                     <p class="partner-description">
@@ -5153,7 +5165,7 @@
 
                 <article class="partner-card">
                     <div class="partner-logo-container">
-                        <img src="/assets/partners/misty-glam.png?v=20260922" alt="Misty Glam Company Logo" class="partner-logo" loading="lazy">
+                        <img src="/assets/partners/misty-glam.webp?v=20260922" alt="Misty Glam Company Logo" class="partner-logo" loading="lazy">
                     </div>
                     <h3 class="partner-name">Misty Glam Company</h3>
                     <p class="partner-description">
@@ -5181,7 +5193,7 @@
             <div class="board-grid">
                 <article class="board-member" data-member="adedotun">
                     <div class="board-member-image">
-                        <img src="/assets/directors/adedotun-soyemi.jpg?v=20260922" alt="Portrait of Adedotun Soyemi" loading="lazy">
+                        <img src="/assets/directors/adedotun-soyemi.webp?v=20260922" alt="Portrait of Adedotun Soyemi" loading="lazy">
                     </div>
                     <div class="board-member-info">
                         <h3 class="board-member-name">Adedotun Soyemi</h3>
@@ -5200,7 +5212,7 @@
 
                 <article class="board-member">
                     <div class="board-member-image">
-                        <img src="/assets/directors/sarah-george-ashiru.jpg?v=20260922" alt="Portrait of Sarah George-Ashiru" loading="lazy">
+                        <img src="/assets/directors/sarah-george-ashiru.webp?v=20260922" alt="Portrait of Sarah George-Ashiru" loading="lazy">
                     </div>
                     <div class="board-member-info">
                         <h3 class="board-member-name">Sarah George-Ashiru</h3>
@@ -5219,7 +5231,7 @@
 
                 <article class="board-member">
                     <div class="board-member-image">
-                        <img src="/assets/directors/kehinde-owoputi.jpg?v=20260922" alt="Portrait of Kehinde Owoputi" loading="lazy">
+                        <img src="/assets/directors/kehinde-owoputi.webp?v=20260922" alt="Portrait of Kehinde Owoputi" loading="lazy">
                     </div>
                     <div class="board-member-info">
                         <h3 class="board-member-name">Kehinde Owoputi</h3>
@@ -5238,7 +5250,7 @@
 
                 <article class="board-member">
                     <div class="board-member-image">
-                        <img src="/assets/directors/oluwademilade.jpg?v=20260922" alt="Portrait of Oluwademilade Adejoorin" loading="lazy">
+                        <img src="/assets/directors/oluwademilade.webp?v=20260922" alt="Portrait of Oluwademilade Adejoorin" loading="lazy">
                     </div>
                     <div class="board-member-info">
                         <h3 class="board-member-name">Oluwademilade Adejoorin</h3>
@@ -5257,7 +5269,7 @@
 
                 <article class="board-member">
                     <div class="board-member-image">
-                        <img src="/assets/directors/serina-whyte.jpg?v=20260922" alt="Portrait of Serina Whyte" loading="lazy">
+                        <img src="/assets/directors/serina-whyte.webp?v=20260922" alt="Portrait of Serina Whyte" loading="lazy">
                     </div>
                     <div class="board-member-info">
                         <h3 class="board-member-name">Serina Whyte</h3>
@@ -5276,7 +5288,7 @@
 
                 <article class="board-member">
                     <div class="board-member-image">
-                        <img src="/assets/directors/damilola-adebonojo.jpg?v=20260922" alt="Portrait of Dámilọ́lá Adébọ́nọ̀jọ" loading="lazy">
+                        <img src="/assets/directors/damilola-adebonojo.webp?v=20260922" alt="Portrait of Dámilọ́lá Adébọ́nọ̀jọ" loading="lazy">
                     </div>
                     <div class="board-member-info">
                         <h3 class="board-member-name">Dámilọ́lá Adébọ́nọ̀jọ</h3>
@@ -5295,7 +5307,7 @@
 
                 <article class="board-member" data-member="solace">
                     <div class="board-member-image">
-                        <img src="/assets/directors/solace-olabode.jpg?v=20260922" alt="Portrait of Solace Olabode" loading="lazy">
+                        <img src="/assets/directors/solace-olabode.webp?v=20260922" alt="Portrait of Solace Olabode" loading="lazy">
                     </div>
                     <div class="board-member-info">
                         <h3 class="board-member-name">Solace Olabode</h3>
@@ -5329,7 +5341,7 @@
             <div class="board-grid">
                 <article class="board-member" data-member="solace">
                     <div class="board-member-image">
-                        <img src="/assets/directors/solace-olabode.jpg?v=20260922" alt="Portrait of Solace Olabode" loading="lazy">
+                        <img src="/assets/directors/solace-olabode.webp?v=20260922" alt="Portrait of Solace Olabode" loading="lazy">
                     </div>
                     <div class="board-member-info">
                         <h3 class="board-member-name">Solace Olabode</h3>
@@ -5348,7 +5360,7 @@
 
                 <article class="board-member">
                     <div class="board-member-image">
-                        <img src="/assets/directors/yetunde-adeoye.jpg?v=20260922" alt="Portrait of Yetunde Adeoye" loading="lazy">
+                        <img src="/assets/directors/yetunde-adeoye.webp?v=20260922" alt="Portrait of Yetunde Adeoye" loading="lazy">
                     </div>
                     <div class="board-member-info">
                         <h3 class="board-member-name">Yetunde Adeoye</h3>
@@ -5367,7 +5379,7 @@
 
                 <article class="board-member">
                     <div class="board-member-image">
-                        <img src="/assets/directors/faith-makanjuola.jpg?v=20260922" alt="Portrait of Faith Makanjuola" loading="lazy">
+                        <img src="/assets/directors/faith-makanjuola.webp?v=20260922" alt="Portrait of Faith Makanjuola" loading="lazy">
                     </div>
                     <div class="board-member-info">
                         <h3 class="board-member-name">Faith Makanjuola</h3>
@@ -5386,7 +5398,7 @@
 
                 <article class="board-member">
                     <div class="board-member-image">
-                        <img src="/assets/directors/oyindamola-animashaun.jpg?v=20260922" alt="Portrait of Oyindamola Animashaun" loading="lazy">
+                        <img src="/assets/directors/oyindamola-animashaun.webp?v=20260922" alt="Portrait of Oyindamola Animashaun" loading="lazy">
                     </div>
                     <div class="board-member-info">
                         <h3 class="board-member-name">Oyindamola Animashaun</h3>
