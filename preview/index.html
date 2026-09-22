@@ -2183,86 +2183,6 @@
         }
 
         /* ============================================
-           PARTNERSHIP ANNOUNCEMENTS
-           Announcement graphics shown at their own aspect
-           ratio rather than cropped into logo cards.
-           ============================================ */
-        .partnership-announcements {
-            margin-top: var(--space-2xl);
-        }
-
-        .partnership-announcements-heading {
-            font-family: var(--font-display);
-            font-size: var(--text-xl);
-            color: var(--color-primary-dark);
-            text-align: center;
-            margin-bottom: var(--space-xs);
-        }
-
-        .partnership-announcements-intro {
-            text-align: center;
-            color: var(--color-text-secondary);
-            max-width: 640px;
-            margin: 0 auto var(--space-lg);
-        }
-
-        .announcement-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: var(--space-lg);
-            align-items: start;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .announcement-card {
-            margin: 0;
-            background: #FFFFFF;
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            transition: transform var(--transition-base), box-shadow var(--transition-base);
-        }
-
-        .announcement-card:hover,
-        .announcement-card:focus-within {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .announcement-card img {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
-
-        .announcement-card figcaption {
-            padding: var(--space-md);
-            font-size: var(--text-sm);
-            line-height: 1.6;
-            color: var(--color-text-secondary);
-            border-top: 1px solid var(--color-border);
-        }
-
-        .announcement-card figcaption strong {
-            display: block;
-            color: var(--color-primary-dark);
-            font-weight: 600;
-            margin-bottom: 0.35rem;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .announcement-card {
-                transition: none;
-            }
-            .announcement-card:hover,
-            .announcement-card:focus-within {
-                transform: none;
-            }
-        }
-
-        /* ============================================
            CTA SECTION
            ============================================ */
         .cta-section {
@@ -4502,30 +4422,6 @@
         }
 
 
-        /* ---- announcement cards: equal height, art never cropped ---- */
-        .announcement-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-
-        .announcement-card { display: flex; flex-direction: column; }
-
-        .announcement-frame {
-            display: block;
-            width: 100%;
-            border: 0;
-            padding: 0;
-            aspect-ratio: 16 / 10;
-            background: linear-gradient(140deg, #F6F1F5 0%, #EFE7EE 100%);
-            cursor: zoom-in;
-            overflow: hidden;
-        }
-        .announcement-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: block;
-            transition: transform 600ms var(--ease-out-quart);
-        }
-        .announcement-card:hover .announcement-frame img { transform: scale(1.03); }
-        .announcement-card figcaption { flex: 1; }
 
         /* ---- gallery: flex grid so a short final row centres instead of orphaning ---- */
         .gallery-collection .gallery-grid {
@@ -4553,11 +4449,26 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .announcement-frame img { transition: none; }
-            .announcement-card:hover .announcement-frame img { transform: none; }
             .gallery-collection .gallery-item { transition: none; }
             .gallery-collection .gallery-item:hover,
             .gallery-collection .gallery-item:focus-within { transform: none; }
+        }
+
+
+        /* Monogram stand-in for a member whose photograph has not arrived yet.
+           Replace the span with the usual <img> once it does. */
+        .board-member-initials {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(140deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            color: #fff;
+            font-family: var(--font-display);
+            font-size: 3.4rem;
+            letter-spacing: 0.06em;
+            user-select: none;
         }
 
     </style>
@@ -5272,32 +5183,6 @@
 
             </div>
 
-            <div class="partnership-announcements">
-                <h3 class="partnership-announcements-heading">Partnership Announcements</h3>
-                <p class="partnership-announcements-intro">New collaborations extending what we can offer mothers with disabilities.</p>
-
-                <div class="announcement-grid">
-                    <figure class="announcement-card">
-                        <button type="button" class="announcement-frame" data-flyer="/assets/partners/misty-glam-partnership.png?v=20260922" data-flyer-alt="Misty Glam Company and The Mum Bridge partnership announcement" aria-label="View the Misty Glam Company partnership announcement at full size">
-                            <img src="/assets/partners/misty-glam-partnership.png?v=20260922" alt="Misty Glam Company and The Mum Bridge partnership announcement graphic" loading="lazy">
-                        </button>
-                        <figcaption>
-                            <strong>Misty Glam Company &times; The Mum Bridge</strong>
-                            A partnership committed to amplifying representation, creating opportunities and celebrating the voices of mothers with disabilities.
-                        </figcaption>
-                    </figure>
-
-                    <figure class="announcement-card">
-                        <button type="button" class="announcement-frame" data-flyer="/assets/partners/gathr-partnership.png?v=20260922" data-flyer-alt="Gathr and The Mum Bridge partnership announcement" aria-label="View the Gathr partnership announcement at full size">
-                            <img src="/assets/partners/gathr-partnership.png?v=20260922" alt="Gathr and The Mum Bridge partnership announcement graphic" loading="lazy">
-                        </button>
-                        <figcaption>
-                            <strong>Gathr &times; The Mum Bridge</strong>
-                            Supporting 100 mothers with disabilities in Lagos &mdash; bridging maternal health, parenting support and economic opportunity through assistive devices, digital skills, health insurance and visibility.
-                        </figcaption>
-                    </figure>
-                </div>
-            </div>
         </div>
     </section>
     <!-- ============================================
@@ -5455,7 +5340,7 @@
                     </div>
                     <div class="board-member-info">
                         <h3 class="board-member-name">Solace Olabode</h3>
-                        <p class="board-member-role">Founder &amp; Executive Director (Volunteer)</p>
+                        <p class="board-member-role">Founder &amp; Executive Director</p>
                         <p class="board-member-bio">
                             At The Mum Bridge, she leads the organisation&rsquo;s vision, strategy, partnerships, and overall direction, building disability-inclusive systems around motherhood. She is a hard-of-hearing mother and People Systems Consultant, bringing lived experience and professional expertise to advancing opportunities and inclusion for mothers with disabilities.
                         </p>
@@ -5468,11 +5353,9 @@
                     </div>
                 </article>
 
-                <!-- Yetunde Adeoye — awaiting photo -->
-                <!--
                 <article class="board-member">
                     <div class="board-member-image">
-                        <img src="/assets/directors/adeoye-yetunde.jpg?v=20260922" alt="Portrait of Yetunde Adeoye" loading="lazy">
+                        <span class="board-member-initials" aria-hidden="true">YA</span>
                     </div>
                     <div class="board-member-info">
                         <h3 class="board-member-name">Yetunde Adeoye</h3>
@@ -5488,7 +5371,6 @@
                         </div>
                     </div>
                 </article>
-                -->
 
                 <article class="board-member">
                     <div class="board-member-image">
@@ -5575,21 +5457,6 @@
                     </p>
                 </article>
 
-                <article class="donate-tier donate-tier--feature">
-                    <header class="donate-tier-header">
-                        <h4 class="donate-tier-title">Sponsor The Mum Bridge Gathering 2026</h4>
-                    </header>
-                    <p class="donate-tier-desc">
-                        The Mum Bridge Gathering is Nigeria&rsquo;s first large-scale gathering dedicated to mothers with disabilities, bringing together mothers, advocates, healthcare providers, policymakers, and partners across Lagos.
-                    </p>
-                    <p class="donate-tier-desc">
-                        We are seeking corporate sponsors, foundations, and institutional partners ready to help build a more inclusive future for mothers with disabilities in Nigeria.
-                    </p>
-                    <p class="donate-tier-desc donate-tier-cta-line">
-                        To discuss sponsorship and partnership opportunities, contact us at
-                        <a href="mailto:info@themumbridge.org">info@themumbridge.org</a>.
-                    </p>
-                </article>
             </div>
 
             <div class="donate-pay">
@@ -5864,10 +5731,6 @@
                         <span class="donation-tier-pill">Sponsor A Mum Bridge Circle</span>
                         <span class="donation-tier-meta">&#8358;25,000 &ndash; &#8358;500,000 <span class="donation-tier-meta-alt">(~$18 &ndash; $357)</span></span>
                         <span class="donation-tier-line">Covers an accessible community gathering &mdash; venue, materials, transport, meals, sign language.</span>
-                    </div>
-                    <div class="donation-tier-item donation-tier-item--feature" role="listitem">
-                        <span class="donation-tier-pill">Sponsor The Mum Bridge Gathering 2026</span>
-                        <span class="donation-tier-line">Corporate, foundation &amp; institutional partners welcome. Email <a href="mailto:info@themumbridge.org">info@themumbridge.org</a>.</span>
                     </div>
                 </div>
 

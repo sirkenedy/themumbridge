@@ -3,6 +3,17 @@
 ## Overview
 This document captures the comprehensive UI structure, design system, and user experience of The Mum Bridge & Care Foundation website (themumbridge.org). Created: February 25, 2026 | Last Updated: September 22, 2026
 
+## September 22, 2026 (corrections) — sections removed, Team completed
+
+Four corrections from Kehinde against the preview.
+
+- **Partnership Announcements deleted entirely** — markup and all its CSS. The Misty Glam and Gathr announcement graphics are no longer shown anywhere. `assets/partners/misty-glam-partnership.png` and `gathr-partnership.png` remain in the repo but are now **unreferenced**. Misty Glam keeps its normal logo card in the partners grid; Gathr is off the site.
+- **"Sponsor The Mum Bridge Gathering 2026" removed.** It lived in **two** places — the `.donate-tier--feature` block in the Donate section (the one carrying the "Featured Opportunity" CSS badge) and a matching `.donation-tier-item--feature` in the donation modal's tier summary. Both were removed, since the offering is retired; donate tiers and modal tiers are both down to three. The `.donate-tier--feature` CSS is left in place, unused.
+- **Solace is not a volunteer.** Her Team title is now `Founder & Executive Director`. Yetunde, Faith and Oyindamola keep their `(Volunteer)` suffix — the instruction was about her title only.
+- **Yetunde Adeoye is on the Team**, between Solace and Faith, giving the brief's full order. **Her photograph still has not been supplied**, so her card uses a `.board-member-initials` monogram (brand gradient, "YA") in place of the `<img>`. Swap the span back to the usual `<img src="/assets/directors/adeoye-yetunde.jpg">` when the photo arrives — nothing else needs to change.
+
+Team is now complete at 4. Only the two video cards remain commented out.
+
 ## September 22, 2026 (later) — Faith's photo, announcement cards, gallery polish
 
 - **Faith Makanjuola is live.** Source was a 4480×6720 studio portrait, centre-cropped to 3:4 and resized to 600×900. Team is now 3 live; **Yetunde Adeoye is the only person still commented out** — her photo was mentioned but not actually attached.
