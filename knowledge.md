@@ -3,6 +3,23 @@
 ## Overview
 This document captures the comprehensive UI structure, design system, and user experience of The Mum Bridge & Care Foundation website (themumbridge.org). Created: February 25, 2026 | Last Updated: September 22, 2026
 
+## September 22, 2026 — All paths made relative (fixes local viewing)
+
+Images did not render when opening the site locally. Cause: every path was **root-absolute** (`/assets/…`). Those were written that way when the homepage lived in `preview/`, and they only resolve when the site is served from the web root — under `file://`, or a server rooted elsewhere, `/assets/` points outside the project.
+
+**Every page now uses relative paths**, which work identically on the live site, on any local server, and via `file://`:
+- root pages → `assets/…`
+- pages one level down (`resources/`, `dims/`, `gallery/`, `preview/`) → `../assets/…`
+
+Reverses the "leave them root-absolute" note in the launch entry above — that reasoning only held while the page lived in a subfolder.
+
+**Two paths lived in JavaScript, not in attributes**, and an attribute-only search will miss them: `resources/index.html` and `resources-v2.html` build slide URLs with `img.src = '…assets/parenting-resources/' + slug + …`. Both were fixed. `resources-old.html` already used a relative prefix.
+
+### Incident
+The first attempt at the legacy-link fix used `open(path,'w').write(open(path).read().replace(…))`. Python opens the write handle **first**, truncating the file before the nested read runs, so `resources/index.html` and `resources-v2.html` were both written to **0 bytes**. Recovered with `git checkout HEAD --` and redone with an explicit read-then-write and a length assertion. Never nest a read inside a `'w'` open.
+
+Verified: every link, asset and slide-map entry resolves relative to its own page across all nine pages; tags balanced, scripts parse, HTTP 200 on every route.
+
 ## September 22, 2026 — Performance pass + fourth video
 
 The From Our Mums cards were loading very slowly. Root cause: the affirmation artwork shipped as **PNG**, averaging 570KB per card, ~4.5MB for the section alone. That exposed a site-wide problem.
